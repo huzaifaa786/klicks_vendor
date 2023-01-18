@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:klicks_vendor/values/colors.dart';
 
 class LogOutTile extends StatelessWidget {
   const LogOutTile({super.key, this.image, this.text, this.ontap});
-  
+
   final image;
   final text;
   final ontap;
@@ -14,22 +15,38 @@ class LogOutTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: ontap,
-      child: SizedBox(
+      child: Container(
         height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SvgPicture.asset(
-              image,
-              color: Colors.red,
-            ),
-            SizedBox(width: 12),
-            Text(
-              text,
-              style: TextStyle(
-                  fontSize: 17, fontWeight: FontWeight.w500, color: Colors.red),
-            )
-          ],
+        decoration: BoxDecoration(
+            color: White,
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: Offset(0, 3),
+              ),
+            ]),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                image,
+                color: Colors.red,
+              ),
+              SizedBox(width: 12),
+              Text(
+                text,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.red),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -9,3 +9,7 @@ const fieldColor = Color(4294111986);
 const badgeGreen = Color(4280790624);
 const colorgrey = Color(4281545523);
 const White = Colors.white;
+const cardBlue = Color.fromARGB(255, 197, 234, 255);
+const cardgreen = Color.fromARGB(255, 248, 255, 218);
+const cardorange = Color.fromARGB(255, 253, 245, 230);
+const cardpink = Color.fromARGB(255, 255, 224, 244);
