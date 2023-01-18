@@ -14,8 +14,9 @@ class TitleTopbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.only(right: 20, left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
