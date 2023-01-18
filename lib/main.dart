@@ -4,6 +4,7 @@ import 'package:klicks_vendor/screen/login/login.dart';
 import 'package:klicks_vendor/screen/main/main.dart';
 import 'package:klicks_vendor/screen/notification/notification.dart';
 import 'package:klicks_vendor/screen/order%20status/order_status.dart';
+import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/screen/splash/splash_screen.dart';
 import 'package:klicks_vendor/values/styles.dart';
 
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: Styles.lightTheme,
       title: "Klicks",
-      initialRoute: 'main',
+      initialRoute: 'service',
       routes: {
         'splash': (context) => const SplashScreen(),
         'login': (context) => const LoginScreen(),
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
         'notification': (context) => const NotificationScreen(),
         'edit_profile': (context) => const EditProfile(),
         'main':(context) => MainScreen(),
+          'service': (context) => const Service(),
       },
     );
   }
