@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/screen/edit_profile.dart/edit_profile.dart';
 import 'package:klicks_vendor/screen/login/login.dart';
