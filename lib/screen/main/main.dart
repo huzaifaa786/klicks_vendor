@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/language.dart';
 import 'package:klicks_vendor/static/logoutTile.dart';
 import 'package:klicks_vendor/static/main_card.dart';
@@ -58,28 +59,36 @@ class _MainScreenState extends State<MainScreen> {
                           shrinkWrap: true,
                           children: [
                             MainCard(
-                              ontap: () {},
+                              ontap: () {
+                                Navigator.pushNamed(context, 'order_status');
+                              },
                               color: cardBlue,
                               title: 'Orders',
                               discription: 'Track your orders here',
                               image: 'assets/images/OrderBook.svg',
                             ),
                             MainCard(
-                              ontap: () {},
+                              ontap: () {
+                                Navigator.pushNamed(context, 'service');
+                              },
                               color: cardgreen,
                               title: 'Services',
                               discription: 'List of our services',
                               image: 'assets/images/services.svg',
                             ),
                             MainCard(
-                              ontap: () {},
+                              ontap: () {
+                                Navigator.pushNamed(context, 'sales');
+                              },
                               color: cardorange,
                               title: 'Total Sale',
                               discription: 'Track your daily sale',
                               image: 'assets/images/sales.svg',
                             ),
                             MainCard(
-                              ontap: () {},
+                              ontap: () {
+                                Navigator.pushNamed(context, 'edit_profile');
+                              },
                               color: cardpink,
                               title: 'Profile',
                               discription: 'Manage your Profile',

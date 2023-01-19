@@ -8,6 +8,7 @@ import 'package:klicks_vendor/static/border_button.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/card.dart';
 import 'package:klicks_vendor/static/edit_button.dart';
+import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
@@ -23,18 +24,22 @@ class Service extends StatefulWidget {
 
 class _ServiceState extends State<Service> {
   bool showCreate = false;
+  bool show = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Column(
+            children: [
               TitleTopbar(
                 text: 'Services',
-                ontap: () {},
+                ontap: () {
+                  Navigator.pop(context);
+                },
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.82,
@@ -154,14 +159,16 @@ class _ServiceState extends State<Service> {
                                 Text(
                                   'Tyre Change',
                                   style: TextStyle(
-                                      fontSize: 17, fontWeight: FontWeight.w600),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 5, right: 5),
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
                                   child: EditButton(
                                     title: 'Edit',
                                     onPressed: () {},
@@ -199,14 +206,16 @@ class _ServiceState extends State<Service> {
                                 Text(
                                   'Oil Change',
                                   style: TextStyle(
-                                      fontSize: 17, fontWeight: FontWeight.w600),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 5, right: 5),
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
                                   child: EditButton(
                                     title: 'Edit',
                                     onPressed: () {},
@@ -229,19 +238,39 @@ class _ServiceState extends State<Service> {
                           ],
                         ),
                       ),
-                      
                     ],
                   ),
                 ),
               ),
-        ],
-      ),
-      Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: LargeButton(title: 'Update', onPressed: () {}),
-                  )
             ],
-          )),
+          ),
+          show == false
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: LargeButton(
+                      title: "Update",
+                      onPressed: () {
+                        setState(() {
+                          show = !show;
+                          print(show);
+                        });
+                      }),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: IconsButton(
+                    title: 'Changes saved successfully!',
+                    color: Colors.green,
+                    rounded: true,
+                    onPressed: () {
+                      setState(() {
+                        show = !show;
+                      });
+                    },
+                  ),
+                )
+        ],
+      )),
     );
   }
 }

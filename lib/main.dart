@@ -28,16 +28,16 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: Styles.lightTheme,
       title: "Klicks",
-      initialRoute: 'order_detail',
+      initialRoute: 'splash',
       routes: {
         'splash': (context) => const SplashScreen(),
         'login': (context) => const LoginScreen(),
         'order_status': (context) => const OrderStatus(),
         'notification': (context) => const NotificationScreen(),
         'edit_profile': (context) => const EditProfile(),
-        'main':(context) => MainScreen(),
-          'service': (context) => const Service(),
-          'order_detail': (context) => const OrderDetail(),
+        'main': (context) => MainScreen(),
+        'service': (context) => const Service(),
+        'sales': (context) => const OrderDetail(),
       },
     );
   }

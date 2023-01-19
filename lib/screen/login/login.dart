@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: LargeButton(
                   title: "Sign in",
                   onPressed: () {
+                    Navigator.pushNamed(context, 'main');
                   },
                 ),
               ),
