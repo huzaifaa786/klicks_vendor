@@ -11,14 +11,6 @@ import 'package:intl/date_symbol_data_local.dart';
 
 class OrderDetail extends StatefulWidget {
   const OrderDetail({super.key});
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TableCalendar Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-    );
-  }
 
   @override
   State<OrderDetail> createState() => _OrderDetailState();
