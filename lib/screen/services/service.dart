@@ -8,6 +8,7 @@ import 'package:klicks_vendor/static/border_button.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/card.dart';
 import 'package:klicks_vendor/static/edit_button.dart';
+import 'package:klicks_vendor/static/extra_list_item.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
@@ -41,205 +42,132 @@ class _ServiceState extends State<Service> {
                   Navigator.pop(context);
                 },
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.82,
+              Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 30,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CardCar(
-                              image: 'assets/images/car2.png',
-                            ),
-                            CardCar(
-                              image: 'assets/images/car2.png',
-                            ),
-                          ],
-                        ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 30,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Extre Service',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            GestureDetector(
-                              onTap: () {
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardCar(
+                            image: 'assets/images/car2.png',
+                          ),
+                          CardCar(
+                            image: 'assets/images/car2.png',
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Extre Service',
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w500),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              print(showCreate);
+                              setState(() {
+                                showCreate = !showCreate;
                                 print(showCreate);
-                                setState(() {
-                                  showCreate = !showCreate;
-                                  print(showCreate);
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset('assets/images/add.png'),
-                                  Text(
-                                    'Add new',
-                                    style: TextStyle(color: Colors.blue),
-                                  )
-                                ],
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset('assets/images/add.png'),
+                                Text(
+                                  'Add new',
+                                  style: TextStyle(color: Colors.blue),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    showCreate == true
+                        ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: InputField(
+                                  hint: 'Enter Service name',
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      showCreate == true
-                          ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: InputField(
-                                    hint: 'Enter Service name',
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InputField(
+                                      hint: 'AED',
+                                      width: 0.42,
+                                    ),
+                                    IconInputField(
+                                      imageIcon: 'assets/images/image.svg',
+                                      hint: 'upload image',
+                                      width: 0.42,
+                                    )
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InputField(
-                                        hint: 'AED',
-                                        width: 0.42,
-                                      ),
-                                      IconInputField(
-                                        imageIcon: 'assets/images/image.svg',
-                                        hint: 'upload image',
-                                        width: 0.42,
-                                      )
-                                    ],
-                                  ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BorderButton(
+                                      title: 'cancel',
+                                      onPressed: () {},
+                                      screenRatio: 0.42,
+                                    ),
+                                    LargeButton(
+                                      title: 'Add',
+                                      onPressed: () {},
+                                      screenRatio: 0.42,
+                                      rounded: true,
+                                    )
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      BorderButton(
-                                        title: 'cancel',
-                                        onPressed: () {},
-                                        screenRatio: 0.42,
-                                      ),
-                                      LargeButton(
-                                        title: 'Add',
-                                        onPressed: () {},
-                                        screenRatio: 0.42,
-                                        rounded: true,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          : SizedBox(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+
+                    SizedBox(
+                      height: showCreate == true
+                          ? MediaQuery.of(context).size.height * 0.16
+                          : MediaQuery.of(context).size.height * 0.45,
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  'assets/images/tyre.png',
-                                  height: 40,
-                                  width: 40,
-                                ),
-                                Text(
-                                  'Tyre Change',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
+                            ExtraListTile(
+                              image: 'assets/images/tyre.png',
+                              text: 'Tyre Service',
+                              edittap: (){},
+                              removetap: (){},
                             ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 5),
-                                  child: EditButton(
-                                    title: 'Edit',
-                                    onPressed: () {},
-                                    textcolor: Colors.green,
-                                    screenRatio: 0.20,
-                                    imgicon: 'assets/images/edit.svg',
-                                    color: Colors.green.shade100,
-                                  ),
-                                ),
-                                EditButton(
-                                  title: 'Remove',
-                                  onPressed: () {},
-                                  screenRatio: 0.27,
-                                  textcolor: Colors.red,
-                                  imgicon: 'assets/images/delete.svg',
-                                  color: Colors.red.shade100,
-                                ),
-                              ],
-                            )
+                            ExtraListTile(
+                              image: 'assets/images/oil.png',
+                              text: 'Oil Chnage',
+                              edittap: (){},
+                              removetap: (){},
+                            ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  'assets/images/oil.png',
-                                  height: 40,
-                                  width: 40,
-                                ),
-                                Text(
-                                  'Oil Change',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 5, right: 5),
-                                  child: EditButton(
-                                    title: 'Edit',
-                                    onPressed: () {},
-                                    textcolor: Colors.green,
-                                    screenRatio: 0.20,
-                                    imgicon: 'assets/images/edit.svg',
-                                    color: Colors.green.shade100,
-                                  ),
-                                ),
-                                EditButton(
-                                  title: 'Remove',
-                                  onPressed: () {},
-                                  screenRatio: 0.27,
-                                  textcolor: Colors.red,
-                                  imgicon: 'assets/images/delete.svg',
-                                  color: Colors.red.shade100,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],

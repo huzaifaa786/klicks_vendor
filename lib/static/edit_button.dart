@@ -54,8 +54,8 @@ class EditButton extends StatelessWidget {
               style: TextStyle(
                 color: textcolor,
                 fontFamily: 'Poppins',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
