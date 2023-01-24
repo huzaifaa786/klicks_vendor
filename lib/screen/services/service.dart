@@ -54,7 +54,7 @@ class _ServiceState extends State<Service> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CardCar(
-                            image: 'assets/images/car2.png',
+                            image: 'assets/images/car1.png',
                           ),
                           CardCar(
                             image: 'assets/images/car2.png',
