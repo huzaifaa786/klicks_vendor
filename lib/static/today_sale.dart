@@ -57,7 +57,7 @@ class TodaySale extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Customer Name ',style: TextStyle(fontSize:15,fontWeight: FontWeight.w600 ),),
-                                Text('SWEDAN'),
+                                Text('SUV'),
                               ],
                             ),
                           ),

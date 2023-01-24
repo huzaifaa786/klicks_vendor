@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -26,6 +28,9 @@ class _OrderDetailState extends State<OrderDetail> {
       today = day;
     });
   }
+
+  String str = 'bezkoder.com';
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +71,7 @@ class _OrderDetailState extends State<OrderDetail> {
                       format = _format;
                     });
                   },
-                  startingDayOfWeek: StartingDayOfWeek.sunday,
-                  daysOfWeekVisible: true,
-
-                  //Day Changed
+                 
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
