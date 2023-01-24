@@ -74,7 +74,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 children: [
                   Image(
                     image: AssetImage(
-                      'assets/images/noti_logo.png',
+                      'assets/images/noti_car.png',
                     ),
                   ),
                   Container(

@@ -51,7 +51,7 @@ class Order extends StatelessWidget {
                             Text('BMW'),
                             Padding(
                               padding: const EdgeInsets.only(left: 15),
-                              child: Text('SWEDAN'),
+                              child: Text('SWDAN'),
                             ),
                           ],
                         ),
