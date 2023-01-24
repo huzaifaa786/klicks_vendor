@@ -28,86 +28,90 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          'assets/images/logo1.png',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage(
+                            'assets/images/logo1.png',
+                          ),
+                          height: 220,
+                          width: 220,
                         ),
-                        height: 220,
-                        width: 220,
+                      ],
+                    ),
+                    // Positioned(
+                    //   bottom: 10,
+                    //   left: 55,
+                    //   child: Text(
+                    //     "Sign in to continue",
+                    //     style: TextStyle(
+                    //       fontSize: 26,
+                    //       fontWeight: FontWeight.w600,
+                    //     ),
+                    //   ),
+                    // )
+                  ],
+                ),
+                Text(
+                  "Sign in to continue",
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40.0),
+                  child: IconInputField(
+                    imageIcon: 'assets/images/email.svg',
+                    hint: 'Email',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: InputFieldPassword(
+                    imageIcon: 'assets/images/lock.svg',
+                    hint: 'Password',
+                    toggle: _toggle,
+                    obscure: _obscureText,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'Forgot Passowrd?',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
-                  // Positioned(
-                  //   bottom: 10,
-                  //   left: 55,
-                  //   child: Text(
-                  //     "Sign in to continue",
-                  //     style: TextStyle(
-                  //       fontSize: 26,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // )
-                ],
-              ),
-              Text(
-                "Sign in to continue",
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: IconInputField(
-                  imageIcon: 'assets/images/email.svg',
-                  hint: 'Email',
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0, bottom: 30),
+                  child: LargeButton(
+                    title: "Sign in",
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'main');
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0),
-                child: InputFieldPassword(
-                  imageIcon: 'assets/images/lock.svg',
-                  hint: 'Password',
-                  toggle: _toggle,
-                  obscure: _obscureText,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        'Forgot Passowrd?',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0, bottom: 30),
-                child: LargeButton(
-                  title: "Sign in",
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'main');
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
