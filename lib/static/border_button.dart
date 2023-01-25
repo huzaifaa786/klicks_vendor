@@ -48,7 +48,7 @@ class BorderButton extends StatelessWidget {
                 color: mainColor,
                 fontFamily: 'Poppins',
                 fontSize: 20,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
