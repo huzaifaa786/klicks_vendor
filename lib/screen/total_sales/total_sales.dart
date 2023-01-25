@@ -19,7 +19,7 @@ class SalesScreen extends StatefulWidget {
 }
 
 class _SalesScreenState extends State<SalesScreen> {
-  CalendarFormat format = CalendarFormat.month;
+  CalendarFormat format = CalendarFormat.twoWeeks;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
   DateTime today = DateTime.now();
@@ -67,9 +67,9 @@ class _SalesScreenState extends State<SalesScreen> {
                             isTodayHighlighted: true,
                             outsideDaysVisible: false,
                           ),
-                          availableCalendarFormats: const {
-                            CalendarFormat.month: 'Month',
-                          },
+                          // availableCalendarFormats: const {
+                          //   CalendarFormat.month: 'Month',
+                          // },
                           calendarFormat: format,
                           onFormatChanged: (CalendarFormat _format) {
                             setState(() {

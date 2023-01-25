@@ -50,13 +50,13 @@ class _EditProfileState extends State<EditProfile> {
                         Padding(
                           padding: EdgeInsets.only(top: 12.0, bottom: 6),
                           child: Text(
-                            "Username",
+                            "Email",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500, fontSize: 16),
                           ),
                         ),
                         InputField(
-                          hint: 'Enter Username',
+                          hint: 'Enter Email',
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 12.0, bottom: 6),

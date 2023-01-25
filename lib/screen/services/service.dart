@@ -82,7 +82,7 @@ class _ServiceState extends State<Service> {
                             },
                             child: Row(
                               children: [
-                                Image.asset('assets/images/add.png',height: 16,width: 16,),
+                                Image.asset('assets/images/add.png',height: 14,width: 14,),
                                 Text(
                                   'Add new',
                                   style: TextStyle(color: Colors.blue),
