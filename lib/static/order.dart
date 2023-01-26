@@ -13,11 +13,13 @@ class Order extends StatelessWidget {
     this.icon,
     this.color,
     this.imageicon,
+    this.ontap,
     this.shadowColor,
   }) : super(key: key);
   final text;
   final icon;
   final color;
+  final ontap;
   final imageicon;
   final shadowColor;
   @override
@@ -27,41 +29,43 @@ class Order extends StatelessWidget {
       child: SizedBox(
         height: 80,
         width: MediaQuery.of(context).size.width,
-        child: Card(
-          shadowColor: Colors.black,
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Order ID :F5345'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          imageicon,
-                          height: 40,
-                          width: 40,
-                        ),
-                        Column(
-                          children: [
-                            Text('BMW'),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Text('SWDAN'),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                        Text('jan 12 2023'),
-
-                  ],
-                ),
-              ],
+        child: GestureDetector(
+          onTap: ontap,
+          child: Card(
+            shadowColor: Colors.black,
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Order ID :F5345'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            imageicon,
+                            height: 40,
+                            width: 40,
+                          ),
+                          Column(
+                            children: [
+                              Text('BMW'),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Text('SEDAN'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Text('jan 12 2023'),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

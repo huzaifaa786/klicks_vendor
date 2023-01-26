@@ -60,6 +60,11 @@ class _SalesScreenState extends State<SalesScreen> {
                           focusedDay: today,
                           onDaySelected: _onDaySelected,
                           calendarStyle: CalendarStyle(
+                            todayDecoration: BoxDecoration(
+                                color: Color.fromARGB(255, 144, 205, 255),
+                                shape: BoxShape.circle),
+                            selectedDecoration: BoxDecoration(
+                                color: mainColor, shape: BoxShape.circle),
                             markerDecoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(10),
@@ -85,7 +90,7 @@ class _SalesScreenState extends State<SalesScreen> {
                               fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height*0.1,
+                          height: MediaQuery.of(context).size.height * 0.1,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
