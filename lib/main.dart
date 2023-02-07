@@ -6,6 +6,7 @@ import 'package:klicks_vendor/screen/login/login.dart';
 import 'package:klicks_vendor/screen/main/main.dart';
 import 'package:klicks_vendor/screen/notification/notification.dart';
 import 'package:klicks_vendor/screen/order%20status/order_status.dart';
+import 'package:klicks_vendor/screen/order_history/order_history.dart';
 import 'package:klicks_vendor/screen/total_sales/total_sales.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/screen/splash/splash_screen.dart';
@@ -40,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         'main': (context) => MainScreen(),
         'service': (context) => const Service(),
         'sales': (context) => const SalesScreen(),
+        'history': (context) => const OrderHistry(),
       },
     );
   }

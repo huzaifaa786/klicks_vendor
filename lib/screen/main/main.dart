@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             MainCard(
                               ontap: () {
-                                Navigator.pushNamed(context, 'order_status');
+                                Navigator.pushNamed(context, 'history');
                               },
                               color: cardBlue,
                               title: 'Orders',
