@@ -1,0 +1,1 @@
+const BASE_URL = "https://klicks.triteckodes.com/api/";

@@ -34,7 +34,7 @@ class CardCar extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
-                    child: Card(child: Text('AED 40.00',style: TextStyle(fontSize: 19,fontWeight: FontWeight.w600),)),
+                    child: Card(child: Text('AED '+text,style: TextStyle(fontSize: 19,fontWeight: FontWeight.w600),)),
                   )
          ],
        ),

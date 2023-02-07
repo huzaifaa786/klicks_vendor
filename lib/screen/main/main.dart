@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/api/auth.dart';
+import 'package:klicks_vendor/modals/company.dart';
+import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/static/language.dart';
 import 'package:klicks_vendor/static/logoutTile.dart';
 import 'package:klicks_vendor/static/main_card.dart';
@@ -15,6 +18,21 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Company? company;
+  getcompany() async {
+    var mcompany = await AuthApi.getcompany();
+    setState(() {
+      company = mcompany;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getcompany();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 4),
                         child: Text(
-                          "Hello, Amal!",
+                          "Hello,"+company!.username!,
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,
@@ -69,7 +87,12 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             MainCard(
                               ontap: () {
-                                Navigator.pushNamed(context, 'service');
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Service(
+                                              company: company,
+                                            )));
                               },
                               color: cardgreen,
                               title: 'Services',
