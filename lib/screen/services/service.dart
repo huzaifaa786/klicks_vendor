@@ -50,6 +50,13 @@ class _ServiceState extends State<Service> {
       final img = base64Encode(File(image!.path).readAsBytesSync());
       await ExtraServiceApi.addservice(
           service_nameController, priceController, img);
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Service(
+                    company: widget.company,
+                  )));
       service_nameController.text = '';
       priceController.text = '';
       image = XFile('');
@@ -279,14 +286,13 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
 
   updata() async {
     if (service_nameController.text == '' ||
-        priceController.text == '' ||
-        image!.path == '') {
+        priceController.text == '') {
       Fluttertoast.showToast(msg: 'Fill out all the Fields. Invalid!');
     } else {
       print('xvxc');
       final img = base64Encode(File(image!.path).readAsBytesSync());
       await ExtraServiceApi.editservice(
-          service_nameController, priceController, img,id);
+          service_nameController, priceController, img, id);
     }
   }
 
@@ -318,10 +324,13 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
             padding: const EdgeInsets.only(top: 20),
             child: Row(
               children: [
-                Image(
-                  image: NetworkImage(imageUrl),
-                  height: 50,
-                  width: 70,
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: Image(
+                    image: NetworkImage(imageUrl),
+                    height: 45,
+                    width: 45,
+                  ),
                 ),
                 InkWell(
                     onTap: () {

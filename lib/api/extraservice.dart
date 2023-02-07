@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:klicks_vendor/api/api.dart';
+import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/Service.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/values/string.dart';
@@ -18,7 +19,7 @@ class ExtraServiceApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {
-      'company_id': int.parse( prefs.getString('company_id')!),
+      'company_id': int.parse(prefs.getString('company_id')!),
       'service_name': service_name.text.toString(),
       'price': price.text.toString(),
       'image': image,
@@ -50,9 +51,7 @@ class ExtraServiceApi {
     var data;
     final prefs = await SharedPreferences.getInstance();
 
-    data = {
-      'id': int.parse( prefs.getString('company_id')!)
-    };
+    data = {'id': int.parse(prefs.getString('company_id')!)};
     print(data);
     var response = await Api.execute(
       url: url,
@@ -66,47 +65,41 @@ class ExtraServiceApi {
     }
     return extraservices;
   }
-   static delservice(id) async {
-    // LoadingHelper.show();
+
+  static delservice(id) async {
+    LoadingHelper.show();
     var url = BASE_URL + 'delservice';
     var data;
-  
 
-    data = {
-     'id': id
-    };
+    data = {'id': id};
     print(data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
     // print(response);
-    // LoadingHelper.dismiss();
-     ExtraService extraservice = ExtraService(response['true']);
+    LoadingHelper.dismiss();
     return response;
   }
-   static editservice( service_name,
-    price,
-    image,id) async {
-    // LoadingHelper.show();
-    var url = BASE_URL + 'editservices';
+
+  static editservice(service_name, price, image, id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'editservice';
     var data;
-  
 
     data = {
-     'service_name': service_name.text.toString(),
+      'service_name': service_name.text.toString(),
       'price': price.text.toString(),
       'image': image,
-      'id' :id,
+      'id': id,
     };
     print(data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
-    // LoadingHelper.dismiss();
-     ExtraService extraservice = ExtraService(response['true']);
+    print(response);
+    LoadingHelper.dismiss();
     return response;
   }
 }

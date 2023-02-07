@@ -33,13 +33,19 @@ class ImageInput extends StatelessWidget {
       width: 180,
       decoration: BoxDecoration(
           color: Colors.grey.shade200, borderRadius: BorderRadius.circular(5)),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        SvgPicture.asset('assets/images/image.svg'),
-        Text(
-          'Upload image',
-          style: TextStyle(color: Colors.grey.shade600),
-        )
-      ]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 12, right: 12),
+            child: SvgPicture.asset('assets/images/image.svg'),
+          ),
+          Text(
+            "Upload Image",
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          )
+        ],
+      ),
     );
   }
 }
