@@ -27,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
       company = mcompany;
     });
   }
+  
 
   void initState() {
     super.initState();
@@ -136,7 +137,11 @@ class _MainScreenState extends State<MainScreen> {
                               LogOutTile(
                                 image: 'assets/images/logout.svg',
                                 text: 'Log out',
-                                ontap: () {},
+                                ontap: () {
+                                  AuthApi.logout();
+                                    Navigator.pushNamed(
+                                            context, 'login');
+                                },
                               )
                             ],
                           ),
