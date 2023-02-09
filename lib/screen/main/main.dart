@@ -29,8 +29,8 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getcompany();
-    });
+      await getcompany();
+    }); 
   }
 
   @override
@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 4),
                         child: Text(
-                          "Hello,"+company!.username!,
+                          "Hello," + company!.username!,
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,

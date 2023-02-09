@@ -89,7 +89,7 @@ class ExtraServiceApi {
     price,
     image,id) async {
     // LoadingHelper.show();
-    var url = BASE_URL + 'editservices';
+    var url = BASE_URL + 'editservice';
     var data;
   
 
