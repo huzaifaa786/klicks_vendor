@@ -11,13 +11,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthApi {
   static login(email, password) async {
-    // LoadingHelper.show();
+    LoadingHelper.show();
     var url = BASE_URL + 'companyLogin';
     var data = {'email': email.text, 'password': password.text};
 
     var response = await Api.execute(url: url, data: data);
 
-    // LoadingHelper.dismiss();
+    LoadingHelper.dismiss();
     if (!response['error']) {
       Company company = Company(response['company']);
 
@@ -25,16 +25,15 @@ class AuthApi {
       print(response['company.api_token']);
       SharedPreferencesHelper.setString(
           'company_id', company.company_id.toString());
-      // Auth.login(user);
       return true;
     } else {
-      // FlutterToast.showToast(msg: response['error_data']);
+      Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
   }
 
   static getcompany() async {
-    // LoadingHelper.show();
+    LoadingHelper.show();
     var url = BASE_URL + 'companyget';
     var data;
     final prefs = await SharedPreferences.getInstance();
@@ -42,15 +41,12 @@ class AuthApi {
     data = {'api_token': prefs.getString('api_token')!};
 
     var response = await Api.execute(url: url, data: data);
-    // print(Response);
-    // LoadingHelper.dismiss();
+    LoadingHelper.dismiss();
     if (!response['error']) {
       Company company = Company(response['company']);
-
-      // Auth.login(user);
       return company;
     } else {
-      // FlutterToast.showToast(msg: response['error_data']);
+      Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
   }
