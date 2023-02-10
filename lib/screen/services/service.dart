@@ -231,10 +231,11 @@ class _ServiceState extends State<Service> {
                                       service.service_name,
                                       service.price,
                                       service.image,
+                                      
                                       service.id);
                                 },
                                 removetap: () {
-                                  _onAlertButtonsPressed(context, service.id);
+                                  _onAlertButtonsPressed(context, service.id,);
                                 },
                               ),
                           ],
@@ -375,6 +376,8 @@ _onAlertButtonsPressed(context, id) {
         ),
         onPressed: () {
           delservice();
+            Navigator.pop(context);
+     
         },
         color: Color.fromRGBO(0, 179, 134, 1.0),
       ),

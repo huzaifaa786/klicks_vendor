@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/helpers/shared_pref.dart';
+import 'package:klicks_vendor/main.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -50,4 +52,10 @@ class AuthApi {
       return false;
     }
   }
+     static Future logout() async {
+    
+    SharedPreferencesHelper.remove('api_token');
+   
+  }
+ 
 }
