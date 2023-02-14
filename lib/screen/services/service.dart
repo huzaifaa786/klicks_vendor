@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
@@ -76,6 +77,7 @@ class _ServiceState extends State<Service> {
   getservice() async {
     var mservice = await ExtraServiceApi.getservice();
     setState(() {
+      services = [];
       services = mservice;
     });
   }
@@ -231,11 +233,11 @@ class _ServiceState extends State<Service> {
                                       service.service_name,
                                       service.price,
                                       service.image,
-                                      
                                       service.id);
                                 },
-                                removetap: () {
-                                  _onAlertButtonsPressed(context, service.id,);
+                                removetap: () async {
+                                  await _onAlertButtonsPressed(
+                                      context, service.id, widget.company);
                                 },
                               ),
                           ],
@@ -286,21 +288,23 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
   service_nameController.text = service_name;
 
   updata() async {
-    if (service_nameController.text == '' ||
-        priceController.text == '') {
+    if (service_nameController.text == '' || priceController.text == '') {
       Fluttertoast.showToast(msg: 'Fill out all the Fields. Invalid!');
     } else {
       print('xvxc');
-      final img = base64Encode(File(image!.path).readAsBytesSync());
-      await ExtraServiceApi.editservice(
-          service_nameController, priceController, img, id);
+      if (image!.path == '') {
+        await ExtraServiceApi.editservicewithoutImage(
+            service_nameController, priceController, id);
+      } else {
+        final img = base64Encode(File(image!.path).readAsBytesSync());
+        await ExtraServiceApi.editservice(
+            service_nameController, priceController, img, id);
+      }
     }
   }
 
   selectimage() async {
-    print('dsff');
     final ImagePicker _picker = ImagePicker();
-
     image = await _picker.pickImage(source: ImageSource.gallery);
   }
 
@@ -356,7 +360,7 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
       ]).show();
 }
 
-_onAlertButtonsPressed(context, id) {
+_onAlertButtonsPressed(context, id, company) async {
   print('id');
 
   delservice() async {
@@ -374,10 +378,9 @@ _onAlertButtonsPressed(context, id) {
           "YES",
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        onPressed: () {
-          delservice();
-            Navigator.pop(context);
-     
+        onPressed: () async {
+          await delservice();
+          Navigator.pop(context, true);
         },
         color: Color.fromRGBO(0, 179, 134, 1.0),
       ),
@@ -386,7 +389,7 @@ _onAlertButtonsPressed(context, id) {
           "NO",
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => Navigator.pop(context, false),
         gradient: LinearGradient(colors: [
           Color.fromRGBO(116, 116, 191, 1.0),
           Color.fromRGBO(52, 138, 199, 1.0),

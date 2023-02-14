@@ -1,19 +1,13 @@
-import 'dart:developer';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/Service.dart';
-import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ExtraServiceApi {
-  static addservice(
-    service_name,
-    price,
-    image,
-  ) async {
-    // LoadingHelper.show();
+  static addservice(service_name, price, image) async {
+    LoadingHelper.show();
     var url = BASE_URL + 'addservice';
     var data;
     final prefs = await SharedPreferences.getInstance();
@@ -30,23 +24,20 @@ class ExtraServiceApi {
       data: data,
     );
     // print(response);
-    // LoadingHelper.dismiss();
+    LoadingHelper.dismiss();
     if (!response['error']) {
       // print(response['services']);
       ExtraService extraservice = ExtraService(response['services']);
-      // SharedPreferencesHelper.setString('api_token', user.apiToken!);
-      // SharedPreferencesHelper.setString('name', user.name!);
-
       return true;
     } else {
       print('error');
-      // Fluttertoast.showToast(msg: response['error_data']);
+      Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
   }
 
   static getservice() async {
-    // LoadingHelper.show();
+    LoadingHelper.show();
     var url = BASE_URL + 'allservices';
     var data;
     final prefs = await SharedPreferences.getInstance();
@@ -58,7 +49,7 @@ class ExtraServiceApi {
       data: data,
     );
     // print(response);
-    // LoadingHelper.dismiss();
+    LoadingHelper.dismiss();
     List<ExtraService> extraservices = <ExtraService>[];
     for (var extraservice in response['services']) {
       extraservices.add(ExtraService(extraservice));
@@ -91,6 +82,26 @@ class ExtraServiceApi {
       'service_name': service_name.text.toString(),
       'price': price.text.toString(),
       'image': image,
+      'id': id,
+    };
+    print(data);
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+    print(response);
+    LoadingHelper.dismiss();
+    return response;
+  }
+
+  static editservicewithoutImage(service_name, price, id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'editservice';
+    var data;
+
+    data = {
+      'service_name': service_name.text.toString(),
+      'price': price.text.toString(),
       'id': id,
     };
     print(data);
