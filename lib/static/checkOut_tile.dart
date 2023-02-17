@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class CheckOutTile extends StatelessWidget {
-  const CheckOutTile({super.key, this.title, this.discription,this.extra = false,this.services});
+  const CheckOutTile(
+      {super.key,
+      this.title,
+      this.discription,
+      this.extra = false,
+      this.services});
   final title;
   final discription;
   final bool extra;
   final Widget? services;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +30,6 @@ class CheckOutTile extends StatelessWidget {
                   fontWeight: FontWeight.w400, fontSize: 14, color: colorgrey),
             ),
           ),
-          extra  ?
-          Container(child: services) :
-          
-
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.35,
             child: Text(

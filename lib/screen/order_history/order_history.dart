@@ -14,9 +14,8 @@ class OrderHistry extends StatefulWidget {
 }
 
 class _OrderHistryState extends State<OrderHistry> {
-   OrderModal? order;
   List<OrderModal> orders = [];
-  getservice() async {
+  getOrders() async {
     var morder = await OrderApi.getorder();
     setState(() {
       orders = [];
@@ -27,9 +26,25 @@ class _OrderHistryState extends State<OrderHistry> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getservice();
+      getOrders();
     });
   }
+
+  List<String> monthNames = [
+    '', // The first item is left empty so that the index of each month corresponds to its number (i.e. January is at index 1)
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +71,28 @@ class _OrderHistryState extends State<OrderHistry> {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  height: MediaQuery.of(context).size.height*0.8,
+                  height: MediaQuery.of(context).size.height * 0.77,
                   child: ListView.builder(
                       itemCount: orders.length,
                       itemBuilder: (BuildContext context, int index) {
+                        String monthName =
+                            monthNames[orders[index].dateTime!.month];
                         return Order(
-                          orderId:orders[index].id.toString(),
+                          orderId: orders[index].id.toString(),
                           companyname: orders[index].company,
-                            cartype: orders[index].cartype,
+                          cartype: orders[index].cartype,
+                          dateTime: monthName +
+                              ' ' +
+                              orders[index].dateTime!.day.toString() +
+                              ', ' +
+                              orders[index].dateTime!.year.toString(),
                           imageicon: 'assets/images/car_order.svg',
                           ontap: () {
-                           Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => OrderStatus(order:orders[index])));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        OrderStatus(order: orders[index])));
                           },
                         );
                       }),

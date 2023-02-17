@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/Service.dart';
+import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
+import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class OrderStatus extends StatefulWidget {
@@ -19,13 +23,14 @@ class OrderStatus extends StatefulWidget {
 }
 
 class _OrderStatusState extends State<OrderStatus> {
-  List<ExtraService> services = [];
+  List<ExtraServiceDetail> services = [];
   getservice() async {
-    var morder = await OrderApi.orderdetail(widget.order!.id.toString());
-    print(widget.order!.id.toString());
+    var morderServices =
+        await OrderApi.ExtraServicesINOrder(widget.order!.id.toString());
+    log(widget.order!.id.toString());
     setState(() {
       services = [];
-      services = morder;
+      services = morderServices;
     });
   }
 
@@ -33,7 +38,6 @@ class _OrderStatusState extends State<OrderStatus> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
-      print(widget.order);
     });
   }
 
@@ -86,19 +90,47 @@ class _OrderStatusState extends State<OrderStatus> {
                   title: 'Mall',
                   discription: widget.order!.mall,
                 ),
-               for (var service in services)
-               
-                CheckOutTile(
-                  
-                  title: 'Extras: ',
-                  extra: true,
-                  services: Column(children: [ 
-                     
-                     
-                 Text( service.service_name!)
-                  
-                  ])
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(
+                        'Extras: ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: colorgrey),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        for (var service in services)
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            child: Text(
+                              service == '' ? 'No Extra Services' : service.service_name! + ', ',
+                              maxLines: 3,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Colors.black),
+                            ),
+                          )
+                      ],
+                    )
+                  ],
                 ),
+                // for (var service in services)
+                //   service == null
+                //       ? CheckOutTile(
+                //           title: 'Extras: ',
+                //           discription: '',
+                //         )
+                //       : CheckOutTile(
+                //           title: 'Extras: ',
+                //           discription: service.service_name,
+                //         ),
                 isSelected == 'reject'
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

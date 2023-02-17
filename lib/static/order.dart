@@ -15,6 +15,7 @@ class Order extends StatelessWidget {
     this.imageicon,
     this.ontap,
       this.cartype,
+      this.dateTime,
     this.companyname,
     this.orderId,
     this.shadowColor,
@@ -25,7 +26,7 @@ class Order extends StatelessWidget {
   final color;
    final cartype;
   final companyname;
-
+final dateTime;
   final ontap;
   final imageicon;
   final shadowColor;
@@ -57,18 +58,19 @@ class Order extends StatelessWidget {
                             height: 40,
                             width: 40,
                           ),
-                          Column(
-                            children: [
-                              Text(companyname),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Text(cartype),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(companyname),
+                                Text(cartype),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Text('jan 12 2023'),
+                      Text(dateTime),
                     ],
                   ),
                 ],
