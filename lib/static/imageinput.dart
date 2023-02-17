@@ -11,6 +11,7 @@ class ImageInput extends StatelessWidget {
     Key? key,
     this.textcolor,
     this.icon,
+    this.text,
     this.imgicon,
     this.iconTrue = true,
     this.screenRatio = 0.9,
@@ -23,6 +24,7 @@ class ImageInput extends StatelessWidget {
   final screenRatio;
   final color;
   final textcolor;
+  final text;
   final icon;
   final rounded;
 
@@ -40,9 +42,13 @@ class ImageInput extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12, right: 12),
             child: SvgPicture.asset('assets/images/image.svg'),
           ),
-          Text(
-            "Upload Image",
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          Expanded(
+            child: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            ),
           )
         ],
       ),

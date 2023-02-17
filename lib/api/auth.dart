@@ -52,10 +52,8 @@ class AuthApi {
       return false;
     }
   }
-     static Future logout() async {
-    
+
+  static Future logout() async {
     SharedPreferencesHelper.remove('api_token');
-   
   }
- 
 }
