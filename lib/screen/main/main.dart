@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
+import 'package:klicks_vendor/screen/edit_profile.dart/edit_profile.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/static/language.dart';
 import 'package:klicks_vendor/static/logoutTile.dart';
@@ -27,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
       company = mcompany;
     });
   }
-  
 
   void initState() {
     super.initState();
@@ -115,8 +115,15 @@ class _MainScreenState extends State<MainScreen> {
                                     ),
                                     MainCard(
                                       ontap: () {
-                                        Navigator.pushNamed(
-                                            context, 'edit_profile');
+                                        // Navigator.pushNamed(
+                                        //     context, 'edit_profile');
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditProfile(
+                                                      company: company,
+                                                    )));
                                       },
                                       color: cardpink,
                                       title: 'Profile',
@@ -139,8 +146,8 @@ class _MainScreenState extends State<MainScreen> {
                                 text: 'Log out',
                                 ontap: () {
                                   AuthApi.logout();
-                                    Navigator.pushNamed(
-                                            context, 'login');
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, 'login', (route) => false);
                                 },
                               )
                             ],

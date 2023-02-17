@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
@@ -9,13 +10,17 @@ import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  const EditProfile({super.key, this.company});
+  final Company? company;
 
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool _obscureText = true;
   bool show = false;
 
@@ -23,6 +28,12 @@ class _EditProfileState extends State<EditProfile> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  void initState() {
+    emailController.text = widget.company!.email!;
+    phoneController.text = widget.company!.phone!;
+    super.initState();
   }
 
   @override
@@ -57,6 +68,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         InputField(
                           hint: 'Enter Email',
+                          controller: emailController,
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 12.0, bottom: 6),
@@ -68,6 +80,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         InputField(
                           hint: 'Enter phone number',
+                          controller: phoneController,
                           type: TextInputType.number,
                         ),
                         Padding(
@@ -94,6 +107,7 @@ class _EditProfileState extends State<EditProfile> {
                           hint: 'Password',
                           toggle: _toggle,
                           obscure: _obscureText,
+                          controller: passwordController,
                         ),
                       ],
                     ),

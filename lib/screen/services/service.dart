@@ -69,8 +69,10 @@ class _ServiceState extends State<Service> {
   selectimage() async {
     print('dsff');
     final ImagePicker _picker = ImagePicker();
-
-    image = await _picker.pickImage(source: ImageSource.gallery);
+    var image1 = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = image1;
+    });
   }
 
   List<ExtraService> services = [];
@@ -181,12 +183,17 @@ class _ServiceState extends State<Service> {
                                       controller: priceController,
                                       hint: 'AED',
                                       width: 0.42,
+                                      type: TextInputType.number,
                                     ),
                                     InkWell(
                                       onTap: () {
                                         selectimage();
                                       },
-                                      child: ImageInput(),
+                                      child: ImageInput(
+                                        text: image!.path == ''
+                                            ? 'Upload Image'
+                                            : image!.name,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -228,15 +235,16 @@ class _ServiceState extends State<Service> {
                                 image: service.image,
                                 text: service.service_name,
                                 edittap: () {
-                                  _onAlertWithCustomContentPressed(
+                                  editServices(
                                       context,
                                       service.service_name,
                                       service.price,
                                       service.image,
-                                      service.id);
+                                      service.id,
+                                      widget.company);
                                 },
-                                removetap: () async {
-                                  await _onAlertButtonsPressed(
+                                removetap: () {
+                                  DeleteService(
                                       context, service.id, widget.company);
                                 },
                               ),
@@ -249,38 +257,38 @@ class _ServiceState extends State<Service> {
               ),
             ],
           ),
-          show == false
-              ? Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: LargeButton(
-                      title: "Update",
-                      onPressed: () {
-                        setState(() {
-                          show = !show;
-                          print(show);
-                        });
-                      }),
-                )
-              : Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: IconsButton(
-                    title: 'Changes saved successfully!',
-                    color: Colors.green,
-                    rounded: true,
-                    onPressed: () {
-                      setState(() {
-                        show = !show;
-                      });
-                    },
-                  ),
-                ),
+          // show == false
+          //     ? Padding(
+          //         padding: const EdgeInsets.only(bottom: 12),
+          //         child: LargeButton(
+          //             title: "Update",
+          //             onPressed: () {
+          //               setState(() {
+          //                 show = !show;
+          //                 print(show);
+          //               });
+          //             }),
+          //       )
+          //     : Padding(
+          //         padding: const EdgeInsets.only(bottom: 12),
+          //         child: IconsButton(
+          //           title: 'Changes saved successfully!',
+          //           color: Colors.green,
+          //           rounded: true,
+          //           onPressed: () {
+          //             setState(() {
+          //               show = !show;
+          //             });
+          //           },
+          //         ),
+          //       ),
         ],
       )),
     );
   }
 }
 
-_onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
+editServices(context, service_name, price, imageUrl, id, company) {
   TextEditingController service_nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   XFile? image = XFile('');
@@ -306,6 +314,7 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
   selectimage() async {
     final ImagePicker _picker = ImagePicker();
     image = await _picker.pickImage(source: ImageSource.gallery);
+    // setState((){});
   }
 
   Alert(
@@ -324,24 +333,30 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
             decoration: InputDecoration(
               labelText: 'price',
             ),
+            keyboardType: TextInputType.number,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: Image(
-                    image: NetworkImage(imageUrl),
-                    height: 45,
-                    width: 45,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(right: 12),
+                    child: image!.path == ''
+                        ? Image(
+                            image: NetworkImage(imageUrl),
+                            width: 45,
+                          )
+                        : Image(
+                            image: AssetImage(image!.path),
+                            width: 45,
+                          )),
                 InkWell(
                     onTap: () {
                       selectimage();
                     },
-                    child: ImageInput()),
+                    child: ImageInput(
+                      text: image!.path.isEmpty ? 'Upload Image' : image!.path,
+                    )),
               ],
             ),
           )
@@ -349,8 +364,15 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
       ),
       buttons: [
         DialogButton(
-          onPressed: () {
-            updata();
+          onPressed: () async {
+            await updata();
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Service(
+                          company: company,
+                        )));
           },
           child: Text(
             "save",
@@ -360,7 +382,7 @@ _onAlertWithCustomContentPressed(context, service_name, price, imageUrl, id) {
       ]).show();
 }
 
-_onAlertButtonsPressed(context, id, company) async {
+DeleteService(context, id, company) async {
   print('id');
 
   delservice() async {
@@ -380,7 +402,13 @@ _onAlertButtonsPressed(context, id, company) async {
         ),
         onPressed: () async {
           await delservice();
-          Navigator.pop(context, true);
+          Navigator.pop(context);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Service(
+                        company: company,
+                      )));
         },
         color: Color.fromRGBO(0, 179, 134, 1.0),
       ),
