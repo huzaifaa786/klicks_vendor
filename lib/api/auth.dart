@@ -56,4 +56,21 @@ class AuthApi {
   static Future logout() async {
     SharedPreferencesHelper.remove('api_token');
   }
+
+    static changeposward(password) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'changepasword';
+    var data;
+    final prefs = await SharedPreferences.getInstance();
+    print(prefs.getString('api_token'));
+    data = {'api_token': prefs.getString('api_token')!,
+    'password': password.text
+    
+    };
+
+    var response = await Api.execute(url: url, data: data);
+   
+     LoadingHelper.dismiss();
+    return response;
+  }
 }
