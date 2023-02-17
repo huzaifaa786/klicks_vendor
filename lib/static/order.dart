@@ -14,11 +14,18 @@ class Order extends StatelessWidget {
     this.color,
     this.imageicon,
     this.ontap,
+      this.cartype,
+    this.companyname,
+    this.orderId,
     this.shadowColor,
   }) : super(key: key);
   final text;
+  final orderId;
   final icon;
   final color;
+   final cartype;
+  final companyname;
+
   final ontap;
   final imageicon;
   final shadowColor;
@@ -39,7 +46,7 @@ class Order extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Order ID :F5345'),
+                  Text('order id :' +orderId),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -52,10 +59,10 @@ class Order extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              Text('BMW'),
+                              Text(companyname),
                               Padding(
                                 padding: const EdgeInsets.only(left: 15),
-                                child: Text('SEDAN'),
+                                child: Text(cartype),
                               ),
                             ],
                           ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/api/order.dart';
+import 'package:klicks_vendor/modals/order.dart';
+import 'package:klicks_vendor/screen/order%20status/order_status.dart';
 import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/searchbar.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
@@ -11,6 +14,23 @@ class OrderHistry extends StatefulWidget {
 }
 
 class _OrderHistryState extends State<OrderHistry> {
+   OrderModal? order;
+  List<OrderModal> orders = [];
+  getservice() async {
+    var morder = await OrderApi.getorder();
+    setState(() {
+      orders = [];
+      orders = morder;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getservice();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,11 +55,24 @@ class _OrderHistryState extends State<OrderHistry> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Order(
-                  imageicon: 'assets/images/car_order.svg',
-                  ontap: () {
-                    Navigator.pushNamed(context, 'order_status');
-                  },
+                Container(
+                  height: MediaQuery.of(context).size.height*0.8,
+                  child: ListView.builder(
+                      itemCount: orders.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Order(
+                          orderId:orders[index].id.toString(),
+                          companyname: orders[index].company,
+                            cartype: orders[index].cartype,
+                          imageicon: 'assets/images/car_order.svg',
+                          ontap: () {
+                           Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => OrderStatus(order:orders[index])));
+                          },
+                        );
+                      }),
                 ),
               ],
             ),

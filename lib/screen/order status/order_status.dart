@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:klicks_vendor/api/order.dart';
+import 'package:klicks_vendor/modals/Service.dart';
+import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
@@ -9,13 +12,31 @@ import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class OrderStatus extends StatefulWidget {
-  const OrderStatus({super.key});
-
+  const OrderStatus({super.key, this.order});
+  final OrderModal? order;
   @override
   State<OrderStatus> createState() => _OrderStatusState();
 }
 
 class _OrderStatusState extends State<OrderStatus> {
+  List<ExtraService> services = [];
+  getservice() async {
+    var morder = await OrderApi.orderdetail(widget.order!.id.toString());
+    print(widget.order!.id.toString());
+    setState(() {
+      services = [];
+      services = morder;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getservice();
+      print(widget.order);
+    });
+  }
+
   String? isSelected = '';
   @override
   Widget build(BuildContext context) {
@@ -47,27 +68,36 @@ class _OrderStatusState extends State<OrderStatus> {
                 SizedBox(height: 20),
                 CheckOutTile(
                   title: 'Vehicle Type',
-                  discription: 'Sedan',
+                  discription: widget.order!.cartype,
                 ),
                 CheckOutTile(
                   title: 'Build Company:',
-                  discription: 'BMW ',
+                  discription: widget.order!.company,
                 ),
                 CheckOutTile(
                   title: 'Number Plate:',
-                  discription: 'WW 701',
+                  discription: widget.order!.plate_number,
                 ),
                 CheckOutTile(
                   title: 'Parking Number:',
-                  discription: 'FA23',
+                  discription: widget.order!.parking,
                 ),
                 CheckOutTile(
                   title: 'Mall',
-                  discription: 'Dubai Mall',
+                  discription: widget.order!.mall,
                 ),
+               for (var service in services)
+               
                 CheckOutTile(
+                  
                   title: 'Extras: ',
-                  discription: 'Wash seats as well',
+                  extra: true,
+                  services: Column(children: [ 
+                     
+                     
+                 Text( service.service_name!)
+                  
+                  ])
                 ),
                 isSelected == 'reject'
                     ? Row(

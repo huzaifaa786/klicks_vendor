@@ -1,12 +1,12 @@
-class OrderModal {
-  int? id;
+class OrderDetail{
+
+ int? id;
   String? mall;
    String? company;
   String? parking;
   String? plate_number;
   String? floor;
    String? cartype;
-   List? service = [''];
 
   OrderModal(order) {
     id = order['id'];
@@ -16,6 +16,13 @@ class OrderModal {
     plate_number = order['number_plate'];
     floor = order['floor'];
       cartype = order['cartype'];
-    service = order['service'] as List?;
   }
+
+
+
+
+
+
+
+
 }

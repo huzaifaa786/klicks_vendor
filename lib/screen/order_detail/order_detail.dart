@@ -5,6 +5,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/static/today_sale.dart';
 import 'package:klicks_vendor/values/styles.dart';
@@ -12,8 +13,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class OrderDetail extends StatefulWidget {
-  const OrderDetail({super.key});
-
+  const OrderDetail({super.key, this.order});
+final OrderModal? order;
   @override
   State<OrderDetail> createState() => _OrderDetailState();
 }
