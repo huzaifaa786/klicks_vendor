@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/main.dart';
+import 'package:klicks_vendor/screen/forgot_password/forgot_password.dart';
 import 'package:klicks_vendor/screen/main/main.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- TextEditingController emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
 
@@ -42,12 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController,
         passwordController,
       ))
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => MainScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainScreen()));
     }
   }
-
-
 
   bool _obscureText = true;
 
@@ -105,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40.0),
                   child: IconInputField(
-                     controller: emailController,
+                    controller: emailController,
                     imageIcon: 'assets/images/email.svg',
                     hint: 'Email',
                   ),
@@ -113,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0),
                   child: InputFieldPassword(
-                      controller: passwordController,
+                    controller: passwordController,
                     imageIcon: 'assets/images/lock.svg',
                     hint: 'Password',
                     toggle: _toggle,
@@ -126,7 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ForgotScreen()));
+                        },
                         child: Text(
                           'Forgot Passowrd?',
                           style: TextStyle(
@@ -143,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: LargeButton(
                     title: "Sign in",
                     onPressed: () {
-                       login();
+                      login();
                     },
                   ),
                 ),

@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/screen/edit_profile.dart/edit_profile.dart';
@@ -56,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
                               Padding(
                                 padding: EdgeInsets.only(top: 20, bottom: 4),
                                 child: Text(
-                                  "Hello," + company!.username!,
+                                  "Hello, " + company!.username!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 24,
@@ -148,6 +149,7 @@ class _MainScreenState extends State<MainScreen> {
                                   AuthApi.logout();
                                   Navigator.pushNamedAndRemoveUntil(
                                       context, 'login', (route) => false);
+                                      Fluttertoast.showToast(msg: "Logout successful");
                                 },
                               )
                             ],

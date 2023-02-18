@@ -1,11 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/helpers/shared_pref.dart';
-import 'package:klicks_vendor/main.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -57,20 +52,51 @@ class AuthApi {
     SharedPreferencesHelper.remove('api_token');
   }
 
-    static changeposward(password) async {
+  static changeposward(password) async {
     LoadingHelper.show();
     var url = BASE_URL + 'changepasword';
     var data;
     final prefs = await SharedPreferences.getInstance();
     print(prefs.getString('api_token'));
-    data = {'api_token': prefs.getString('api_token')!,
-    'password': password.text
-    
+    data = {
+      'api_token': prefs.getString('api_token')!,
+      'password': password.text
     };
 
     var response = await Api.execute(url: url, data: data);
-   
-     LoadingHelper.dismiss();
+
+    LoadingHelper.dismiss();
     return response;
+  }
+
+  static ResetPassword(password, api_token) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'changepasword';
+    var data;
+    final prefs = await SharedPreferences.getInstance();
+    print(prefs.getString('api_token'));
+    data = {'api_token': api_token, 'password': password.text};
+
+    var response = await Api.execute(url: url, data: data);
+
+    LoadingHelper.dismiss();
+    return response;
+  }
+
+  static getcompanyUsingEmail(email) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'forgetpasword';
+    var data = {'email': email};
+
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
+    if (!response['error']) {
+      Company company = Company(response['company']);
+      return company;
+    } else {
+      Fluttertoast.showToast(msg: response['error_data']);
+      return false;
+    }
   }
 }

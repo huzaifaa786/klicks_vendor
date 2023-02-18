@@ -48,8 +48,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         show = true;
       });
-      phoneController.text = '';
-      emailController.text = '';
       passwordController.text = '';
     }
   }
