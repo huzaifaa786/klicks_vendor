@@ -18,6 +18,6 @@ class OrderModal {
     floor = order['floor'];
     cartype = order['cartype'];
     service = order['service'] as List?;
-    dateTime = DateTime.parse(order['created_at'] );
+    dateTime = DateTime.parse(order['created_at']);
   }
 }
