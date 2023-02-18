@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/order.dart';
+import 'package:klicks_vendor/modals/sale.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
@@ -22,14 +23,21 @@ class SalesScreen extends StatefulWidget {
 }
 
 class _SalesScreenState extends State<SalesScreen> {
-  OrderModal? order;
-  List<OrderModal> orders = [];
+  SaleModal? order;
+  List<SaleModal> orders = [];
+  List<SaleModal> searchedorders = [];
+  CalendarFormat format = CalendarFormat.twoWeeks;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+  DateTime today = DateTime.now();
   getservice() async {
-    var morder = await OrderApi.getorder();
+    var morder = await OrderApi.getcompleteorder();
     setState(() {
       orders = [];
       orders = morder;
+      searchedorders = orders;
     });
+    daySale(today);
   }
 
   void initState() {
@@ -39,19 +47,22 @@ class _SalesScreenState extends State<SalesScreen> {
     });
   }
 
-  CalendarFormat format = CalendarFormat.twoWeeks;
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
-  DateTime today = DateTime.now();
   void _onDaySelected(DateTime day, DateTime foucsedDay) {
-    print('dfgdf');
+    daySale(day);
     setState(() {
       today = day;
     });
   }
 
-  Daysale() {
-    DateTime day;
+  daySale(DateTime day) {
+    
+    List<SaleModal> orderlist =
+        orders.where((i) => i.dateTime!.day == day.day).toList();
+    
+
+    setState(() {
+      searchedorders = orderlist;
+    });
   }
 
   @override
@@ -117,12 +128,12 @@ class _SalesScreenState extends State<SalesScreen> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.5,
                           child: ListView.builder(
-                              itemCount: orders.length,
+                              itemCount: searchedorders.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return TodaySale(
-                                  name: orders[index].user!,
-                                  type: orders[index].cartype,
-                                  price: orders[index].price,
+                                  name: searchedorders[index].user!,
+                                  type: searchedorders[index].cartype,
+                                  price: searchedorders[index].price,
                                   imageicon: 'assets/images/car_order.svg',
                                 );
                               }),

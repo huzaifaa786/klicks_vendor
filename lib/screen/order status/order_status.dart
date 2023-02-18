@@ -133,7 +133,7 @@ class _OrderStatusState extends State<OrderStatus> {
                 //           title: 'Extras: ',
                 //           discription: service.service_name,
                 //         ),
-                isSelected == 'reject'
+                widget.order!.status == '2'
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -147,13 +147,11 @@ class _OrderStatusState extends State<OrderStatus> {
                           Badge(
                             title: 'Rejected',
                             color: Colors.red,
-                            ontap: () {
-                              OrderApi.orderaccept(widget.order!.id);
-                            },
+                            ontap: () {},
                           )
                         ],
                       )
-                    : isSelected == 'accept'
+                    : widget.order!.status == '1'
                         ? Padding(
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
@@ -168,7 +166,7 @@ class _OrderStatusState extends State<OrderStatus> {
                         : SizedBox()
               ],
             ),
-            isSelected == ''
+            widget.order!.status == '0'
                 ? Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Row(
@@ -177,8 +175,9 @@ class _OrderStatusState extends State<OrderStatus> {
                         LargeButton(
                             title: 'Accept',
                             onPressed: () {
+                              OrderApi.orderaccept(widget.order!.id);
                               setState(() {
-                                isSelected = 'accept';
+                                widget.order!.status == '1';
                               });
                             },
                             screenRatio: 0.4,
@@ -187,8 +186,9 @@ class _OrderStatusState extends State<OrderStatus> {
                         LargeButton(
                             title: 'Reject',
                             onPressed: () {
+                              OrderApi.orderreject(widget.order!.id);
                               setState(() {
-                                isSelected = 'reject';
+                                widget.order!.status == '2';
                               });
                             },
                             screenRatio: 0.4,
@@ -197,12 +197,14 @@ class _OrderStatusState extends State<OrderStatus> {
                       ],
                     ),
                   )
-                : isSelected == 'accept'
+                : widget.order!.status == '1'
                     ? Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: IconsButton(
                           title: 'Complete',
-                          onPressed: () {},
+                          onPressed: () {
+                            OrderApi.ordercomplete(widget.order!.id);
+                          },
                           color: badgeGreen,
                         ),
                       )
