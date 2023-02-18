@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
@@ -28,6 +30,28 @@ class _EditProfileState extends State<EditProfile> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  chnage() async {
+    if (phoneController.text == '' ||
+        emailController.text == '' ||
+        passwordController.text == '') {
+      Fluttertoast.showToast(msg: 'Fill out all the Fields. Invalid!');
+      setState(() {
+        show = false;
+      });
+    } else {
+      await AuthApi.changeposward(
+        passwordController,
+      );
+      // Fluttertoast.showToast(msg: 'update successfully');
+      setState(() {
+        show = true;
+      });
+      phoneController.text = '';
+      emailController.text = '';
+      passwordController.text = '';
+    }
   }
 
   void initState() {
@@ -67,6 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         InputField(
+                          readOnly: true,
                           hint: 'Enter Email',
                           controller: emailController,
                         ),
@@ -79,6 +104,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         InputField(
+                          readOnly: true,
                           hint: 'Enter phone number',
                           controller: phoneController,
                           type: TextInputType.number,
@@ -117,9 +143,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: LargeButton(
                                 title: "Update Profile",
                                 onPressed: () {
-                                  setState(() {
-                                    show = !show;
-                                  });
+                                  chnage();
                                 }),
                           )
                         : Padding(
@@ -129,9 +153,9 @@ class _EditProfileState extends State<EditProfile> {
                               color: Colors.green,
                               rounded: true,
                               onPressed: () {
-                                setState(() {
-                                  show = !show;
-                                });
+                                // setState(() {
+                                //   show = !show;
+                                // });
                               },
                             ),
                           )

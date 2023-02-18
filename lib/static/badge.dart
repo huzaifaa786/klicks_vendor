@@ -10,10 +10,12 @@ class Badge extends StatelessWidget {
     @required this.title,
     this.color = badgeGreen,
     this.rounded = false,
+    this.ontap,
   }) : super(key: key);
   final title;
   final color;
   final rounded;
+   final ontap;
 
   @override
   Widget build(BuildContext context) {

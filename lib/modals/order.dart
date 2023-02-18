@@ -5,9 +5,11 @@ class OrderModal {
   String? parking;
   String? plate_number;
   String? floor;
+  String? user;
   String? cartype;
+  String? price;
+   DateTime? dateTime;
   List? service = [''];
-  DateTime? dateTime;
 
   OrderModal(order) {
     id = order['id'];
@@ -16,8 +18,10 @@ class OrderModal {
     parking = order['parking'];
     plate_number = order['number_plate'];
     floor = order['floor'];
+    dateTime = DateTime.parse(order['created_at']);
+    price = order['totalpayment'] ?? '';
+    user = order['user']['name'] ?? '';
     cartype = order['cartype'];
     service = order['service'] as List?;
-    dateTime = DateTime.parse(order['created_at']);
   }
 }

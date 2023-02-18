@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:klicks_vendor/api/order.dart';
+import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/static/button.dart';
+import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/static/today_sale.dart';
 import 'package:klicks_vendor/values/colors.dart';
@@ -19,14 +22,36 @@ class SalesScreen extends StatefulWidget {
 }
 
 class _SalesScreenState extends State<SalesScreen> {
+  OrderModal? order;
+  List<OrderModal> orders = [];
+  getservice() async {
+    var morder = await OrderApi.getorder();
+    setState(() {
+      orders = [];
+      orders = morder;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getservice();
+    });
+  }
+
   CalendarFormat format = CalendarFormat.twoWeeks;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
   DateTime today = DateTime.now();
   void _onDaySelected(DateTime day, DateTime foucsedDay) {
+    print('dfgdf');
     setState(() {
       today = day;
     });
+  }
+
+  Daysale() {
+    DateTime day;
   }
 
   @override
@@ -90,22 +115,17 @@ class _SalesScreenState extends State<SalesScreen> {
                               fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                TodaySale(
-                                  imageicon: 'assets/images/tyre.png',
-                                ),
-                                TodaySale(
-                                  imageicon: 'assets/images/tyre.png',
-                                ),
-                                TodaySale(
-                                  imageicon: 'assets/images/tyre.png',
-                                )
-                              ],
-                            ),
-                          ),
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: ListView.builder(
+                              itemCount: orders.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return TodaySale(
+                                  name: orders[index].user!,
+                                  type: orders[index].cartype,
+                                  price: orders[index].price,
+                                  imageicon: 'assets/images/car_order.svg',
+                                );
+                              }),
                         )
                       ],
                     ),

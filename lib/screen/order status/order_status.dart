@@ -109,7 +109,9 @@ class _OrderStatusState extends State<OrderStatus> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.35,
                             child: Text(
-                              service == '' ? 'No Extra Services' : service.service_name! + ', ',
+                              service == ''
+                                  ? 'No Extra Services'
+                                  : service.service_name! + ', ',
                               maxLines: 3,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
@@ -145,6 +147,9 @@ class _OrderStatusState extends State<OrderStatus> {
                           Badge(
                             title: 'Rejected',
                             color: Colors.red,
+                            ontap: () {
+                              OrderApi.orderaccept(widget.order!.id);
+                            },
                           )
                         ],
                       )

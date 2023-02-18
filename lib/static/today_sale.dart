@@ -15,12 +15,19 @@ class TodaySale extends StatelessWidget {
     this.text,
     this.icon,
     this.color,
+      this.name,
+        this.type,
+          this.price,
     this.imageicon,
     this.shadowColor,
   }) : super(key: key);
   final text;
   final icon;
   final color;
+  final name;
+    final type;
+      final price;
+
   final imageicon;
   final shadowColor;
   @override
@@ -46,7 +53,7 @@ class TodaySale extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 14),
                       child: Row(
                         children: [
-                          Image.asset(
+                          SvgPicture.asset(
                             imageicon,
                             height: 40,
                             width: 40,
@@ -56,15 +63,15 @@ class TodaySale extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Customer Name ',style: TextStyle(fontSize:15,fontWeight: FontWeight.w600 ),),
-                                Text('SUV'),
+                                Text(name,style: TextStyle(fontSize:15,fontWeight: FontWeight.w600 ),),
+                                Text(type),
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                        Text('AED :23'),
+                        Text('AED :' + price),
 
                   ],
                 ),
