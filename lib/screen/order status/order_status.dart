@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
+import 'package:klicks_vendor/main.dart';
 import 'package:klicks_vendor/modals/Service.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
@@ -38,6 +40,7 @@ class _OrderStatusState extends State<OrderStatus> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
+      print(widget.order!.status);
     });
   }
 
@@ -133,7 +136,10 @@ class _OrderStatusState extends State<OrderStatus> {
                 //           title: 'Extras: ',
                 //           discription: service.service_name,
                 //         ),
-                widget.order!.status == '2'
+                SizedBox(
+                  height: 4,
+                ),
+                widget.order!.status == 3
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -145,28 +151,46 @@ class _OrderStatusState extends State<OrderStatus> {
                                 color: colorgrey),
                           ),
                           Badge(
-                            title: 'Rejected',
-                            color: Colors.red,
+                            title: 'Complete',
+                            color: Colors.green,
                             ontap: () {},
                           )
                         ],
                       )
-                    : widget.order!.status == '1'
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: Text(
-                              "Order is accepted and in progress now, mark your order\n as completed after finishing the work",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                  color: colorgrey),
-                            ),
+                    : widget.order!.status == 2
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Status',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: colorgrey),
+                              ),
+                              Badge(
+                                title: 'Rejected',
+                                color: Colors.red,
+                                ontap: () {},
+                              )
+                            ],
                           )
-                        : SizedBox()
+                        : widget.order!.status == 1
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(
+                                  "Order is accepted and in progress now, mark your order\n as completed after finishing the work",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      color: colorgrey),
+                                ),
+                              )
+                            : SizedBox(),
               ],
             ),
-            widget.order!.status == '0'
+            widget.order!.status == 0
                 ? Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Row(
@@ -174,22 +198,32 @@ class _OrderStatusState extends State<OrderStatus> {
                       children: [
                         LargeButton(
                             title: 'Accept',
-                            onPressed: () {
-                              OrderApi.orderaccept(widget.order!.id);
+                            onPressed: () async {
+                              await OrderApi.orderaccept(widget.order!.id);
                               setState(() {
-                                widget.order!.status == '1';
+                                widget.order!.status = 1;
                               });
+                              // Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             OrderStatus(order: widget.order)));
                             },
                             screenRatio: 0.4,
                             rounded: true,
                             color: badgeGreen),
                         LargeButton(
                             title: 'Reject',
-                            onPressed: () {
-                              OrderApi.orderreject(widget.order!.id);
+                            onPressed: () async {
+                              await OrderApi.orderreject(widget.order!.id);
                               setState(() {
-                                widget.order!.status == '2';
+                                widget.order!.status = 2;
                               });
+                              // Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             OrderStatus(order: widget.order)));
                             },
                             screenRatio: 0.4,
                             rounded: true,
@@ -197,13 +231,21 @@ class _OrderStatusState extends State<OrderStatus> {
                       ],
                     ),
                   )
-                : widget.order!.status == '1'
+                : widget.order!.status == 1
                     ? Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: IconsButton(
                           title: 'Complete',
-                          onPressed: () {
-                            OrderApi.ordercomplete(widget.order!.id);
+                          onPressed: () async {
+                            await OrderApi.ordercomplete(widget.order!.id);
+                            setState(() {
+                              widget.order!.status = 3;
+                            });
+                            // Navigator.pushReplacement(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             OrderStatus(order: widget.order)));
                           },
                           color: badgeGreen,
                         ),

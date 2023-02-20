@@ -87,10 +87,9 @@ class _OrderHistryState extends State<OrderHistry> {
                               orders[index].dateTime!.day.toString() +
                               ', ' +
                               orders[index].dateTime!.year.toString(),
-                          imageicon: 'assets/images/car_order.svg',
+                          type: orders[index].cartype,
                           ontap: () {
                             Navigator.push(
-                              
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
