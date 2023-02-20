@@ -158,7 +158,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                     fontWeight: FontWeight.w500)),
                             Row(
                               children: [
-                                Text("45.00 ",
+                                Text(" ",
                                     style: TextStyle(
                                         color: White,
                                         fontSize: 20,

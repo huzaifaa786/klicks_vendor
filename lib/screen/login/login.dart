@@ -42,9 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (await AuthApi.login(
         emailController,
         passwordController,
-      ))
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreen()));
+      )) Navigator.pushNamedAndRemoveUntil(context, 'main', (route) => false);
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => MainScreen()));
     }
   }
 
