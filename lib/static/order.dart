@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:klicks_vendor/values/colors.dart';
 
 class Order extends StatelessWidget {
   const Order({
@@ -14,21 +15,23 @@ class Order extends StatelessWidget {
     this.color,
     this.imageicon,
     this.ontap,
-      this.cartype,
-      this.dateTime,
+    this.cartype,
+    this.dateTime,
     this.companyname,
     this.orderId,
     this.shadowColor,
+    this.type = 'suv',
   }) : super(key: key);
   final text;
   final orderId;
   final icon;
   final color;
-   final cartype;
+  final cartype;
   final companyname;
-final dateTime;
+  final dateTime;
   final ontap;
   final imageicon;
+  final type;
   final shadowColor;
   @override
   Widget build(BuildContext context) {
@@ -47,17 +50,33 @@ final dateTime;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('order id :' +orderId),
+                  Text('order id :' + orderId),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          SvgPicture.asset(
-                            imageicon,
-                            height: 40,
-                            width: 40,
-                          ),
+                          type == 'suv'
+                              ? Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(color: mainColor,borderRadius: BorderRadius.circular(6),),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: SvgPicture.asset(
+                                      'assets/images/svgSuv.svg',
+                                      height: 17,
+                                      width: 18,
+                                      color: Colors.white,
+                                    ),
+                                ),
+                              )
+                              : SvgPicture.asset(
+                                  'assets/images/car_order.svg',
+                                  height: 40,
+                                  width: 40,
+                                  // color: Colors.black,
+                                ),
                           Padding(
                             padding: const EdgeInsets.only(left: 12),
                             child: Column(

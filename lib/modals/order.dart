@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class OrderModal {
   int? id;
   String? mall;
@@ -6,7 +8,7 @@ class OrderModal {
   String? plate_number;
   String? floor;
   String? user;
-  String? status;
+  int? status;
   String? cartype;
   String? price;
   DateTime? dateTime;
