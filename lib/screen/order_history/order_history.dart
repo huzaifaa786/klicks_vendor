@@ -53,7 +53,6 @@ class _OrderHistryState extends State<OrderHistry> {
                 o.cartype!.toLowerCase().contains(query.toLowerCase()) ||
                 o.id!.toString().contains(query.toLowerCase()))
             .toList();
-        print(SearchOrders);
       }
     });
   }

@@ -94,7 +94,7 @@ class _SalesScreenState extends State<SalesScreen> {
                 },
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.85,
+                height: MediaQuery.of(context).size.height * 0.89,
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +131,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                   ? size = 0.59
                                   : format == CalendarFormat.twoWeeks
                                       ? size = 0.53
-                                      : size = 0.36;
+                                      : size = 0.319;
                               format = _format;
                             });
                           },
