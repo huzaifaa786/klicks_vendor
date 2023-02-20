@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -47,23 +49,34 @@ class _SalesScreenState extends State<SalesScreen> {
     });
   }
 
-  void _onDaySelected(DateTime day, DateTime foucsedDay) {
-    daySale(day);
+  void _onDaySelected(DateTime day, DateTime foucsedDay) async {
+    await daySale(day);
     setState(() {
       today = day;
+      price = 0;
+      for (var i = 0; i < searchedorders.length; i++) {
+        print(searchedorders[i].price!);
+        price += int.parse(searchedorders[i].price.toString());
+      }
     });
   }
 
   daySale(DateTime day) {
-    
     List<SaleModal> orderlist =
         orders.where((i) => i.dateTime!.day == day.day).toList();
-    
 
     setState(() {
       searchedorders = orderlist;
+      price = 0;
+      for (var i = 0; i < searchedorders.length; i++) {
+        print(searchedorders[i].price!);
+        price += int.parse(searchedorders[i].price.toString());
+      }
     });
   }
+
+  int price = 0;
+  double size = 0.53;
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +127,11 @@ class _SalesScreenState extends State<SalesScreen> {
                           calendarFormat: format,
                           onFormatChanged: (CalendarFormat _format) {
                             setState(() {
+                              _format == CalendarFormat.week
+                                  ? size = 0.59
+                                  : format == CalendarFormat.twoWeeks
+                                      ? size = 0.53
+                                      : size = 0.36;
                               format = _format;
                             });
                           },
@@ -126,7 +144,7 @@ class _SalesScreenState extends State<SalesScreen> {
                               fontWeight: FontWeight.w500, fontSize: 16),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.5,
+                          height: MediaQuery.of(context).size.height * size,
                           child: ListView.builder(
                               itemCount: searchedorders.length,
                               itemBuilder: (BuildContext context, int index) {
@@ -158,14 +176,14 @@ class _SalesScreenState extends State<SalesScreen> {
                                     fontWeight: FontWeight.w500)),
                             Row(
                               children: [
-                                Text("45.00 ",
+                                Text(price.toString(),
                                     style: TextStyle(
                                         color: White,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600)),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
-                                  child: Text("AED ",
+                                  child: Text(" AED",
                                       style: TextStyle(
                                           color: White,
                                           fontSize: 12,
