@@ -23,6 +23,37 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   Company? company;
+  DateTime? now;
+  String? monthName;
+  String? weekdayName;
+
+  List<String> weekdays = [
+    '',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+
+  List<String> monthNames = [
+    '',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   getcompany() async {
     var mcompany = await AuthApi.getcompany();
     setState(() {
@@ -34,7 +65,9 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getcompany();
-      log(company!.username.toString());
+      now = DateTime.now();
+      monthName = monthNames[now!.month];
+      weekdayName = weekdays[now!.weekday];
     });
   }
 
@@ -65,7 +98,11 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                               Text(
-                                "Tuesday, January 3rd",
+                                weekdayName! +
+                                    ', ' +
+                                    monthName! +
+                                    ' ' +
+                                    now!.day.toString(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16,
@@ -149,7 +186,8 @@ class _MainScreenState extends State<MainScreen> {
                                   AuthApi.logout();
                                   Navigator.pushNamedAndRemoveUntil(
                                       context, 'login', (route) => false);
-                                      Fluttertoast.showToast(msg: "Logout successful");
+                                  Fluttertoast.showToast(
+                                      msg: "Logout successful");
                                 },
                               )
                             ],
