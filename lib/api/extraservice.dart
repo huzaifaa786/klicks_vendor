@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';

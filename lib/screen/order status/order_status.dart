@@ -29,7 +29,6 @@ class _OrderStatusState extends State<OrderStatus> {
   getservice() async {
     var morderServices =
         await OrderApi.ExtraServicesINOrder(widget.order!.id.toString());
-    log(widget.order!.id.toString());
     setState(() {
       services = [];
       services = morderServices;
@@ -40,11 +39,9 @@ class _OrderStatusState extends State<OrderStatus> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
-      print(widget.order!.status);
     });
   }
 
-  String? isSelected = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,11 +200,6 @@ class _OrderStatusState extends State<OrderStatus> {
                               setState(() {
                                 widget.order!.status = 1;
                               });
-                              // Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             OrderStatus(order: widget.order)));
                             },
                             screenRatio: 0.4,
                             rounded: true,
@@ -219,11 +211,6 @@ class _OrderStatusState extends State<OrderStatus> {
                               setState(() {
                                 widget.order!.status = 2;
                               });
-                              // Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             OrderStatus(order: widget.order)));
                             },
                             screenRatio: 0.4,
                             rounded: true,
@@ -241,11 +228,6 @@ class _OrderStatusState extends State<OrderStatus> {
                             setState(() {
                               widget.order!.status = 3;
                             });
-                            // Navigator.pushReplacement(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) =>
-                            //             OrderStatus(order: widget.order)));
                           },
                           color: badgeGreen,
                         ),

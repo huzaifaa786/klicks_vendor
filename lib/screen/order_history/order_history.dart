@@ -16,23 +16,18 @@ class OrderHistry extends StatefulWidget {
 
 class _OrderHistryState extends State<OrderHistry> {
   List<OrderModal> orders = [];
+  List<OrderModal> SearchOrders = [];
   getOrders() async {
     var morder = await OrderApi.getorder();
     setState(() {
       orders = [];
       orders = morder;
-    });
-  }
-
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getOrders();
+      SearchOrders = orders;
     });
   }
 
   List<String> monthNames = [
-    '', // The first item is left empty so that the index of each month corresponds to its number (i.e. January is at index 1)
+    '',
     'January',
     'February',
     'March',
@@ -46,6 +41,29 @@ class _OrderHistryState extends State<OrderHistry> {
     'November',
     'December',
   ];
+
+  void searchOrders(String query) {
+    setState(() {
+      if (query == '') {
+        SearchOrders = orders;
+      } else {
+        SearchOrders = orders
+            .where((o) =>
+                o.dateTime!.toString().contains(query.toLowerCase()) ||
+                o.cartype!.toLowerCase().contains(query.toLowerCase()) ||
+                o.id!.toString().contains(query.toLowerCase()))
+            .toList();
+        print(SearchOrders);
+      }
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getOrders();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +84,7 @@ class _OrderHistryState extends State<OrderHistry> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: SearchBar(
+                    onChange: searchOrders,
                     imageIcon: 'assets/images/search.png',
                     hint: 'search',
                   ),
@@ -74,26 +93,27 @@ class _OrderHistryState extends State<OrderHistry> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.77,
                   child: ListView.builder(
-                      itemCount: orders.length,
+                      itemCount: SearchOrders.length,
                       itemBuilder: (BuildContext context, int index) {
+                        int i = index + 1;
                         String monthName =
-                            monthNames[orders[index].dateTime!.month];
+                            monthNames[SearchOrders[index].dateTime!.month];
                         return Order(
-                          orderId: orders[index].id.toString(),
-                          companyname: orders[index].company,
-                          cartype: orders[index].cartype,
+                          orderId: SearchOrders[index].id.toString(),
+                          companyname: SearchOrders[index].company,
+                          cartype: SearchOrders[index].cartype,
                           dateTime: monthName +
                               ' ' +
-                              orders[index].dateTime!.day.toString() +
+                              SearchOrders[index].dateTime!.day.toString() +
                               ', ' +
-                              orders[index].dateTime!.year.toString(),
-                          type: orders[index].cartype,
+                              SearchOrders[index].dateTime!.year.toString(),
+                          type: SearchOrders[index].cartype,
                           ontap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        OrderStatus(order: orders[index])));
+                                    builder: (context) => OrderStatus(
+                                        order: SearchOrders[index])));
                           },
                         );
                       }),
