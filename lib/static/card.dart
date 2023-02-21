@@ -10,12 +10,14 @@ class CardCar extends StatelessWidget {
     this.icon,
     this.color,
     this.imageicon,
+    this.onpress,
     this.image,
     this.shadowColor,
   }) : super(key: key);
   final text;
   final icon;
   final color;
+    final onpress;
   final imageicon;
   final shadowColor;
   final image;
@@ -32,9 +34,12 @@ class CardCar extends StatelessWidget {
                       image,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 13),
-                    child: Card(child: Text('AED '+text,style: TextStyle(fontSize: 19,fontWeight: FontWeight.w600),)),
+                  GestureDetector(
+                    onTap: onpress,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 13),
+                      child: Card(child: Text('AED '+text,style: TextStyle(fontSize: 19,fontWeight: FontWeight.w600),)),
+                    ),
                   )
          ],
        ),

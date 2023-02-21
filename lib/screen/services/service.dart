@@ -56,7 +56,7 @@ class _ServiceState extends State<Service> {
           context,
           MaterialPageRoute(
               builder: (context) => Service(
-                    company: widget.company,
+                    company: company,
                   )));
       service_nameController.text = '';
       priceController.text = '';
@@ -88,6 +88,15 @@ class _ServiceState extends State<Service> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
+      await getcompany();
+    });
+  }
+
+  Company? company;
+  getcompany() async {
+    var mcompany = await AuthApi.getcompany();
+    setState(() {
+      company = mcompany;
     });
   }
 
@@ -95,195 +104,222 @@ class _ServiceState extends State<Service> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              TitleTopbar(
-                text: 'Services',
-                ontap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Column(
+          child: company != null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 30,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CardCar(
-                            image: 'assets/images/car1.png',
-                            text: widget.company!.suv_price,
-                          ),
-                          CardCar(
-                            image: 'assets/images/car2.png',
-                            text: widget.company!.sedan_price,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Extre Service',
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w500),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              print(showCreate);
-                              setState(() {
-                                showCreate = !showCreate;
-                                print(showCreate);
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/images/add.png',
-                                  height: 14,
-                                  width: 14,
-                                ),
-                                Text(
-                                  'Add new',
-                                  style: TextStyle(color: Colors.blue),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    showCreate == true
-                        ? Column(
+                    Column(
+                      children: [
+                        TitleTopbar(
+                          text: 'Services',
+                          ontap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: InputField(
-                                  controller: service_nameController,
-                                  hint: 'Enter Service name',
+                                padding: const EdgeInsets.only(
+                                  top: 30,
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    InputField(
-                                      controller: priceController,
-                                      hint: 'AED',
-                                      width: 0.42,
-                                      type: TextInputType.number,
+                                    CardCar(
+                                      image: 'assets/images/car1.png',
+                                      text: company!.sedan_price,
+                                      onpress: () {
+                                        editprice(
+                                          context,
+                                          company!.suv_price,
+                                          company!.sedan_price,
+                                          company,
+                                          company!.company_id,
+                                        );
+                                      },
                                     ),
-                                    InkWell(
+                                    CardCar(
+                                      image: 'assets/images/car2.png',
+                                      text: company!.suv_price,
+                                      onpress: () {
+                                        editprice(
+                                          context,
+                                          company!.suv_price,
+                                          company!.sedan_price,
+                                          company,
+                                          company!.company_id,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Extre Service',
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    GestureDetector(
                                       onTap: () {
-                                        selectimage();
+                                        print(showCreate);
+                                        setState(() {
+                                          showCreate = !showCreate;
+                                          print(showCreate);
+                                        });
                                       },
-                                      child: ImageInput(
-                                        text: image!.path == ''
-                                            ? 'Upload Image'
-                                            : image!.name,
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/add.png',
+                                            height: 14,
+                                            width: 14,
+                                          ),
+                                          Text(
+                                            'Add new',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          )
+                                        ],
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    BorderButton(
-                                      title: 'cancel',
-                                      onPressed: () {},
-                                      screenRatio: 0.42,
-                                    ),
-                                    LargeButton(
-                                      title: 'Add',
-                                      onPressed: () {
-                                        save();
-                                      },
-                                      screenRatio: 0.42,
-                                      rounded: true,
+                              showCreate == true
+                                  ? Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: InputField(
+                                            controller: service_nameController,
+                                            hint: 'Enter Service name',
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              InputField(
+                                                controller: priceController,
+                                                hint: 'AED',
+                                                width: 0.42,
+                                                type: TextInputType.number,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  selectimage();
+                                                },
+                                                child: ImageInput(
+                                                  text: image!.path == ''
+                                                      ? 'Upload Image'
+                                                      : image!.name,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              BorderButton(
+                                                title: 'cancel',
+                                                onPressed: () {},
+                                                screenRatio: 0.42,
+                                              ),
+                                              LargeButton(
+                                                title: 'Add',
+                                                onPressed: () {
+                                                  save();
+                                                },
+                                                screenRatio: 0.42,
+                                                rounded: true,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     )
-                                  ],
+                                  : SizedBox(),
+                              SizedBox(
+                                height: showCreate == true
+                                    ? MediaQuery.of(context).size.height * 0.16
+                                    : MediaQuery.of(context).size.height * 0.45,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      for (var service in services)
+                                        ExtraListTile(
+                                          image: service.image,
+                                          text: service.service_name,
+                                          edittap: () {
+                                            editServices(
+                                                context,
+                                                service.service_name,
+                                                service.price,
+                                                service.image,
+                                                service.id,
+                                                company);
+                                          },
+                                          removetap: () {
+                                            DeleteService(
+                                                context, service.id, company);
+                                          },
+                                        ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: showCreate == true
-                          ? MediaQuery.of(context).size.height * 0.16
-                          : MediaQuery.of(context).size.height * 0.45,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            for (var service in services)
-                              ExtraListTile(
-                                image: service.image,
-                                text: service.service_name,
-                                edittap: () {
-                                  editServices(
-                                      context,
-                                      service.service_name,
-                                      service.price,
-                                      service.image,
-                                      service.id,
-                                      widget.company);
-                                },
-                                removetap: () {
-                                  DeleteService(
-                                      context, service.id, widget.company);
-                                },
-                              ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
+                    // show == false
+                    //     ? Padding(
+                    //         padding: const EdgeInsets.only(bottom: 12),
+                    //         child: LargeButton(
+                    //             title: "Update",
+                    //             onPressed: () {
+                    //               setState(() {
+                    //                 show = !show;
+                    //                 print(show);
+                    //               });
+                    //             }),
+                    //       )
+                    //     : Padding(
+                    //         padding: const EdgeInsets.only(bottom: 12),
+                    //         child: IconsButton(
+                    //           title: 'Changes saved successfully!',
+                    //           color: Colors.green,
+                    //           rounded: true,
+                    //           onPressed: () {
+                    //             setState(() {
+                    //               show = !show;
+                    //             });
+                    //           },
+                    //         ),
+                    //       ),
                   ],
-                ),
-              ),
-            ],
-          ),
-          // show == false
-          //     ? Padding(
-          //         padding: const EdgeInsets.only(bottom: 12),
-          //         child: LargeButton(
-          //             title: "Update",
-          //             onPressed: () {
-          //               setState(() {
-          //                 show = !show;
-          //                 print(show);
-          //               });
-          //             }),
-          //       )
-          //     : Padding(
-          //         padding: const EdgeInsets.only(bottom: 12),
-          //         child: IconsButton(
-          //           title: 'Changes saved successfully!',
-          //           color: Colors.green,
-          //           rounded: true,
-          //           onPressed: () {
-          //             setState(() {
-          //               show = !show;
-          //             });
-          //           },
-          //         ),
-          //       ),
-        ],
-      )),
+                )
+              : Container()),
     );
   }
 }
@@ -425,4 +461,62 @@ DeleteService(context, id, company) async {
       )
     ],
   ).show();
+}
+
+editprice(context, suv_price, sedan_price, company, company_id) {
+  TextEditingController suv_priceController = TextEditingController();
+  TextEditingController sedan_priceController = TextEditingController();
+
+  suv_priceController.text = suv_price;
+  sedan_priceController.text = sedan_price;
+  save() async {
+    if (suv_priceController.text == '' || sedan_priceController.text == '') {
+      Fluttertoast.showToast(msg: 'Fill out all the Fields. Invalid!');
+    } else {
+      print('xvxc');
+
+      await ExtraServiceApi.editprice(
+          sedan_priceController, suv_priceController, company_id);
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Service(
+                    company: company,
+                  )));
+    }
+  }
+
+  Alert(
+      context: context,
+      title: "Edit Price",
+      content: Column(
+        children: <Widget>[
+          TextField(
+            controller: suv_priceController,
+            decoration: InputDecoration(
+              labelText: 'suv price',
+            ),
+             keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: sedan_priceController,
+            decoration: InputDecoration(
+              labelText: 'sedan price',
+            ),
+            keyboardType: TextInputType.number,
+          ),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          onPressed: () async {
+            await save();
+          },
+          child: Text(
+            "save",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ]).show();
 }

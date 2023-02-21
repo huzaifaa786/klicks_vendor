@@ -115,4 +115,24 @@ class ExtraServiceApi {
     LoadingHelper.dismiss();
     return response;
   }
+  static editprice(sedan_price,suv_price,company_id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'changeprice';
+    var data;
+
+    data = {
+         'sedan_price': sedan_price.text.toString(),
+      'suv_price':suv_price .text.toString(),
+   
+      'id' : company_id,
+    };
+    print(data);
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+    print(response);
+    LoadingHelper.dismiss();
+    return response;
+  }
 }
