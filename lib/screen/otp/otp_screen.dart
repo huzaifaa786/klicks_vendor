@@ -6,6 +6,11 @@ import 'package:klicks_vendor/values/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
+
+    const OtpScreen(
+      {super.key, required this.otp});
+ 
+  final int otp;
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
