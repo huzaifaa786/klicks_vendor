@@ -1,21 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:klicks_vendor/api/order.dart';
-import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/modals/sale.dart';
-import 'package:klicks_vendor/static/button.dart';
-import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/static/today_sale.dart';
 import 'package:klicks_vendor/values/colors.dart';
-import 'package:klicks_vendor/values/styles.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class SalesScreen extends StatefulWidget {
   const SalesScreen({super.key});

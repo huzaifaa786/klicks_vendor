@@ -1,32 +1,21 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/api/extraservice.dart';
 import 'package:klicks_vendor/modals/Service.dart';
 import 'package:klicks_vendor/modals/company.dart';
-import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/border_button.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/card.dart';
-import 'package:klicks_vendor/static/edit_button.dart';
 import 'package:klicks_vendor/static/extra_list_item.dart';
-import 'package:klicks_vendor/static/icon_button.dart';
-import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/imageinput.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
-import 'package:klicks_vendor/static/topbar.dart';
-import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Service extends StatefulWidget {
@@ -104,222 +93,221 @@ class _ServiceState extends State<Service> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: company != null
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        TitleTopbar(
-                          text: 'Services',
-                          ontap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 30,
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              TitleTopbar(
+                text: 'Services',
+                ontap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              company != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 30,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CardCar(
+                                  image: 'assets/images/car1.png',
+                                  text: company!.sedan_price,
+                                  onpress: () {
+                                    editprice(
+                                      context,
+                                      company!.suv_price,
+                                      company!.sedan_price,
+                                      company,
+                                      company!.company_id,
+                                    );
+                                  },
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CardCar(
-                                      image: 'assets/images/car1.png',
-                                      text: company!.sedan_price,
-                                      onpress: () {
-                                        editprice(
-                                          context,
-                                          company!.suv_price,
-                                          company!.sedan_price,
-                                          company,
-                                          company!.company_id,
-                                        );
-                                      },
-                                    ),
-                                    CardCar(
-                                      image: 'assets/images/car2.png',
-                                      text: company!.suv_price,
-                                      onpress: () {
-                                        editprice(
-                                          context,
-                                          company!.suv_price,
-                                          company!.sedan_price,
-                                          company,
-                                          company!.company_id,
-                                        );
-                                      },
-                                    ),
-                                  ],
+                                CardCar(
+                                  image: 'assets/images/car2.png',
+                                  text: company!.suv_price,
+                                  onpress: () {
+                                    editprice(
+                                      context,
+                                      company!.suv_price,
+                                      company!.sedan_price,
+                                      company,
+                                      company!.company_id,
+                                    );
+                                  },
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Extre Service',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    print(showCreate);
+                                    setState(() {
+                                      showCreate = !showCreate;
+                                      print(showCreate);
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/add.png',
+                                        height: 14,
+                                        width: 14,
+                                      ),
+                                      Text(
+                                        'Add new',
+                                        style: TextStyle(color: Colors.blue),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          showCreate == true
+                              ? Column(
                                   children: [
-                                    Text(
-                                      'Extre Service',
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: InputField(
+                                        controller: service_nameController,
+                                        hint: 'Enter Service name',
+                                      ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        print(showCreate);
-                                        setState(() {
-                                          showCreate = !showCreate;
-                                          print(showCreate);
-                                        });
-                                      },
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Image.asset(
-                                            'assets/images/add.png',
-                                            height: 14,
-                                            width: 14,
+                                          InputField(
+                                            controller: priceController,
+                                            hint: 'AED',
+                                            width: 0.42,
+                                            type: TextInputType.number,
                                           ),
-                                          Text(
-                                            'Add new',
-                                            style:
-                                                TextStyle(color: Colors.blue),
+                                          InkWell(
+                                            onTap: () {
+                                              selectimage();
+                                            },
+                                            child: ImageInput(
+                                              text: image!.path == ''
+                                                  ? 'Upload Image'
+                                                  : image!.name,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          BorderButton(
+                                            title: 'cancel',
+                                            onPressed: () {
+                                              setState(() {
+                                                showCreate = !showCreate;
+                                                print(showCreate);
+                                              });
+                                            },
+                                            screenRatio: 0.42,
+                                          ),
+                                          LargeButton(
+                                            title: 'Add',
+                                            onPressed: () {
+                                              save();
+                                            },
+                                            screenRatio: 0.42,
+                                            rounded: true,
                                           )
                                         ],
                                       ),
                                     ),
                                   ],
-                                ),
+                                )
+                              : SizedBox(),
+                          SizedBox(
+                            height: showCreate == true
+                                ? MediaQuery.of(context).size.height * 0.16
+                                : MediaQuery.of(context).size.height * 0.45,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  for (var service in services)
+                                    ExtraListTile(
+                                      image: service.image,
+                                      text: service.service_name,
+                                      edittap: () {
+                                        editServices(
+                                            context,
+                                            service.service_name,
+                                            service.price,
+                                            service.image,
+                                            service.id,
+                                            company);
+                                      },
+                                      removetap: () {
+                                        DeleteService(
+                                            context, service.id, company);
+                                      },
+                                    ),
+                                ],
                               ),
-                              showCreate == true
-                                  ? Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 12),
-                                          child: InputField(
-                                            controller: service_nameController,
-                                            hint: 'Enter Service name',
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 12),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              InputField(
-                                                controller: priceController,
-                                                hint: 'AED',
-                                                width: 0.42,
-                                                type: TextInputType.number,
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  selectimage();
-                                                },
-                                                child: ImageInput(
-                                                  text: image!.path == ''
-                                                      ? 'Upload Image'
-                                                      : image!.name,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 12),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              BorderButton(
-                                                title: 'cancel',
-                                                onPressed: () {},
-                                                screenRatio: 0.42,
-                                              ),
-                                              LargeButton(
-                                                title: 'Add',
-                                                onPressed: () {
-                                                  save();
-                                                },
-                                                screenRatio: 0.42,
-                                                rounded: true,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : SizedBox(),
-                              SizedBox(
-                                height: showCreate == true
-                                    ? MediaQuery.of(context).size.height * 0.16
-                                    : MediaQuery.of(context).size.height * 0.45,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      for (var service in services)
-                                        ExtraListTile(
-                                          image: service.image,
-                                          text: service.service_name,
-                                          edittap: () {
-                                            editServices(
-                                                context,
-                                                service.service_name,
-                                                service.price,
-                                                service.image,
-                                                service.id,
-                                                company);
-                                          },
-                                          removetap: () {
-                                            DeleteService(
-                                                context, service.id, company);
-                                          },
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    // show == false
-                    //     ? Padding(
-                    //         padding: const EdgeInsets.only(bottom: 12),
-                    //         child: LargeButton(
-                    //             title: "Update",
-                    //             onPressed: () {
-                    //               setState(() {
-                    //                 show = !show;
-                    //                 print(show);
-                    //               });
-                    //             }),
-                    //       )
-                    //     : Padding(
-                    //         padding: const EdgeInsets.only(bottom: 12),
-                    //         child: IconsButton(
-                    //           title: 'Changes saved successfully!',
-                    //           color: Colors.green,
-                    //           rounded: true,
-                    //           onPressed: () {
-                    //             setState(() {
-                    //               show = !show;
-                    //             });
-                    //           },
-                    //         ),
-                    //       ),
-                  ],
-                )
-              : Container()),
+                        ],
+                      ),
+                    )
+                  : Container()
+            ],
+          ),
+          // show == false
+          //     ? Padding(
+          //         padding: const EdgeInsets.only(bottom: 12),
+          //         child: LargeButton(
+          //             title: "Update",
+          //             onPressed: () {
+          //               setState(() {
+          //                 show = !show;
+          //                 print(show);
+          //               });
+          //             }),
+          //       )
+          //     : Padding(
+          //         padding: const EdgeInsets.only(bottom: 12),
+          //         child: IconsButton(
+          //           title: 'Changes saved successfully!',
+          //           color: Colors.green,
+          //           rounded: true,
+          //           onPressed: () {
+          //             setState(() {
+          //               show = !show;
+          //             });
+          //           },
+          //         ),
+          //       ),
+        ],
+      )),
     );
   }
 }
@@ -497,7 +485,7 @@ editprice(context, suv_price, sedan_price, company, company_id) {
             decoration: InputDecoration(
               labelText: 'suv price',
             ),
-             keyboardType: TextInputType.number,
+            keyboardType: TextInputType.number,
           ),
           TextField(
             controller: sedan_priceController,
