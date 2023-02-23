@@ -130,4 +130,20 @@ class OrderApi {
     }
     return orders;
   }
+
+  static getSlaes(String format) async {
+    LoadingHelper.show();
+    var url = BASE_URL + '';
+    var data;
+    final prefs = await SharedPreferences.getInstance();
+
+    data = {'date': format.toString()};
+    print(data);
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+    print(response);
+    LoadingHelper.dismiss();
+  }
 }
