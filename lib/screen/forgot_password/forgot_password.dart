@@ -20,6 +20,7 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> {
+  TextEditingController emailController = TextEditingController();
   Otp? otp;
   getcompany() async {
     if (emailController.text == '') {
@@ -27,25 +28,22 @@ class _ForgotScreenState extends State<ForgotScreen> {
     } else {
       var mcompany = await AuthApi.getcompanyUsingEmail(emailController.text);
       if (mcompany != false) {
-        setState(() {
-          otp = mcompany;
-          // log(company!.name.toString());
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OtpScreen(
-               
-                otp: otp!.otp!,
-              ),
+        // log(company!.name.toString());
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(
+              otp: mcompany.toString(),
+              emailcontroller: emailController.text,
             ),
-          );
-        });
+          ),
+        );
       }
     }
   }
 
   @override
-  TextEditingController emailController = TextEditingController();
+
 
   Widget build(BuildContext context) {
     return Scaffold(

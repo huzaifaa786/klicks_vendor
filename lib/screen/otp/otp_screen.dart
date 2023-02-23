@@ -1,16 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:klicks_vendor/modals/otp.dart';
+import 'package:klicks_vendor/screen/forgot_password/change_password.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key, required this.otp,required this.emailcontroller});
 
-    const OtpScreen(
-      {super.key, required this.otp});
- 
-  final int otp;
+  final String otp;
+  final String emailcontroller;
+
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
@@ -27,6 +30,8 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void startTimer() {
+    print(widget.otp.toString());
+    print('fddfgdfgf');
     Timer.periodic(Duration(seconds: 1), (timer) {
       if (_counter > 0) {
         setState(() {
@@ -39,6 +44,18 @@ class _OtpScreenState extends State<OtpScreen> {
         timer.cancel();
       }
     });
+  }
+
+  compare() async {
+    if (_pinController.text != widget.otp) {
+      Fluttertoast.showToast(msg: 'Invild Otp.Please enter correct one');
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ChangePasswordScreen(
+email:widget.emailcontroller,
+
+          )));
+    }
   }
 
   @override
@@ -139,7 +156,9 @@ class _OtpScreenState extends State<OtpScreen> {
               padding: const EdgeInsets.only(top: 25.0, bottom: 30),
               child: LargeButton(
                 title: "Verify OTP",
-                onPressed: () {},
+                onPressed: () {
+                  compare();
+                },
               ),
             ),
           ],
