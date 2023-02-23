@@ -7,6 +7,7 @@ class Company {
   String? suv_price;
   String? sedan_price;
   String? username;
+   
 
   Company(company) {
     company_id = company['id'];
@@ -17,5 +18,6 @@ class Company {
     suv_price = company['suv_price'];
     sedan_price = company['sedan_price'];
     username = company['username'];
+   
   }
 }

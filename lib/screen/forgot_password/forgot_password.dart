@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
+import 'package:klicks_vendor/modals/otp.dart';
 import 'package:klicks_vendor/screen/forgot_password/change_password.dart';
+import 'package:klicks_vendor/screen/otp/otp_screen.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 
@@ -18,32 +20,30 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> {
-  Company? company;
+  TextEditingController emailController = TextEditingController();
+  Otp? otp;
   getcompany() async {
     if (emailController.text == '') {
       Fluttertoast.showToast(msg: "Input can't be empty.");
     } else {
       var mcompany = await AuthApi.getcompanyUsingEmail(emailController.text);
       if (mcompany != false) {
-        setState(() {
-          company = mcompany;
-          log(company!.name.toString());
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChangePasswordScreen(
-                api_token: company!.apiToken.toString(),
-                name: company!.name.toString(),
-              ),
+        // log(company!.name.toString());
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpScreen(
+              otp: mcompany.toString(),
+              emailcontroller: emailController.text,
             ),
-          );
-        });
+          ),
+        );
       }
     }
   }
 
   @override
-  TextEditingController emailController = TextEditingController();
+
 
   Widget build(BuildContext context) {
     return Scaffold(

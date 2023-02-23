@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/helpers/shared_pref.dart';
 import 'package:klicks_vendor/modals/company.dart';
+import 'package:klicks_vendor/modals/otp.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,14 +92,24 @@ class AuthApi {
     var data = {'email': email};
 
     var response = await Api.execute(url: url, data: data);
-    print(response);
     LoadingHelper.dismiss();
     if (!response['error']) {
-      Company company = Company(response['company']);
-      return company;
+      return response['otp'];
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
+  }
+
+  static forget(email, password) async {
+    log(email);
+    log(password);
+    LoadingHelper.show();
+    var url = BASE_URL + 'forget';
+    var data = {'email': email, 'password': password};
+    var response = await Api.execute(url: url, data: data);
+
+    LoadingHelper.dismiss();
+    return response;
   }
 }

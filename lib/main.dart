@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           'service': (context) => const Service(),
           'sales': (context) => const SalesScreen(),
           'history': (context) => const OrderHistry(),
-          'otp': (context) => OtpScreen(),
+          // 'otp': (context) => OtpScreen(),
         },
       ),
     );

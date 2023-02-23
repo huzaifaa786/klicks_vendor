@@ -10,10 +10,9 @@ import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/password_inputfield.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen(
-      {super.key, required this.api_token, required this.name});
-  final String api_token;
-  final String name;
+  const ChangePasswordScreen({super.key, required this.email});
+
+  final String email;
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
@@ -33,7 +32,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     if (passwordController.text == '') {
       Fluttertoast.showToast(msg: "Field can't. Invalid!");
     } else {
-      await AuthApi.ResetPassword(passwordController, widget.api_token);
+      await AuthApi.forget(widget.email, passwordController.text);
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -46,8 +45,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   void initState() {
     super.initState();
-    log(widget.name);
-    log(widget.api_token);
+    // log(widget.emailcontroller);
+    // log(widget.api_token);
   }
 
   @override
@@ -76,7 +75,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ],
                 ),
                 Text(
-                  "Change Password Of " + widget.name,
+                  "Change Password Of ",
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(
