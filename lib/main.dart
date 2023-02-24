@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
           'edit_profile': (context) => const EditProfile(),
           'main': (context) => MainScreen(),
           'service': (context) => const Service(),
-          'sales': (context) => const SalesScreen(),
+          // 'sales': (context) => const SalesScreen(),
           'history': (context) => const OrderHistry(),
           // 'otp': (context) => OtpScreen(),
         },

@@ -55,21 +55,28 @@ class AuthApi {
     SharedPreferencesHelper.remove('api_token');
   }
 
-  static changeposward(password) async {
+  static changeposward(String email, password, newPassword) async {
     LoadingHelper.show();
     var url = BASE_URL + 'changepasword';
     var data;
-    final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('api_token'));
     data = {
-      'api_token': prefs.getString('api_token')!,
-      'password': password.text
+      'email': email,
+      'password': password.text,
+      'newpassword': newPassword.text
     };
 
     var response = await Api.execute(url: url, data: data);
 
     LoadingHelper.dismiss();
-    return response;
+    if (response['error'] == false) {
+      Company company = Company(response['update']);
+      Fluttertoast.showToast(msg: 'Password update successfully');
+      return company;
+    } else {
+      Fluttertoast.showToast(msg: response['error']);
+      return false;
+    }
+    // return response;
   }
 
   static ResetPassword(password, api_token) async {

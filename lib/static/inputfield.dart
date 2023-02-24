@@ -12,6 +12,7 @@ class InputField extends StatelessWidget {
       this.maxlines = false,
       this.enabled = true,
       this.readOnly = false,
+      this.obscure = false,
       this.onChange,
       this.imageIcon,
       this.validator,
@@ -32,6 +33,7 @@ class InputField extends StatelessWidget {
   final type;
   final imageIcon;
   final icon;
+  final obscure;
   final text;
   final autovalidateMode;
   final maxlines;
@@ -49,6 +51,7 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         readOnly: readOnly,
         enabled: enabled,
+        obscureText: obscure,
         controller: controller,
         style: TextStyle(fontSize: fontSize),
         keyboardType: type,

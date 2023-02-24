@@ -131,19 +131,19 @@ class OrderApi {
     return orders;
   }
 
-  static getSlaes(String format) async {
+  static getSlaes(String format,String id) async {
     LoadingHelper.show();
-    var url = BASE_URL + '';
+    var url = BASE_URL + 'totalsale';
     var data;
     final prefs = await SharedPreferences.getInstance();
 
-    data = {'date': format.toString()};
+    data = {'date': format.toString(),'id': id};
     print(data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
     LoadingHelper.dismiss();
+    return response;
   }
 }

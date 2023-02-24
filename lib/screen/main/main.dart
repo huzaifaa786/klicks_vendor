@@ -8,6 +8,7 @@ import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/screen/edit_profile.dart/edit_profile.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
+import 'package:klicks_vendor/screen/total_sales/total_sales.dart';
 import 'package:klicks_vendor/static/language.dart';
 import 'package:klicks_vendor/static/logoutTile.dart';
 import 'package:klicks_vendor/static/main_card.dart';
@@ -144,7 +145,14 @@ class _MainScreenState extends State<MainScreen> {
                                     ),
                                     MainCard(
                                       ontap: () {
-                                        Navigator.pushNamed(context, 'sales');
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SalesScreen(
+                                                      id: company!.company_id
+                                                          .toString(),
+                                                    )));
                                       },
                                       color: cardorange,
                                       title: 'Total Sale',

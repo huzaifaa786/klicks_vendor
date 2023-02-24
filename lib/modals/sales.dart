@@ -1,0 +1,6 @@
+class SalesModel {
+
+  SalesModel(salesModel) {
+  
+  }
+}
