@@ -49,7 +49,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   flutter_translate: ^3.1.0
   pin_code_fields: ^7.4.0
-  fl_chart: ^0.61.0
+  syncfusion_flutter_charts: ^20.4.51
 
 
 
