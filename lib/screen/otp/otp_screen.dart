@@ -1,4 +1,4 @@
-import 'dart:async';
+// ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +8,8 @@ import 'package:klicks_vendor/values/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.otp,required this.emailcontroller});
+  const OtpScreen(
+      {super.key, required this.otp, required this.emailcontroller});
 
   final String otp;
   final String emailcontroller;
@@ -25,35 +26,36 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    startTimer();
+    // startTimer();
   }
 
-  void startTimer() {
-    print(widget.otp.toString());
-    print('fddfgdfgf');
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      if (_counter > 0) {
-        setState(() {
-          _counter--;
-        });
-      } else {
-        setState(() {
-          _isButtonDisabled = false;
-        });
-        timer.cancel();
-      }
-    });
-  }
+  // void startTimer() {
+  //   print(widget.otp.toString());
+  //   print('fddfgdfgf');
+  //   Timer.periodic(Duration(seconds: 1), (timer) {
+  //     if (_counter > 0) {
+  //       setState(() {
+  //         _counter--;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         _isButtonDisabled = false;
+  //       });
+  //       timer.cancel();
+  //     }
+  //   });
+  // }
 
   compare() async {
     if (_pinController.text != widget.otp) {
       Fluttertoast.showToast(msg: 'Invild Otp.Please enter correct one');
     } else {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ChangePasswordScreen(
-email:widget.emailcontroller,
-
-          )));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ChangePasswordScreen(
+                    email: widget.emailcontroller,
+                  )));
     }
   }
 
@@ -122,35 +124,35 @@ email:widget.emailcontroller,
               autovalidateMode: AutovalidateMode.disabled,
               onChanged: (String value) {},
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _isButtonDisabled
-                    ? Row(
-                        children: [
-                          Text(
-                            'Send OTP in ',
-                            style: TextStyle(color: mainColor),
-                          ),
-                          Text(
-                            ' $_counter ',
-                          ),
-                          Text(
-                            'seconds',
-                            style: TextStyle(color: mainColor),
-                          ),
-                        ],
-                      )
-                    : InkWell(
-                        onTap: (() {}),
-                        child: Text(
-                          'Resend OTP',
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                        ),
-                      ),
-              ],
-            ),
+            // SizedBox(height: 20),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     _isButtonDisabled
+            //         ? Row(
+            //             children: [
+            //               Text(
+            //                 'Send OTP in ',
+            //                 style: TextStyle(color: mainColor),
+            //               ),
+            //               Text(
+            //                 ' $_counter ',
+            //               ),
+            //               Text(
+            //                 'seconds',
+            //                 style: TextStyle(color: mainColor),
+            //               ),
+            //             ],
+            //           )
+            //         : InkWell(
+            //             onTap: (() {}),
+            //             child: Text(
+            //               'Resend OTP',
+            //               style: TextStyle(color: Colors.blue, fontSize: 16),
+            //             ),
+            //           ),
+            //   ],
+            // ),
             Padding(
               padding: const EdgeInsets.only(top: 25.0, bottom: 30),
               child: LargeButton(
