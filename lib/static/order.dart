@@ -49,7 +49,10 @@ class Order extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text('order id :' ,style: TextStyle(fontWeight: FontWeight.w600),),
+                      Text(
+                        'order id :',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
                       Text(orderId),
                     ],
                   ),
@@ -60,19 +63,22 @@ class Order extends StatelessWidget {
                         children: [
                           type == 'suv'
                               ? Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(color: mainColor,borderRadius: BorderRadius.circular(6),),
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: SvgPicture.asset(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: mainColor,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: SvgPicture.asset(
                                       'assets/images/svgSuv.svg',
                                       height: 17,
                                       width: 18,
                                       color: Colors.white,
                                     ),
-                                ),
-                              )
+                                  ),
+                                )
                               : SvgPicture.asset(
                                   'assets/images/car_order.svg',
                                   height: 40,
