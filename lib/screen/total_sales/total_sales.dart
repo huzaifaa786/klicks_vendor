@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/sale.dart';
@@ -24,8 +26,8 @@ class _SalesScreenState extends State<SalesScreen> {
   CalendarFormat format = CalendarFormat.week;
   var format1 = 'week';
   DateTime Ourdate = DateTime.now();
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
+  // DateTime selectedDay = DateTime.now();
+  // DateTime focusedDay = DateTime.now();
   DateTime today = DateTime.now();
   List<SalesData> _spots = [];
 
@@ -40,6 +42,7 @@ class _SalesScreenState extends State<SalesScreen> {
   }
 
   getsale() async {
+    log(Ourdate.toString());
     var sales = await OrderApi.getSlaes(format1, Ourdate, widget.id!);
     _spots = [];
     price = sales['totalSale'];
@@ -67,6 +70,12 @@ class _SalesScreenState extends State<SalesScreen> {
       //   price += int.parse(searchedorders[i].price.toString());
       // }
     });
+  }
+
+  void onFormatChanged(DateTime date) {
+    today = date;
+    Ourdate = date;
+    getsale();
   }
 
   daySale(DateTime day) {
@@ -134,12 +143,7 @@ class _SalesScreenState extends State<SalesScreen> {
                               CalendarFormat.month: 'Month',
                               CalendarFormat.week: 'Week',
                             },
-                            onPageChanged: (date) {
-                              // Update your UI based on the selected month
-                              print('Selected month: ${date}');
-                              // Ourdate = date;
-                              // getsale();
-                            },
+                            onPageChanged: onFormatChanged,
                             calendarFormat: format,
                             onFormatChanged: (CalendarFormat _format) {
                               setState(() {
@@ -175,19 +179,22 @@ class _SalesScreenState extends State<SalesScreen> {
                           //       }),
                           // )
                           SizedBox(height: 16),
-                          SfCartesianChart(
-                            primaryXAxis: CategoryAxis(),
-                            series: <LineSeries<SalesData, String>>[
-                              LineSeries<SalesData, String>(
-                                dataSource: _spots,
-                                xValueMapper: (SalesData sales, _) =>
-                                    sales.days,
-                                yValueMapper: (SalesData sales, _) =>
-                                    sales.sales,
-                                dataLabelSettings:
-                                    DataLabelSettings(isVisible: true),
-                              ),
-                            ],
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * size,
+                            child: SfCartesianChart(
+                              primaryXAxis: CategoryAxis(),
+                              series: <LineSeries<SalesData, String>>[
+                                LineSeries<SalesData, String>(
+                                  dataSource: _spots,
+                                  xValueMapper: (SalesData sales, _) =>
+                                      sales.days,
+                                  yValueMapper: (SalesData sales, _) =>
+                                      sales.sales,
+                                  dataLabelSettings:
+                                      DataLabelSettings(isVisible: true),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
