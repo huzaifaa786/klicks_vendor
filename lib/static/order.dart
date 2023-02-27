@@ -47,7 +47,12 @@ class Order extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('order id :' + orderId),
+                  Row(
+                    children: [
+                      Text('order id :' ,style: TextStyle(fontWeight: FontWeight.w600),),
+                      Text(orderId),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
