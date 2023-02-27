@@ -8,8 +8,8 @@ import 'package:klicks_vendor/modals/sale.dart';
 import 'package:klicks_vendor/modals/sales_data_model.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/values/colors.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class SalesScreen extends StatefulWidget {
   const SalesScreen({super.key, required this.id});
