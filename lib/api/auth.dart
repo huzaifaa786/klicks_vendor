@@ -4,7 +4,6 @@ import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/helpers/shared_pref.dart';
 import 'package:klicks_vendor/modals/company.dart';
-import 'package:klicks_vendor/modals/otp.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';

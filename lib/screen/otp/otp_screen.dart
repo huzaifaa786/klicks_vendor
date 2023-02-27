@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:klicks_vendor/modals/otp.dart';
 import 'package:klicks_vendor/screen/forgot_password/change_password.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/values/colors.dart';

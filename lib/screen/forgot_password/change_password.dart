@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/screen/login/login.dart';
 import 'package:klicks_vendor/static/button.dart';
-import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/password_inputfield.dart';
 
 class ChangePasswordScreen extends StatefulWidget {

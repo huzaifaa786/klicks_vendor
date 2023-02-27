@@ -1,8 +1,9 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/order.dart';
-import 'package:klicks_vendor/screen/order%20status/order_status.dart';
+import 'package:klicks_vendor/screen/order_status/order_status.dart';
 import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/searchbar.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';

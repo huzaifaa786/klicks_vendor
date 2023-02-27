@@ -1,13 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
-import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/modals/otp.dart';
-import 'package:klicks_vendor/screen/forgot_password/change_password.dart';
 import 'package:klicks_vendor/screen/otp/otp_screen.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';

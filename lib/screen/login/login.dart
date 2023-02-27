@@ -1,15 +1,11 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, unused_element
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
-import 'package:klicks_vendor/main.dart';
 import 'package:klicks_vendor/screen/forgot_password/forgot_password.dart';
-import 'package:klicks_vendor/screen/main/main.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/password_inputfield.dart';
-import 'package:klicks_vendor/values/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

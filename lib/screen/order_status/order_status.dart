@@ -1,20 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
-import 'package:klicks_vendor/main.dart';
-import 'package:klicks_vendor/modals/Service.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
-import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class OrderStatus extends StatefulWidget {
