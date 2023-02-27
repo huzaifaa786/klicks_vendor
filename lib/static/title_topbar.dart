@@ -22,7 +22,10 @@ class TitleTopbar extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: ontap,
-            child: SvgPicture.asset('assets/images/backArrow.svg'),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10,bottom: 10,top: 10),
+              child: SvgPicture.asset('assets/images/backArrow.svg'),
+            ),
           ),
           Text(
             text,

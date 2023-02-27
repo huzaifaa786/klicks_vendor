@@ -14,7 +14,7 @@ class CardCar extends StatelessWidget {
   final text;
   final icon;
   final color;
-    final onpress;
+  final onpress;
   final imageicon;
   final shadowColor;
   final image;
@@ -24,23 +24,30 @@ class CardCar extends StatelessWidget {
     return Container(
       height: 140,
       width: MediaQuery.of(context).size.width * 0.44,
-       child: Column(
-         children: [
-           Image(
-                    image: AssetImage(
-                      image,
-                    ),
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage(
+              image,
+            ),
+          ),
+          GestureDetector(
+            onTap: onpress,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 13),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4,right: 4),
+                  child: Text(
+                    'AED ' + text,
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                   ),
-                  GestureDetector(
-                    onTap: onpress,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 13),
-                      child: Card(child: Text('AED '+text,style: TextStyle(fontSize: 19,fontWeight: FontWeight.w600),)),
-                    ),
-                  )
-         ],
-       ),
-              
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.all(Radius.circular(6)),
