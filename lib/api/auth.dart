@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:klicks_vendor/api/api.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/helpers/shared_pref.dart';
@@ -11,8 +12,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthApi {
   static login(email, password) async {
     LoadingHelper.show();
+     var token = await FirebaseMessaging.instance.getToken();
     var url = BASE_URL + 'companyLogin';
-    var data = {'email': email.text, 'password': password.text};
+    var data = {'email': email.text, 'password': password.text,'firebase_token': token,};
 
     var response = await Api.execute(url: url, data: data);
 
