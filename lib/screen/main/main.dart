@@ -136,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                                                       company: company,
                                                     )));
                                       },
-                                      color: cardgreen,
+                                     color: cardBlue,
                                       title: 'Services',
                                       discription: 'List of our services',
                                       image: 'assets/images/services.svg',
@@ -152,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                                                           .toString(),
                                                     )));
                                       },
-                                      color: cardorange,
+                                    color: cardBlue,
                                       title: 'Total Sale',
                                       discription: 'Track your daily sale',
                                       image: 'assets/images/sales.svg',
@@ -169,7 +169,7 @@ class _MainScreenState extends State<MainScreen> {
                                                       company: company,
                                                     )));
                                       },
-                                      color: cardpink,
+                                     color: cardBlue,
                                       title: 'Profile',
                                       discription: 'Manage your Profile',
                                       image: 'assets/images/profile.svg',
