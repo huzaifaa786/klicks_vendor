@@ -100,7 +100,7 @@ class _OrderHistryState extends State<OrderHistry> {
                             monthNames[SearchOrders[index].dateTime!.month];
                         return Order(
                           orderId: SearchOrders[index].id.toString(),
-                          companyname: SearchOrders[index].user,
+                          price: SearchOrders[index].price,
                           cartype: SearchOrders[index].cartype,
                           dateTime: monthName +
                               ' ' +
