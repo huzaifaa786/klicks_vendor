@@ -172,7 +172,7 @@ class _ServiceState extends State<Service> {
                                         width: 14,
                                       ),
                                       Text(
-                                        'Add new',
+                                        'ADD',
                                         style: TextStyle(color: Colors.blue),
                                       )
                                     ],

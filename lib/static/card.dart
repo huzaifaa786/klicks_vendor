@@ -49,11 +49,11 @@ class CardCar extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(6)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withOpacity(0.4),
             spreadRadius: 1,
             blurRadius: 10,
             offset: Offset(0, 3),

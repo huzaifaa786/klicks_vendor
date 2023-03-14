@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     imageIcon: 'assets/images/email.svg',
                     hint: 'Email',
+                    
                   ),
                 ),
                 Padding(

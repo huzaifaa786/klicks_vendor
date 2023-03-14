@@ -48,7 +48,7 @@ class IconInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
-        width: MediaQuery.of(context).size.width * width,
+      width: MediaQuery.of(context).size.width * width,
       child: TextFormField(
         readOnly: readOnly,
         enabled: enabled,
@@ -61,11 +61,16 @@ class IconInputField extends StatelessWidget {
         //         ? AutovalidateMode.always
         //         : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide:
+                BorderSide(width: 1, color: Colors.grey.shade400), //<-- SEE HERE
+          ),
           filled: true,
-          fillColor: fieldColor,
+          fillColor: Colors.white,
           hintText: hint,
           contentPadding: EdgeInsets.only(top: 2),
-          hintStyle: TextStyle(color: hintColor),
+          hintStyle: TextStyle(color: Colors.black),
           prefixIcon: FittedBox(
             fit: BoxFit.scaleDown,
             child: SvgPicture.asset(
@@ -76,7 +81,7 @@ class IconInputField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
-                rounded == true ? Radius.circular(45) : Radius.circular(6)),
+                rounded == true ? Radius.circular(65) : Radius.circular(9)),
             borderSide: BorderSide.none,
           ),
         ),

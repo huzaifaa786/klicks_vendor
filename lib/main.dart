@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
@@ -13,7 +14,9 @@ import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/screen/splash/splash_screen.dart';
 import 'package:klicks_vendor/values/styles.dart';
 
-void main() {
+void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
