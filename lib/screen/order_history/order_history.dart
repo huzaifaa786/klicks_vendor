@@ -7,6 +7,7 @@ import 'package:klicks_vendor/screen/order_status/order_status.dart';
 import 'package:klicks_vendor/static/order.dart';
 import 'package:klicks_vendor/static/searchbar.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class OrderHistry extends StatefulWidget {
   const OrderHistry({super.key});
@@ -78,16 +79,41 @@ class _OrderHistryState extends State<OrderHistry> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+            padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: SearchBar(
-                    onChange: searchOrders,
-                    imageIcon: 'assets/images/search.png',
-                    hint: 'search',
-                  ),
+                ToggleSwitch(
+                  minWidth: 90,
+                  minHeight: 60,
+                  initialLabelIndex: 0,
+                  totalSwitches: 4,
+                  cornerRadius: 20,
+                 
+                  inactiveBgColor: Colors.blue.shade50,
+                  labels: ['All', 'Completed', 'In Process', 'Rejected'],
+                  onToggle: (index) {
+                    if (index == 0) {
+                      setState(() {
+                        SearchOrders = orders;
+                      });
+                    } else if (index == 1) {
+                      setState(() {
+                        SearchOrders =
+                            orders.where((i) => i.status == 3).toList();
+                      });
+                    } else if (index == 2) {
+                      setState(() {
+                        SearchOrders = orders
+                            .where((i) => i.status == 0 || i.status == 1)
+                            .toList();
+                      });
+                    } else if (index == 3) {
+                      setState(() {
+                        SearchOrders =
+                            orders.where((i) => i.status == 2).toList();
+                      });
+                    }
+                  },
                 ),
                 SizedBox(height: 20),
                 Container(
@@ -100,7 +126,7 @@ class _OrderHistryState extends State<OrderHistry> {
                             monthNames[SearchOrders[index].dateTime!.month];
                         return Order(
                           orderId: SearchOrders[index].id.toString(),
-                          companyname: SearchOrders[index].user,
+                          price: SearchOrders[index].price,
                           cartype: SearchOrders[index].cartype,
                           dateTime: monthName +
                               ' ' +

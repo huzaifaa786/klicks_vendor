@@ -21,7 +21,7 @@ class Badge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.35,
-      padding: EdgeInsets.only(top: 4, bottom: 4),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(30)),
       child: Center(

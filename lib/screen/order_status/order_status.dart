@@ -10,6 +10,7 @@ import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/values/colors.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class OrderStatus extends StatefulWidget {
   const OrderStatus({super.key, this.order});
@@ -50,97 +51,111 @@ class _OrderStatusState extends State<OrderStatus> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: Text(
-                        'Order Detail',
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(60),
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.keyboard_arrow_left_outlined,
+                        ),
                       ),
                     ),
-                    SvgPicture.asset('assets/images/order.svg'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: Text(
+                            'Order Detail',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Poppins'),
+                          ),
+                        ),
+                        FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: SvgPicture.asset('assets/images/order.svg',
+                                height: 20, width: 20)),
+                      ],
+                    ),
                   ],
                 ),
                 SizedBox(height: 20),
-                CheckOutTile(
-                  title: 'Vehicle Type',
-                  discription: widget.order!.cartype,
-                ),
-                CheckOutTile(
-                  title: 'Build Company:',
-                  discription: widget.order!.company,
-                ),
-                CheckOutTile(
-                  title: 'Number Plate:',
-                  discription: widget.order!.plate_number,
-                ),
-                CheckOutTile(
-                  title: 'Parking Number:',
-                  discription: widget.order!.parking,
-                ),
-                CheckOutTile(
-                  title: 'Mall',
-                  discription: widget.order!.mall,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Text(
-                        'Extras: ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: colorgrey),
+                Container(
+                  margin: EdgeInsets.only(right: 2, left: 1),
+                  padding:
+                      EdgeInsets.only(right: 12, left: 12, top: 16, bottom: 16),
+                  decoration: BoxDecoration(
+                    color: White,
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.4),
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
                       ),
-                    ),
-                    Column(
-                      children: [
-                        for (var service in services)
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            child: Text(
-                              service == ''
-                                  ? 'No Extra Services'
-                                  : service.service_name! + ', ',
-                              maxLines: 3,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colors.black),
-                            ),
-                          )
-                      ],
-                    )
-                  ],
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      CheckOutTile(
+                        title: 'Vehicle Type',
+                        discription: widget.order!.cartype,
+                        image: 'assets/images/vehicleType.svg',
+                      ),
+                      CheckOutTile(
+                        title: 'Number Plate',
+                        discription: widget.order!.plate_number,
+                        image: 'assets/images/numberPlate.svg',
+                      ),
+                      CheckOutTile(
+                        title: 'Prking Number',
+                        discription: widget.order!.parking,
+                        image: 'assets/images/parkingNumber.svg',
+                      ),
+                      CheckOutTile(
+                          title: 'Mall',
+                          discription: widget.order!.mall,
+                          image: 'assets/images/mallCheckout.svg'),
+                      CheckOutTile(
+                          title: 'Floor Number',
+                          discription: widget.order!.floor,
+                          image: 'assets/images/floorNumberCheck.svg'),
+                      CheckOutTile(
+                          title: 'Extra',
+                          discription: widget.order!.service == null
+                              ? 'No, Extra service added'
+                              : widget.order!.service!.length.toString() +
+                                  ' ' +
+                                  'Extra service added',
+                          image: 'assets/images/Extras.svg'),
+                      Text(
+                        widget.order!.price! + " AED",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 23),
+                      ),
+                    ],
+                  ),
                 ),
-                // for (var service in services)
-                //   service == null
-                //       ? CheckOutTile(
-                //           title: 'Extras: ',
-                //           discription: '',
-                //         )
-                //       : CheckOutTile(
-                //           title: 'Extras: ',
-                //           discription: service.service_name,
-                //         ),
                 SizedBox(
                   height: 4,
                 ),
+                SizedBox(height: 40),
                 widget.order!.status == 3
                     ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Status',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: colorgrey),
-                          ),
                           Badge(
                             title: 'Complete',
                             color: Colors.green,
@@ -150,15 +165,8 @@ class _OrderStatusState extends State<OrderStatus> {
                       )
                     : widget.order!.status == 2
                         ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Status',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: colorgrey),
-                              ),
                               Badge(
                                 title: 'Rejected',
                                 color: Colors.red,
@@ -166,24 +174,12 @@ class _OrderStatusState extends State<OrderStatus> {
                               )
                             ],
                           )
-                        : widget.order!.status == 1
-                            ? Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
-                                  "Order is accepted and in progress now, mark your order\n as completed after finishing the work",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: colorgrey),
-                                ),
-                              )
-                            : SizedBox(),
+                        : SizedBox(),
               ],
             ),
             widget.order!.status == 0
                 ? Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 380),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -214,16 +210,30 @@ class _OrderStatusState extends State<OrderStatus> {
                   )
                 : widget.order!.status == 1
                     ? Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: IconsButton(
-                          title: 'Complete',
-                          onPressed: () async {
-                            await OrderApi.ordercomplete(widget.order!.id);
-                            setState(() {
-                              widget.order!.status = 3;
-                            });
-                          },
-                          color: badgeGreen,
+                        padding: const EdgeInsets.only(bottom: 310),
+                        child: Column(
+                          children: [
+                            Badge(
+                              title: 'Order in Progress',
+                              color: Color.fromARGB(255, 218, 201, 51),
+                              ontap: () {},
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            LargeButton(
+                              title: 'Mark as Completed',
+                              onPressed: ()  {
+                                 completeorder(context, widget.order!.id);
+                                setState(() {
+                                  widget.order!.status = 3;
+                                });
+                              },
+                              color: badgeGreen,
+                              screenRatio: 0.5,
+                              rounded: true,
+                            ),
+                          ],
                         ),
                       )
                     : SizedBox()
@@ -231,5 +241,47 @@ class _OrderStatusState extends State<OrderStatus> {
         ),
       )),
     );
+  }
+
+  completeorder(
+    context,
+    id,
+  ) async {
+    print('id');
+
+    delservice() async {
+      var mMalls = await OrderApi.ordercomplete(id);
+    }
+
+    Alert(
+      context: context,
+      image: SvgPicture.asset('assets/images/alert.svg'),
+   
+      desc: "Are you sure to mark as complete ",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "YES",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () async {
+            await delservice();
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(0, 179, 134, 1.0),
+        ),
+        DialogButton(
+          child: Text(
+            "NO",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () => Navigator.pop(context),
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(116, 116, 191, 1.0),
+            Color.fromRGBO(52, 138, 199, 1.0),
+          ]),
+        )
+      ],
+    ).show();
   }
 }

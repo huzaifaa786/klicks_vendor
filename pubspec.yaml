@@ -54,6 +54,7 @@ dependencies:
   flutter_local_notifications: ^8.2.0
   cloud_firestore: ^4.4.4
   firebase_core: ^2.7.1
+  toggle_switch: ^2.0.1
 
 
 
