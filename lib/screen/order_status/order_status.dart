@@ -49,7 +49,7 @@ class _OrderStatusState extends State<OrderStatus> {
             Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -86,9 +86,16 @@ class _OrderStatusState extends State<OrderStatus> {
                             fit: BoxFit.scaleDown,
                             child: SvgPicture.asset('assets/images/order.svg',
                                 height: 20, width: 20)),
+                                Text('')
                       ],
                     ),
+                
                   ],
+                ),
+                    SizedBox(height: 30),
+                     Text('Order ID '+  
+                 widget.order!.id.toString(),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                 ),
                 SizedBox(height: 20),
                 Container(
@@ -107,6 +114,7 @@ class _OrderStatusState extends State<OrderStatus> {
                       ),
                     ],
                   ),
+                  
                   child: Column(
                     children: [
                       CheckOutTile(
