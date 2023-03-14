@@ -32,74 +32,67 @@ class Order extends StatelessWidget {
   final shadowColor;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5),
-      child: SizedBox(
-        height: 80,
-        width: MediaQuery.of(context).size.width,
-        child: GestureDetector(
-          onTap: ontap,
-          child: Card(
-            shadowColor: Colors.black,
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: ontap,
+      child: Card(
+        shadowColor: Colors.black,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'order id :',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  Text(orderId),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Text(
-                        'order id :',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                      type == 'suv'
+                          ? Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                              
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                              child: Image(
+                                image: AssetImage('assets/images/car2.png'),
+                                height: 19,
+                              ),
+                              ),
+                            )
+                          :Image(
+                                image: AssetImage('assets/images/car1.png'),
+                                height: 19,
+                                width: 10,
+                              ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(companyname),
+                            Text(cartype),
+                          ],
+                        ),
                       ),
-                      Text(orderId),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          type == 'suv'
-                              ? Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                  
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                  child: Image(
-                                    image: AssetImage('assets/images/car2.png'),
-                                    height: 19,
-                                  ),
-                                  ),
-                                )
-                              :Image(
-                                    image: AssetImage('assets/images/car1.png'),
-                                    height: 19,
-                                    width: 70,
-                                  ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(companyname),
-                                Text(cartype),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(dateTime),
-                    ],
-                  ),
+                  Text(dateTime),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
