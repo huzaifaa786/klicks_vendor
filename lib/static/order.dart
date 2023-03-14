@@ -66,25 +66,22 @@ class Order extends StatelessWidget {
                                   height: 40,
                                   width: 40,
                                   decoration: BoxDecoration(
-                                    color: mainColor,
+                                  
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
-                                    child: SvgPicture.asset(
-                                      'assets/images/svgSuv.svg',
-                                      height: 17,
-                                      width: 18,
-                                      color: Colors.white,
-                                    ),
+                                  child: Image(
+                                    image: AssetImage('assets/images/car2.png'),
+                                    height: 19,
+                                  ),
                                   ),
                                 )
-                              : SvgPicture.asset(
-                                  'assets/images/car_order.svg',
-                                  height: 40,
-                                  width: 40,
-                                  // color: Colors.black,
-                                ),
+                              :Image(
+                                    image: AssetImage('assets/images/car1.png'),
+                                    height: 19,
+                                    width: 70,
+                                  ),
                           Padding(
                             padding: const EdgeInsets.only(left: 12),
                             child: Column(

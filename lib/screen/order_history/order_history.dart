@@ -95,12 +95,12 @@ class _OrderHistryState extends State<OrderHistry> {
                   child: ListView.builder(
                       itemCount: SearchOrders.length,
                       itemBuilder: (BuildContext context, int index) {
-                        int i = index + 1;
+                        // int i = index + 1;
                         String monthName =
                             monthNames[SearchOrders[index].dateTime!.month];
                         return Order(
                           orderId: SearchOrders[index].id.toString(),
-                          companyname: SearchOrders[index].company,
+                          companyname: SearchOrders[index].user,
                           cartype: SearchOrders[index].cartype,
                           dateTime: monthName +
                               ' ' +

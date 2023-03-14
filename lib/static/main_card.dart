@@ -5,12 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class MainCard extends StatelessWidget {
-  const MainCard({super.key,this.color = cardBlue,this.title,this.discription,this.image,this.ontap});
+  const MainCard({super.key,this.color = cardBlue,this.title,this.discription,this.image,this.ontap,});
   final color;
   final title;
   final discription;
   final image;
   final ontap;
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,8 @@ class MainCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
+           border: Border.all(color: Colors.blueAccent),
+
           color: color,
           boxShadow: [
             BoxShadow(

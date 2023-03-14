@@ -21,50 +21,68 @@ class ExtraListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image(
-                image: NetworkImage(image),
-                height: 35,
-                width: 35,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  text,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ],
+      child: Container(
+        padding: EdgeInsets.all(12),
+        height: 80,
+       decoration: BoxDecoration(
+        
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.4),
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: Offset(0, 3),
           ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5, right: 5),
-                child: EditButton(
-                  title: 'Edit',
-                  onPressed: edittap,
-                  textcolor: Colors.green,
-                  screenRatio: 0.20,
-                  imgicon: 'assets/images/edit.svg',
-                  color: Colors.green.shade100,
-                ),
-              ),
-              EditButton(
-                title: 'Remove',
-                onPressed: removetap,
-                screenRatio: 0.27,
-                textcolor: Colors.red,
-                imgicon: 'assets/images/delete.svg',
-                color: Colors.red.shade100,
-              ),
-            ],
-          )
         ],
+      ),
+        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image(
+                  image: NetworkImage(image),
+                  height: 120,
+                  width: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Text(
+                    text,
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: EditButton(
+                    
+                    onPressed: edittap,
+                   
+                    screenRatio: 0.15,
+                    imgicon: 'assets/images/edit.svg',
+                    color: Colors.white,
+                  ),
+                ),
+                EditButton(
+                  
+                  onPressed: removetap,
+                  screenRatio: 0.15,
+               
+                  imgicon: 'assets/images/delete.svg',
+                  color: Colors.white,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
