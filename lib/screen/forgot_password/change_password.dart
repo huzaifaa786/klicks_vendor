@@ -73,7 +73,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ],
                 ),
                 Text(
-                  "Change Password Of ",
+                  "Reset Password Of Your Account",
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(
