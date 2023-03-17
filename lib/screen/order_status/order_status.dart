@@ -42,7 +42,7 @@ class _OrderStatusState extends State<OrderStatus> {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.only(top: 50, right: 20, left: 20),
+        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -86,15 +86,14 @@ class _OrderStatusState extends State<OrderStatus> {
                             fit: BoxFit.scaleDown,
                             child: SvgPicture.asset('assets/images/order.svg',
                                 height: 20, width: 20)),
-                                Text('')
                       ],
                     ),
-                
+                    Text("a", style: TextStyle(color: White))
                   ],
                 ),
-                    SizedBox(height: 30),
-                     Text('Order ID '+  
-                 widget.order!.id.toString(),
+                SizedBox(height: 30),
+                Text(
+                  'Order ID ' + widget.order!.id.toString(),
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                 ),
                 SizedBox(height: 20),
@@ -114,7 +113,6 @@ class _OrderStatusState extends State<OrderStatus> {
                       ),
                     ],
                   ),
-                  
                   child: Column(
                     children: [
                       CheckOutTile(
@@ -140,14 +138,14 @@ class _OrderStatusState extends State<OrderStatus> {
                           title: 'Floor Number',
                           discription: widget.order!.floor,
                           image: 'assets/images/floorNumberCheck.svg'),
-                      CheckOutTile(
-                          title: 'Extra',
-                          discription: widget.order!.service == null
-                              ? 'No, Extra service added'
-                              : widget.order!.service!.length.toString() +
-                                  ' ' +
-                                  'Extra service added',
-                          image: 'assets/images/Extras.svg'),
+                      // CheckOutTile(
+                      //     title: 'Extra',
+                      //     discription: widget.order!.service == null
+                      //         ? 'No, Extra service added'
+                      //         : widget.order!.service!.length.toString() +
+                      //             ' ' +
+                      //             'Extra service added',
+                      //     image: 'assets/images/Extras.svg'),
                       Text(
                         widget.order!.price! + " AED",
                         style: TextStyle(
@@ -231,8 +229,8 @@ class _OrderStatusState extends State<OrderStatus> {
                             ),
                             LargeButton(
                               title: 'Mark as Completed',
-                              onPressed: ()  {
-                                 completeorder(context, widget.order!.id);
+                              onPressed: () {
+                                completeorder(context, widget.order!.id);
                                 setState(() {
                                   widget.order!.status = 3;
                                 });
@@ -264,7 +262,6 @@ class _OrderStatusState extends State<OrderStatus> {
     Alert(
       context: context,
       image: SvgPicture.asset('assets/images/alert.svg'),
-   
       desc: "Are you sure to mark as complete ",
       buttons: [
         DialogButton(
@@ -283,7 +280,9 @@ class _OrderStatusState extends State<OrderStatus> {
             "NO",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
           gradient: LinearGradient(colors: [
             Color.fromRGBO(116, 116, 191, 1.0),
             Color.fromRGBO(52, 138, 199, 1.0),
