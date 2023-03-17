@@ -21,7 +21,7 @@ class MainCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-           border: Border.all(color: Colors.blueAccent),
+           border: Border.all(color: Color.fromARGB(255, 154, 191, 255)),
 
           color: color,
           boxShadow: [
