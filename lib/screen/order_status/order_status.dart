@@ -245,13 +245,14 @@ class _OrderStatusState extends State<OrderStatus> {
                           title: 'Accept',
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
-                            await OrderApi.orderaccept(
+                            if (await OrderApi.orderaccept(
                                 widget.order!.id,
                                 widget.order!.userid!,
-                                prefs.getString('api_token')!);
-                            // setState(() {
-                            //   widget.order!.status = 1;
-                            // });
+                                prefs.getString('company_id')!)) {
+                              setState(() {
+                                widget.order!.status = 1;
+                              });
+                            }
                           },
                           screenRatio: 0.4,
                           rounded: true,
@@ -260,13 +261,14 @@ class _OrderStatusState extends State<OrderStatus> {
                           title: 'Reject',
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
-                            await OrderApi.orderreject(
+                            if (await OrderApi.orderreject(
                                 widget.order!.id,
                                 widget.order!.userid!,
-                                prefs.getString('api_token')!);
-                            // setState(() {
-                            //   widget.order!.status = 2;
-                            // });
+                                prefs.getString('company_id')!)) {
+                              setState(() {
+                                widget.order!.status = 2;
+                              });
+                            }
                           },
                           screenRatio: 0.4,
                           rounded: true,
@@ -291,14 +293,15 @@ class _OrderStatusState extends State<OrderStatus> {
                             onPressed: () async {
                               final prefs =
                                   await SharedPreferences.getInstance();
-                              completeorder(
+                              if (completeorder(
                                   context,
                                   widget.order!.id,
                                   widget.order!.userid!,
-                                  prefs.getString('api_token')!);
-                              // setState(() {
-                              //   widget.order!.status = 3;
-                              // });
+                                  prefs.getString('company_id')!)) {
+                                setState(() {
+                                  widget.order!.status = 3;
+                                });
+                              }
                             },
                             color: badgeGreen,
                             screenRatio: 0.6,

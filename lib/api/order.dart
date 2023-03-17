@@ -54,7 +54,8 @@ class OrderApi {
     LoadingHelper.show();
     var url = BASE_URL + 'orderaccept';
     var data;
-
+    print(userid);
+    print(companyid);
     data = {'id': id, 'user_id': userid, "company_id": companyid};
     print(data);
     var response = await Api.execute(
@@ -63,7 +64,7 @@ class OrderApi {
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
@@ -83,7 +84,7 @@ class OrderApi {
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
@@ -103,7 +104,7 @@ class OrderApi {
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
