@@ -44,16 +44,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 //         fontFamily: 'Poppins'),
                 //   ),
                 // ),
-                NotificationCard(
-                  image: 'assets/images/Suv.png',
-                  text: 'You have received a new order',
-                  day: '.3d',
+                NotificationTile(
+                  type: 'suv',
+                  title: 'You have received a new order',
+                  day: '3d',
                 ),
-                NotificationCard(
-                  image: 'assets/images/sedan.png',
-                  text: 'You have received a new order',
-                  day: '.3d',
-                )
               ],
             ),
           ),

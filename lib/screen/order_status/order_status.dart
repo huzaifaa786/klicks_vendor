@@ -5,10 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
+import 'package:klicks_vendor/screen/order_status/complete_model.dart';
 import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
-import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +22,7 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   List<ExtraServiceDetail> services = [];
+  bool? query;
   getservice() async {
     var morderServices =
         await OrderApi.ExtraServicesINOrder(widget.order!.id.toString());
@@ -293,11 +294,21 @@ class _OrderStatusState extends State<OrderStatus> {
                             onPressed: () async {
                               final prefs =
                                   await SharedPreferences.getInstance();
-                              if (completeorder(
-                                  context,
-                                  widget.order!.id,
-                                  widget.order!.userid!,
-                                  prefs.getString('company_id')!)) {
+                              query = await Alert(
+                                  context: context,
+                                  content: OrderCompleteStatus(
+                                    id: widget.order!.id!,
+                                    userId: widget.order!.userid!,
+                                    company_id: prefs.getString('company_id')!,
+                                  ),
+                                  buttons: [
+                                    DialogButton(
+                                        height: 0,
+                                        color: White,
+                                        onPressed: () async {},
+                                        child: Text(''))
+                                  ]).show();
+                              if (query == true) {
                                 setState(() {
                                   widget.order!.status = 3;
                                 });
@@ -314,45 +325,5 @@ class _OrderStatusState extends State<OrderStatus> {
         ),
       )),
     );
-  }
-
-  completeorder(context, id, userId, company_id) async {
-    print('id');
-
-    updateStatus() async {
-      await OrderApi.ordercomplete(id, userId, company_id);
-    }
-
-    Alert(
-      context: context,
-      image: SvgPicture.asset('assets/images/alert.svg'),
-      desc: "Are you sure to mark as complete ",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "YES",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          onPressed: () async {
-            await updateStatus();
-            Navigator.pop(context);
-          },
-          color: Color.fromRGBO(0, 179, 134, 1.0),
-        ),
-        DialogButton(
-          child: Text(
-            "NO",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          gradient: LinearGradient(colors: [
-            Color.fromRGBO(116, 116, 191, 1.0),
-            Color.fromRGBO(52, 138, 199, 1.0),
-          ]),
-        )
-      ],
-    ).show();
   }
 }
