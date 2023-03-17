@@ -66,6 +66,8 @@ class _OrderHistryState extends State<OrderHistry> {
     });
   }
 
+  int i = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,30 +87,33 @@ class _OrderHistryState extends State<OrderHistry> {
                 ToggleSwitch(
                   minWidth: 90,
                   minHeight: 60,
-                  initialLabelIndex: 0,
+                  initialLabelIndex: i,
                   totalSwitches: 4,
-                  cornerRadius: 20,
-                 
+                  cornerRadius: 6,
                   inactiveBgColor: Colors.blue.shade50,
                   labels: ['All', 'Completed', 'In Process', 'Rejected'],
                   onToggle: (index) {
                     if (index == 0) {
                       setState(() {
                         SearchOrders = orders;
+                        i = index!;
                       });
                     } else if (index == 1) {
                       setState(() {
+                        i = index!;
                         SearchOrders =
                             orders.where((i) => i.status == 3).toList();
                       });
                     } else if (index == 2) {
                       setState(() {
+                        i = index!;
                         SearchOrders = orders
                             .where((i) => i.status == 0 || i.status == 1)
                             .toList();
                       });
                     } else if (index == 3) {
                       setState(() {
+                        i = index!;
                         SearchOrders =
                             orders.where((i) => i.status == 2).toList();
                       });
