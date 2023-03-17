@@ -11,6 +11,7 @@ import 'package:klicks_vendor/static/checkOut_tile.dart';
 import 'package:klicks_vendor/static/icon_button.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderStatus extends StatefulWidget {
   const OrderStatus({super.key, this.order});
@@ -44,7 +45,6 @@ class _OrderStatusState extends State<OrderStatus> {
           child: Padding(
         padding: EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
@@ -138,14 +138,68 @@ class _OrderStatusState extends State<OrderStatus> {
                           title: 'Floor Number',
                           discription: widget.order!.floor,
                           image: 'assets/images/floorNumberCheck.svg'),
-                      // CheckOutTile(
-                      //     title: 'Extra',
-                      //     discription: widget.order!.service == null
-                      //         ? 'No, Extra service added'
-                      //         : widget.order!.service!.length.toString() +
-                      //             ' ' +
-                      //             'Extra service added',
-                      //     image: 'assets/images/Extras.svg'),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 224, 240, 255),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: SvgPicture.asset(
+                                          'assets/images/Extras.svg',
+                                          height: 12,
+                                          width: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Extras',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: colorgrey),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                for (var service in services)
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    child: Text(
+                                      service == ''
+                                          ? 'No Extra Services'
+                                          : service.service_name! + ', ',
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                       Text(
                         widget.order!.price! + " AED",
                         style: TextStyle(
@@ -184,63 +238,73 @@ class _OrderStatusState extends State<OrderStatus> {
               ],
             ),
             widget.order!.status == 0
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 380),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LargeButton(
-                            title: 'Accept',
-                            onPressed: () async {
-                              await OrderApi.orderaccept(widget.order!.id);
-                              setState(() {
-                                widget.order!.status = 1;
-                              });
-                            },
-                            screenRatio: 0.4,
-                            rounded: true,
-                            color: badgeGreen),
-                        LargeButton(
-                            title: 'Reject',
-                            onPressed: () async {
-                              await OrderApi.orderreject(widget.order!.id);
-                              setState(() {
-                                widget.order!.status = 2;
-                              });
-                            },
-                            screenRatio: 0.4,
-                            rounded: true,
-                            color: Colors.red),
-                      ],
-                    ),
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      LargeButton(
+                          title: 'Accept',
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            await OrderApi.orderaccept(
+                                widget.order!.id,
+                                widget.order!.userid!,
+                                prefs.getString('api_token')!);
+                            // setState(() {
+                            //   widget.order!.status = 1;
+                            // });
+                          },
+                          screenRatio: 0.4,
+                          rounded: true,
+                          color: badgeGreen),
+                      LargeButton(
+                          title: 'Reject',
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            await OrderApi.orderreject(
+                                widget.order!.id,
+                                widget.order!.userid!,
+                                prefs.getString('api_token')!);
+                            // setState(() {
+                            //   widget.order!.status = 2;
+                            // });
+                          },
+                          screenRatio: 0.4,
+                          rounded: true,
+                          color: Colors.red),
+                    ],
                   )
                 : widget.order!.status == 1
-                    ? Padding(
-                        padding: const EdgeInsets.only(bottom: 310),
-                        child: Column(
-                          children: [
-                            Badge(
-                              title: 'Order in Progress',
-                              color: Color.fromARGB(255, 218, 201, 51),
-                              ontap: () {},
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            LargeButton(
-                              title: 'Mark as Completed',
-                              onPressed: () {
-                                completeorder(context, widget.order!.id);
-                                setState(() {
-                                  widget.order!.status = 3;
-                                });
-                              },
-                              color: badgeGreen,
-                              screenRatio: 0.5,
-                              rounded: true,
-                            ),
-                          ],
-                        ),
+                    ? Column(
+                        children: [
+                          LargeButton(
+                            title: 'Order in Progress',
+                            onPressed: () {},
+                            color: InprocessColor,
+                            screenRatio: 0.45,
+                            rounded: true,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          LargeButton(
+                            title: 'Mark as Completed',
+                            onPressed: () async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              completeorder(
+                                  context,
+                                  widget.order!.id,
+                                  widget.order!.userid!,
+                                  prefs.getString('api_token')!);
+                              // setState(() {
+                              //   widget.order!.status = 3;
+                              // });
+                            },
+                            color: badgeGreen,
+                            screenRatio: 0.6,
+                            rounded: true,
+                          ),
+                        ],
                       )
                     : SizedBox()
           ],
@@ -249,14 +313,11 @@ class _OrderStatusState extends State<OrderStatus> {
     );
   }
 
-  completeorder(
-    context,
-    id,
-  ) async {
+  completeorder(context, id, userId, company_id) async {
     print('id');
 
-    delservice() async {
-      var mMalls = await OrderApi.ordercomplete(id);
+    updateStatus() async {
+      await OrderApi.ordercomplete(id, userId, company_id);
     }
 
     Alert(
@@ -270,7 +331,7 @@ class _OrderStatusState extends State<OrderStatus> {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           onPressed: () async {
-            await delservice();
+            await updateStatus();
             Navigator.pop(context);
           },
           color: Color.fromRGBO(0, 179, 134, 1.0),

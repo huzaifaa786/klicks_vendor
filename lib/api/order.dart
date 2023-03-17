@@ -50,12 +50,12 @@ class OrderApi {
     return extraservices;
   }
 
-  static orderaccept(id) async {
+  static orderaccept(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'orderaccept';
     var data;
 
-    data = {'id': id};
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
     print(data);
     var response = await Api.execute(
       url: url,
@@ -70,12 +70,12 @@ class OrderApi {
     }
   }
 
-  static orderreject(id) async {
+  static orderreject(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'orderreject';
     var data;
 
-    data = {'id': id};
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
     print(data);
     var response = await Api.execute(
       url: url,
@@ -90,12 +90,12 @@ class OrderApi {
     }
   }
 
-  static ordercomplete(id) async {
+  static ordercomplete(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'ordercomplete';
     var data;
 
-    data = {'id': id};
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
     print(data);
     var response = await Api.execute(
       url: url,

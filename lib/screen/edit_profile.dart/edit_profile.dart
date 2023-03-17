@@ -71,7 +71,7 @@ class _EditProfileState extends State<EditProfile> {
             Flexible(
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.89,
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

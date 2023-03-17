@@ -22,6 +22,7 @@ class CardCar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 4),
       height: 140,
       width: MediaQuery.of(context).size.width * 0.44,
       child: Column(
