@@ -23,6 +23,7 @@ class AuthApi {
       Company company = Company(response['company']);
 
       SharedPreferencesHelper.setString('api_token', company.apiToken!);
+        SharedPreferencesHelper.setString('company_id', company.company_id.toString());
       print(response['company.api_token']);
       SharedPreferencesHelper.setString(
           'company_id', company.company_id.toString());
