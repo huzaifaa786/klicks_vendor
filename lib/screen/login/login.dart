@@ -6,6 +6,7 @@ import 'package:klicks_vendor/screen/forgot_password/forgot_password.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/password_inputfield.dart';
+import 'package:klicks_vendor/values/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -55,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: White,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),

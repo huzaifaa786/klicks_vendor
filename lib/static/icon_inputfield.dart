@@ -61,16 +61,11 @@ class IconInputField extends StatelessWidget {
         //         ? AutovalidateMode.always
         //         : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide:
-                BorderSide(width: 1, color: Colors.grey.shade400), //<-- SEE HERE
-          ),
           filled: true,
           fillColor: Colors.white,
           hintText: hint,
           contentPadding: EdgeInsets.only(top: 2),
-          hintStyle: TextStyle(color: Colors.black),
+          hintStyle: TextStyle(color: hintColor),
           prefixIcon: FittedBox(
             fit: BoxFit.scaleDown,
             child: SvgPicture.asset(
@@ -79,10 +74,15 @@ class IconInputField extends StatelessWidget {
               width: 18,
             ),
           ),
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
             borderRadius: BorderRadius.all(
-                rounded == true ? Radius.circular(65) : Radius.circular(9)),
-            borderSide: BorderSide.none,
+                rounded == true ? Radius.circular(45) : Radius.circular(6)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
+            borderRadius: BorderRadius.all(
+                rounded == true ? Radius.circular(45) : Radius.circular(6)),
           ),
         ),
         cursorColor: Colors.black,

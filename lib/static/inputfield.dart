@@ -61,19 +61,20 @@ class InputField extends StatelessWidget {
         //         ? AutovalidateMode.always
         //         : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
-             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-      borderSide: BorderSide(
-          width: 1, color: Colors.grey.shade400), //<-- SEE HERE
-    ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+          ),
           filled: true,
           fillColor: Colors.white,
           hintText: hint,
           contentPadding: const EdgeInsets.only(left: 12.0, right: 12),
-          hintStyle: TextStyle(color: Colors.black),
+          hintStyle: TextStyle(color: hintColor),
           border: OutlineInputBorder(
-            
-
             borderRadius: BorderRadius.all(Radius.circular(100)),
             borderSide: BorderSide.none,
           ),

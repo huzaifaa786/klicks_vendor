@@ -44,11 +44,6 @@ class InputFieldPassword extends StatelessWidget {
         style: const TextStyle(fontSize: 14),
         controller: controller,
         decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide:
-                BorderSide(width: 1, color: Colors.grey.shade400), //<-- SEE HERE
-          ),
           prefixIcon: FittedBox(
             fit: BoxFit.scaleDown,
             child: SvgPicture.asset(
@@ -70,11 +65,15 @@ class InputFieldPassword extends StatelessWidget {
           filled: true,
           fillColor: Colors.white,
           hintText: hint,
-          hintStyle: TextStyle(color: Colors.black),
+          hintStyle: TextStyle(color: hintColor),
           contentPadding: const EdgeInsets.only(left: 3.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(400)),
-            borderSide: BorderSide.none,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
         ),
         keyboardType: type,
