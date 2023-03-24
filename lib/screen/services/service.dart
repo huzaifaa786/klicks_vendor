@@ -170,10 +170,11 @@ class _ServiceState extends State<Service> {
                                         'assets/images/add.png',
                                         height: 14,
                                         width: 14,
+                                        color: Colors.black,
                                       ),
                                       Text(
                                         'ADD',
-                                        style: TextStyle(color: Colors.blue),
+                                        // style: TextStyle(color: Colors.blue),
                                       )
                                     ],
                                   ),
@@ -188,7 +189,7 @@ class _ServiceState extends State<Service> {
                                       padding: const EdgeInsets.only(top: 12),
                                       child: InputField(
                                         controller: service_nameController,
-                                        hint: 'Enter Service name',
+                                        hint: 'Service name',
                                       ),
                                     ),
                                     Padding(
