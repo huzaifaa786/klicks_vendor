@@ -13,4 +13,5 @@ const cardgreen = Color.fromARGB(255, 248, 255, 218);
 const cardorange = Color.fromARGB(255, 253, 245, 230);
 const cardpink = Color.fromARGB(255, 255, 224, 244);
 const InprocessColor = Color(4294101324);
+const grey = Color.fromARGB(255, 226, 226, 226);
 
