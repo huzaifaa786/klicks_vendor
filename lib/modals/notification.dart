@@ -1,15 +1,19 @@
-class Notifications {
+class NotificationModal {
   int? id;
-  String? user;
   String? title;
+  int? company_id;
   String? body;
-  //  DateTime? dateTime;
+  int? order_id;
+  int? user_id;
+  DateTime? dateTime;
 
-  Notifications(notification) {
-    id = notification['id'];
-
-    title = notification['title'] ;
-    user = notification['user']['name'] ?? '';
-    body = notification['body'];
+  NotificationModal(noti) {
+    id = noti['id'];
+    title = noti['title'];
+    order_id = noti['order_id'];
+    body = noti['body'];
+    company_id = noti['company_id'];
+    user_id = noti['user_id'];
+    dateTime = DateTime.parse(noti['created_at']);
   }
 }

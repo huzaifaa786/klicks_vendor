@@ -5,10 +5,10 @@ import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Notification {
-  static getcompany() async {
+class NotificationApi {
+   static getnotifications() async {
     LoadingHelper.show();
-    var url = BASE_URL + 'companyget';
+    var url = BASE_URL + 'vendernotfion';
     var data;
     final prefs = await SharedPreferences.getInstance();
     print(prefs.getString('company_id'));
@@ -17,8 +17,12 @@ class Notification {
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();
     if (!response['error']) {
-      Notifications notification = Notifications(response['notification']);
-      return notification;
+      List<NotificationModal> notifications = <NotificationModal>[];
+      for (var notification in response['notification']) {
+        print(response['notification']);
+        notifications.add(NotificationModal(notification));
+      }
+      return notifications;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;

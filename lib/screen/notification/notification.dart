@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/api/notification.dart';
+import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/static/notification_card.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:klicks_vendor/values/colors.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -12,9 +15,27 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  List<NotificationModal> notification = [];
+
+  getNotification() async {
+    var mnotification = await NotificationApi.getnotifications();
+    setState(() {
+      notification = [];
+      notification = mnotification;
+    });
+  }
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      getNotification();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: White,
       body: SafeArea(
           child: Column(
         children: [
@@ -24,33 +45,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
               Navigator.pop(context);
             },
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // GestureDetector(
-                //     onTap: () {
-                //       Navigator.pop(context);
-                //     },
-                //     child: SvgPicture.asset('assets/images/backArrow.svg')),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 20),
-                //   child: Text(
-                //     'Notification',
-                //     style: TextStyle(
-                //         fontSize: 20,
-                //         fontWeight: FontWeight.w600,
-                //         fontFamily: 'Poppins'),
-                //   ),
-                // ),
-                NotificationTile(
-                  type: 'suv',
-                  title: 'You have received a new order',
-                  day: '3d',
-                ),
-              ],
-            ),
+          Container(
+            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
+            height: MediaQuery.of(context).size.height * 0.89,
+            child: ListView.builder(
+                itemCount: notification.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return NotificationTile(
+                    type: "suv",
+                    title: notification[index].title!,
+                    day: notification[index].dateTime.toString(),
+                  );
+                }),
           ),
         ],
       )),

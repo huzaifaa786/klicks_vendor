@@ -11,7 +11,7 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shadowColor: grey,
+      shadowColor: Colors.grey,
       elevation: 3,
       color: Colors.white,
       child: Padding(
