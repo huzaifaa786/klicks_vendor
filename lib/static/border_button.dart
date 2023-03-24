@@ -33,11 +33,10 @@ class BorderButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: color,
-          shadowColor: mainColor,
+          // shadowColor: mainColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(45)),
-             side: BorderSide(width: 0.3,color: mainColor),
-             
+             side: BorderSide(width: 1, color: Colors.grey[300]!),
           ),
         ),
         child: Row(
@@ -46,7 +45,7 @@ class BorderButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: mainColor,
+                color: hintColor,
                 fontFamily: 'Poppins',
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
