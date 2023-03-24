@@ -75,7 +75,7 @@ class _OrderHistryState extends State<OrderHistry> {
           child: Column(
         children: [
           TitleTopbar(
-            text: 'Order History',
+            text: 'Orders',
             ontap: () {
               Navigator.pop(context);
             },
@@ -85,13 +85,14 @@ class _OrderHistryState extends State<OrderHistry> {
             child: Column(
               children: [
                 ToggleSwitch(
-                  minWidth: 90,
-                  minHeight: 60,
+                  minWidth: 85,
+                  minHeight: 55,
                   initialLabelIndex: i,
                   totalSwitches: 4,
                   cornerRadius: 6,
+                  fontSize: 12,
                   inactiveBgColor: Colors.blue.shade50,
-                  labels: ['All', 'Completed', 'In Process', 'Rejected'],
+                  labels: ['All', 'Completed', 'In Progress', 'Rejected'],
                   onToggle: (index) {
                     if (index == 0) {
                       setState(() {
