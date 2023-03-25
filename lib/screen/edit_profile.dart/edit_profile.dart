@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/modals/company.dart';
+import 'package:klicks_vendor/screen/edit_profile.dart/edit_modal.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/values/colors.dart';
@@ -172,84 +171,9 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   ChangePassword(context, email) {
-    TextEditingController currentPassword = TextEditingController();
-    TextEditingController newPassword = TextEditingController();
-    TextEditingController confirmNewPassword = TextEditingController();
-
-    change() async {
-      if (currentPassword.text == '' ||
-          newPassword.text == '' ||
-          confirmNewPassword.text == '') {
-        Fluttertoast.showToast(msg: 'Fill out all the Fields. Invalid!');
-      } else {
-        if (newPassword.text != confirmNewPassword.text) {
-          Fluttertoast.showToast(msg: 'New and Confirm password must be same');
-        } else {
-          await AuthApi.changeposward(
-            email.toString(),
-            currentPassword,
-            newPassword,
-          );
-          Navigator.pop(context);
-          currentPassword.text = '';
-          newPassword.text = '';
-          confirmNewPassword.text = '';
-        }
-      }
-    }
-
-    Alert(
-        context: context,
-        title: "Change Password",
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 6),
-            Text(
-              "Current Password",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-            ),
-            SizedBox(height: 4),
-            InputField(
-              hint: 'Enter current password',
-              obscure: true,
-              controller: currentPassword,
-            ),
-            SizedBox(height: 6),
-            Text(
-              "New Password",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-            ),
-            SizedBox(height: 4),
-            InputField(
-              hint: 'Enter new password',
-              obscure: true,
-              controller: newPassword,
-            ),
-            SizedBox(height: 6),
-            Text(
-              "Confirm New Password",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-            ),
-            SizedBox(height: 4),
-            InputField(
-              hint: 'Enter confirm new password',
-              obscure: true,
-              controller: confirmNewPassword,
-            ),
-          ],
-        ),
-        buttons: [
-          DialogButton(
-            color: mainColor,
-            onPressed: () async {
-              await change();
-            },
-            child: Text(
-              "Change Password",
-              style: TextStyle(color: Colors.white, fontSize: 14),
-            ),
-          )
-        ]).show();
+    Alert(context: context, content: EditModel(email: email), buttons: [
+      DialogButton(
+          height: 0, color: White, onPressed: () async {}, child: Text(''))
+    ]).show();
   }
 }

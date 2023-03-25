@@ -12,9 +12,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthApi {
   static login(email, password) async {
     LoadingHelper.show();
-     var token = await FirebaseMessaging.instance.getToken();
+    var token = await FirebaseMessaging.instance.getToken();
     var url = BASE_URL + 'companyLogin';
-    var data = {'email': email.text, 'password': password.text,'firebase_token': token,};
+    var data = {
+      'email': email.text,
+      'password': password.text,
+      'firebase_token': token,
+    };
 
     var response = await Api.execute(url: url, data: data);
 
@@ -23,7 +27,8 @@ class AuthApi {
       Company company = Company(response['company']);
 
       SharedPreferencesHelper.setString('api_token', company.apiToken!);
-        SharedPreferencesHelper.setString('company_id', company.company_id.toString());
+      SharedPreferencesHelper.setString(
+          'company_id', company.company_id.toString());
       print(response['company.api_token']);
       SharedPreferencesHelper.setString(
           'company_id', company.company_id.toString());
@@ -71,9 +76,7 @@ class AuthApi {
 
     LoadingHelper.dismiss();
     if (response['error'] == false) {
-      Company company = Company(response['update']);
-      Fluttertoast.showToast(msg: 'Password update successfully');
-      return company;
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error']);
       return false;

@@ -33,13 +33,13 @@ class EditButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * screenRatio,
       height: 30,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          primary: color,
-          shadowColor: mainColor,
+      child: InkWell(
+        onTap: onPressed,
+        // style: ElevatedButton.styleFrom(
+        //   primary: color,
+        //   shadowColor: mainColor,
          
-        ),
+        // ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

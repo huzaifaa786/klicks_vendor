@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/notification.dart';
 import 'package:klicks_vendor/modals/notification.dart';
+import 'package:klicks_vendor/screen/notification/notification_detail.dart';
 import 'package:klicks_vendor/static/notification_card.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/values/colors.dart';
@@ -54,7 +55,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   return NotificationTile(
                     type: "suv",
                     title: notification[index].title!,
-                    day: notification[index].dateTime.toString(),
+                    ontap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationDetail(
+                                  order: notification[index])));
+                    },
                   );
                 }),
           ),

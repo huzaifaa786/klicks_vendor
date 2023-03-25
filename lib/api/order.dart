@@ -4,7 +4,6 @@ import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/modals/sale.dart';
-import 'package:klicks_vendor/modals/status_update.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -23,21 +23,19 @@ class ExtraListTile extends StatelessWidget {
       padding: const EdgeInsets.only(top: 12),
       child: Container(
         padding: EdgeInsets.all(12),
-        height: 80,
-       decoration: BoxDecoration(
-        
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-        
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.4),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,19 +61,15 @@ class ExtraListTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 5, right: 5),
                   child: EditButton(
-                    
                     onPressed: edittap,
-                   
-                    screenRatio: 0.15,
+                    screenRatio: 0.05,
                     imgicon: 'assets/images/edit.svg',
                     color: Colors.white,
                   ),
                 ),
                 EditButton(
-                  
                   onPressed: removetap,
                   screenRatio: 0.15,
-               
                   imgicon: 'assets/images/delete.svg',
                   color: Colors.white,
                 ),

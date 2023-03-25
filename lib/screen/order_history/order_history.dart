@@ -5,8 +5,8 @@ import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/screen/order_status/order_status.dart';
 import 'package:klicks_vendor/static/order.dart';
-import 'package:klicks_vendor/static/searchbar.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:klicks_vendor/values/colors.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class OrderHistry extends StatefulWidget {
@@ -121,7 +121,16 @@ class _OrderHistryState extends State<OrderHistry> {
                     }
                   },
                 ),
-                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Total Orders: ',style: TextStyle(fontWeight: FontWeight.bold,color: hintColor),),
+                      Text(SearchOrders.length.toString(),style: TextStyle(color: hintColor))
+                    ],
+                  ),
+                ),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.75,
                   child: ListView.builder(

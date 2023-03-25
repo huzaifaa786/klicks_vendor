@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/values/colors.dart';

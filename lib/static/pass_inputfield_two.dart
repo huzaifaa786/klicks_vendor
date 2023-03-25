@@ -53,7 +53,7 @@ class InputFieldPasswordTwo extends StatelessWidget {
             },
           ),
           filled: true,
-          fillColor: fieldColor,
+          fillColor: White,
           hintText: hint,
           hintStyle: TextStyle(color: hintColor),
           contentPadding: const EdgeInsets.only(left: 12.0),

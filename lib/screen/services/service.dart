@@ -15,6 +15,7 @@ import 'package:klicks_vendor/static/card.dart';
 import 'package:klicks_vendor/static/extra_list_item.dart';
 import 'package:klicks_vendor/static/imageinput.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
+import 'package:klicks_vendor/static/price_field.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -198,9 +199,9 @@ class _ServiceState extends State<Service> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          InputField(
+                                          PriceInputField(
                                             controller: priceController,
-                                            hint: 'AED',
+                                            hint: '0.00',
                                             width: 0.42,
                                             type: TextInputType.number,
                                           ),
@@ -247,6 +248,7 @@ class _ServiceState extends State<Service> {
                                   ],
                                 )
                               : SizedBox(),
+                              SizedBox(height: 8),
                           SizedBox(
                             height: showCreate == true
                                 ? MediaQuery.of(context).size.height * 0.16
