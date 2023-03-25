@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/values/colors.dart';
 
 class CardCar extends StatelessWidget {
   const CardCar({
@@ -22,8 +23,8 @@ class CardCar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 4),
-      height: 140,
+      padding: EdgeInsets.only(top: 12, left: 4, right: 4, bottom: 16),
+      // height: 140,
       width: MediaQuery.of(context).size.width * 0.44,
       child: Column(
         children: [
@@ -36,9 +37,14 @@ class CardCar extends StatelessWidget {
             onTap: onpress,
             child: Padding(
               padding: const EdgeInsets.only(top: 13),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4,right: 4),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1.0, color: grey),
+                    ),
+                  ),
                   child: Text(
                     'AED ' + text,
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),

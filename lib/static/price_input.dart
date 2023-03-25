@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class IconInput extends StatelessWidget {
   const IconInput({
@@ -30,7 +29,8 @@ class IconInput extends StatelessWidget {
       width: 180,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400),
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
