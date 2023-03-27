@@ -178,13 +178,13 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                               SizedBox(height: 20),
-                              LanguageTile(
-                                image: 'assets/images/language.svg',
-                                text: 'Language',
-                                ontap: () {},
-                                language: 'English(US)',
-                              ),
-                              SizedBox(height: 8),
+                              // LanguageTile(
+                              //   image: 'assets/images/language.svg',
+                              //   text: 'Language',
+                              //   ontap: () {},
+                              //   language: 'English(US)',
+                              // ),
+                              // SizedBox(height: 8),
                               LogOutTile(
                                 image: 'assets/images/logout.svg',
                                 text: 'Log out',
