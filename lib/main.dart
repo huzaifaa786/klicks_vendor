@@ -15,8 +15,8 @@ import 'package:klicks_vendor/screen/splash/splash_screen.dart';
 import 'package:klicks_vendor/values/styles.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
