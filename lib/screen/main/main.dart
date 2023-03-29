@@ -136,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                                                       company: company,
                                                     )));
                                       },
-                                     color: cardBlue,
+                                      color: cardBlue,
                                       title: 'Services',
                                       discription: 'List of our services',
                                       image: 'assets/images/services.svg',
@@ -152,7 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                                                           .toString(),
                                                     )));
                                       },
-                                    color: cardBlue,
+                                      color: cardBlue,
                                       title: 'Total Sale',
                                       discription: 'Track your daily sale',
                                       image: 'assets/images/sales.svg',
@@ -169,7 +169,7 @@ class _MainScreenState extends State<MainScreen> {
                                                       company: company,
                                                     )));
                                       },
-                                     color: cardBlue,
+                                      color: cardBlue,
                                       title: 'Profile',
                                       discription: 'Manage your Profile',
                                       image: 'assets/images/profile.svg',
@@ -178,13 +178,15 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                               SizedBox(height: 20),
-                              // LanguageTile(
-                              //   image: 'assets/images/language.svg',
-                              //   text: 'Language',
-                              //   ontap: () {},
-                              //   language: 'English(US)',
-                              // ),
-                              // SizedBox(height: 8),
+                              LanguageTile(
+                                image: 'assets/images/language.svg',
+                                text: 'Language',
+                                ontap: () {
+                                  Navigator.pushNamed(context, 'Lang');
+                                },
+                                language: 'English(US)',
+                              ),
+                              SizedBox(height: 8),
                               LogOutTile(
                                 image: 'assets/images/logout.svg',
                                 text: 'Log out',
