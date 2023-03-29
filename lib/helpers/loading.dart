@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:klicks_vendor/values/colors.dart';
 
 class LoadingHelper {
   static bool absorbClick = false;
@@ -9,8 +8,7 @@ class LoadingHelper {
   static show() {
     absorbClick = true;
     onChangeAbsorbClick();
-    EasyLoading.show(
-    );
+    EasyLoading.show();
   }
 
   static dismiss() {
@@ -32,6 +30,7 @@ class LoadingHelper {
       ..textColor = Colors.blue
       ..maskColor = Colors.blue.withOpacity(0.5)
       ..userInteractions = false
-      ..dismissOnTap = false..boxShadow = <BoxShadow>[];
+      ..dismissOnTap = false
+      ..boxShadow = <BoxShadow>[];
   }
 }
