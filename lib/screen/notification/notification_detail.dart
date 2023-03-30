@@ -11,9 +11,11 @@ import 'package:klicks_vendor/screen/order_status/complete_model.dart';
 import 'package:klicks_vendor/static/badge.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/checkOut_tile.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NotificationDetail extends StatefulWidget {
   const NotificationDetail({super.key, this.order});
@@ -88,7 +90,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                         Padding(
                           padding: const EdgeInsets.only(right: 6.0),
                           child: Text(
-                            'Order Detail',
+                            LocaleKeys.Order_detail.tr(),
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -106,7 +108,9 @@ class _NotificationDetailState extends State<NotificationDetail> {
                 ),
                 SizedBox(height: 30),
                 Text(
-                  'Order ID ' + widget.order!.orderId.toString(),
+                  LocaleKeys.OrderID.tr() +
+                      '' +
+                      widget.order!.orderId.toString(),
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                 ),
                 SizedBox(height: 20),
@@ -129,28 +133,28 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   child: Column(
                     children: [
                       CheckOutTile(
-                        title: 'Vehicle Type',
+                        title: LocaleKeys.Vehicle_Type.tr(),
                         discription: widget.order!.cartype,
                         image: 'assets/images/vehicleType.svg',
                       ),
                       CheckOutTile(
-                        title: 'Number Plate',
+                        title: LocaleKeys.Number_Plate.tr(),
                         discription: widget.order!.plate_number,
                         image: 'assets/images/numberPlate.svg',
                       ),
                       CheckOutTile(
-                        title: 'Prking Number',
+                        title: LocaleKeys.Parking_Number.tr(),
                         discription: widget.order!.parking,
                         image: 'assets/images/parkingNumber.svg',
                       ),
                       orderDetail == null
                           ? SizedBox()
                           : CheckOutTile(
-                              title: 'Mall',
+                              title: LocaleKeys.Mall.tr(),
                               discription: orderDetail!.mall_name,
                               image: 'assets/images/mallCheckout.svg'),
                       CheckOutTile(
-                          title: 'Floor Number',
+                          title: LocaleKeys.Floor_Number.tr(),
                           discription: widget.order!.floor,
                           image: 'assets/images/floorNumberCheck.svg'),
                       Padding(
@@ -182,7 +186,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                     ),
                                   ),
                                   Text(
-                                    'Extras',
+                                    LocaleKeys.Extras.tr(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14,
@@ -232,7 +236,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Badge(
-                            title: 'Complete',
+                            title: LocaleKeys.completed.tr(),
                             color: Colors.green,
                             ontap: () {},
                           )
@@ -243,7 +247,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Badge(
-                                title: 'Rejected',
+                                title: LocaleKeys.Rejected.tr(),
                                 color: Colors.red,
                                 ontap: () {},
                               )
@@ -257,7 +261,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       LargeButton(
-                          title: 'Accept',
+                          title: LocaleKeys.Accept.tr(),
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             if (await OrderApi.orderaccept(
@@ -273,7 +277,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                           rounded: true,
                           color: badgeGreen),
                       LargeButton(
-                          title: 'Reject',
+                          title: LocaleKeys.Reject.tr(),
                           onPressed: () async {
                             final prefs = await SharedPreferences.getInstance();
                             if (await OrderApi.orderreject(
@@ -294,7 +298,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                     ? Column(
                         children: [
                           LargeButton(
-                            title: 'Order in Progress',
+                            title: LocaleKeys.Order_IN_Progress.tr(),
                             onPressed: () {},
                             color: InprocessColor,
                             screenRatio: 0.45,
@@ -304,7 +308,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                             height: 20,
                           ),
                           LargeButton(
-                            title: 'Mark as Completed',
+                            title: LocaleKeys.Mall.tr(),
                             onPressed: () async {
                               final prefs =
                                   await SharedPreferences.getInstance();

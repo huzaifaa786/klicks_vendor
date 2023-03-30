@@ -15,14 +15,13 @@ import 'package:klicks_vendor/screen/order_history/order_history.dart';
 import 'package:klicks_vendor/screen/order_status/order_status.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
 import 'package:klicks_vendor/screen/splash/splash_screen.dart';
-import 'package:klicks_vendor/screen/translation/codegen_oader.dart';
-import 'package:klicks_vendor/static/language.dart';
+import 'package:klicks_vendor/translations/codegen_loader.g.dart';
 import 'package:klicks_vendor/values/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-    await EasyLocalization.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
       supportedLocales: Language.all,
       path: 'assets/translations',
@@ -30,9 +29,7 @@ void main() async {
       fallbackLocale: Language.all[0],
       assetLoader: CodegenLoader(),
       child: const MyApp()));
-  
 }
-
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -60,6 +57,9 @@ class _MyAppState extends State<MyApp> {
     return AbsorbPointer(
       absorbing: LoadingHelper.absorbClick,
       child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
         builder: EasyLoading.init(),

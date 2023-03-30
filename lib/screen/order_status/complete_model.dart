@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/static/button.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OrderCompleteStatus extends StatefulWidget {
   const OrderCompleteStatus(
@@ -30,9 +32,9 @@ class _OrderCompleteStatusState extends State<OrderCompleteStatus> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: 6),
-        Image(image: AssetImage('assets/images/checked 2.png')),
+        Image(image: AssetImage('assets/images/checked.png')),
         Text(
-          "Are you sure to mark as complete ",
+          LocaleKeys.are_you_sure_to_mark_as_complete.tr(),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 4),

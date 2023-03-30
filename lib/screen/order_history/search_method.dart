@@ -1,14 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
-class TranslateMethod extends StatefulWidget {
-  TranslateMethod(
+class SearchMethod extends StatefulWidget {
+  SearchMethod(
       {Key? key,
       this.value,
       this.groupvalue,
       this.onpress,
       this.onchaged,
-      this.image,
+      this.color,
       this.title})
       : super(
           key: key,
@@ -17,13 +19,13 @@ class TranslateMethod extends StatefulWidget {
   final onpress;
   final groupvalue;
   final onchaged;
-  final image;
+  final color;
   final title;
   @override
-  State<TranslateMethod> createState() => _TranslateMethodState();
+  State<SearchMethod> createState() => _SearchMethodState();
 }
 
-class _TranslateMethodState extends State<TranslateMethod> {
+class _SearchMethodState extends State<SearchMethod> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -39,17 +41,21 @@ class _TranslateMethodState extends State<TranslateMethod> {
               width: MediaQuery.of(context).size.width,
               child: ListTile(
                 title: Transform.translate(
-                  offset: Offset(-12, 0),
+                  offset: Offset(-25, 0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      
                       Text(
                         widget.title,
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.w400),
-                      ),
-                      Transform.scale(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: widget.color),
+                      )
+                    ],
+                  ),
+                ),
+                trailing: Transform.scale(
                     scale: 1.2,
                     child: Radio(
                         value: widget.value.toString(),
@@ -59,10 +65,6 @@ class _TranslateMethodState extends State<TranslateMethod> {
                         onChanged: (value) {
                           widget.onchaged();
                         })),
-                    ],
-                  ),
-                ),
-                // trailing: 
                 dense: true,
                 contentPadding: EdgeInsets.only(left: 0.0, right: 0.0),
               ),

@@ -6,7 +6,9 @@ import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/screen/notification/notification_detail.dart';
 import 'package:klicks_vendor/static/notification_card.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -41,7 +43,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           child: Column(
         children: [
           TitleTopbar(
-            text: 'Notification',
+            text: LocaleKeys.Notification.tr(),
             ontap: () {
               Navigator.pop(context);
             },
