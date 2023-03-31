@@ -29,7 +29,7 @@ class AuthApi {
       SharedPreferencesHelper.setString('api_token', company.apiToken!);
       SharedPreferencesHelper.setString(
           'company_id', company.company_id.toString());
-      print(response['company.api_token']);
+      (response['company.api_token']);
       SharedPreferencesHelper.setString(
           'company_id', company.company_id.toString());
       return true;
@@ -44,7 +44,7 @@ class AuthApi {
     var url = BASE_URL + 'companyget';
     var data;
     final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('api_token'));
+    (prefs.getString('api_token'));
     data = {'api_token': prefs.getString('api_token')!};
 
     var response = await Api.execute(url: url, data: data);
@@ -89,7 +89,7 @@ class AuthApi {
     var url = BASE_URL + 'changepasword';
     var data;
     final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('api_token'));
+    (prefs.getString('api_token'));
     data = {'api_token': api_token, 'password': password.text};
 
     var response = await Api.execute(url: url, data: data);

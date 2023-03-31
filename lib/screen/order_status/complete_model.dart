@@ -20,7 +20,6 @@ class OrderCompleteStatus extends StatefulWidget {
 }
 
 class _OrderCompleteStatusState extends State<OrderCompleteStatus> {
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +41,7 @@ class _OrderCompleteStatusState extends State<OrderCompleteStatus> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             LargeButton(
-                title: "yes",
+                title: LocaleKeys.yes.tr(),
                 onPressed: () async {
                   await OrderApi.ordercomplete(
                       widget.id, widget.userId, widget.company_id);
@@ -51,7 +50,7 @@ class _OrderCompleteStatusState extends State<OrderCompleteStatus> {
                 screenRatio: 0.3),
             SizedBox(width: 8),
             LargeButton(
-              title: "No",
+              title: LocaleKeys.No.tr(),
               onPressed: () {
                 Navigator.pop(context);
               },

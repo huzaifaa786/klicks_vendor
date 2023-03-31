@@ -7,15 +7,15 @@ class Api {
     var result;
 
     Dio dio = Dio();
-    print(url);
-    print(data);
+    (url);
+    (data);
 
     result = await dio.post(
       url,
       data: data,
     );
 
-    print(result);
+    (result);
     var response = jsonDecode(result.toString());
 
     return response;

@@ -7,9 +7,12 @@ import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/sale.dart';
 import 'package:klicks_vendor/modals/sales_data_model.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'dart:ui' as ui;
 
 class SalesScreen extends StatefulWidget {
   const SalesScreen({super.key, required this.id});
@@ -66,7 +69,7 @@ class _SalesScreenState extends State<SalesScreen> {
       today = day;
       // price = 0;
       // for (var i = 0; i < searchedorders.length; i++) {
-      //   print(searchedorders[i].price!);
+      //   (searchedorders[i].price!);
       //   price += int.parse(searchedorders[i].price.toString());
       // }
     });
@@ -85,7 +88,7 @@ class _SalesScreenState extends State<SalesScreen> {
       searchedorders = orderlist;
       // price = 0;
       // for (var i = 0; i < searchedorders.length; i++) {
-      //   print(searchedorders[i].price!);
+      //   (searchedorders[i].price!);
       //   price += int.parse(searchedorders[i].price.toString());
       // }
     });
@@ -97,153 +100,155 @@ class _SalesScreenState extends State<SalesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TitleTopbar(
-                text: 'Today Sale',
-                ontap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.82,
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TableCalendar(
-                            selectedDayPredicate: (day) =>
-                                isSameDay(day, today),
-                            firstDay: DateTime.utc(2010, 10, 16),
-                            lastDay: DateTime.now(),
-                            focusedDay: today,
-                            onDaySelected: _onDaySelected,
-                            calendarStyle: CalendarStyle(
-                              todayDecoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 144, 205, 255),
-                                  shape: BoxShape.circle),
-                              selectedDecoration: BoxDecoration(
-                                  color: mainColor, shape: BoxShape.circle),
-                              markerDecoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              isTodayHighlighted: true,
-                              outsideDaysVisible: false,
-                            ),
-                            availableCalendarFormats: const {
-                              CalendarFormat.month: 'Month',
-                              CalendarFormat.week: 'Week',
-                            },
-                            onPageChanged: onFormatChanged,
-                            calendarFormat: format,
-                            onFormatChanged: (CalendarFormat _format) {
-                              setState(() {
-                                _format == CalendarFormat.week
-                                    ? size = 0.59
-                                    : size = 0.319;
-                                _format == CalendarFormat.week
-                                    ? format1 = 'week'
-                                    : format1 = 'month';
-                                format = _format;
-                                getsale();
-                              });
-                            },
-                            startingDayOfWeek: StartingDayOfWeek.monday,
-                            daysOfWeekVisible: true,
-                          ),
-                          Text(
-                            'Order Detail',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 16),
-                          ),
-                          // SizedBox(
-                          //   height: MediaQuery.of(context).size.height * size,
-                          //   child: ListView.builder(
-                          //       itemCount: searchedorders.length,
-                          //       itemBuilder: (BuildContext context, int index) {
-                          //         return TodaySale(
-                          //           name: searchedorders[index].user!,
-                          //           type: searchedorders[index].cartype,
-                          //           price: searchedorders[index].price,
-                          //           imageicon: 'assets/images/car_order.svg',
-                          //         );
-                          //       }),
-                          // )
-                          SizedBox(height: 16),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * size,
-                            child: SfCartesianChart(
-                              primaryXAxis: CategoryAxis(),
-                              series: <LineSeries<SalesData, String>>[
-                                LineSeries<SalesData, String>(
-                                  dataSource: _spots,
-                                  xValueMapper: (SalesData sales, _) =>
-                                      sales.days,
-                                  yValueMapper: (SalesData sales, _) =>
-                                      sales.sales,
-                                  dataLabelSettings:
-                                      DataLabelSettings(isVisible: true),
+      body: Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: SafeArea(
+            child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TitleTopbar(
+                  text: LocaleKeys.Total_sale.tr(),
+                  ontap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.82,
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TableCalendar(
+                              selectedDayPredicate: (day) =>
+                                  isSameDay(day, today),
+                              firstDay: DateTime.utc(2010, 10, 16),
+                              lastDay: DateTime.now(),
+                              focusedDay: today,
+                              onDaySelected: _onDaySelected,
+                              calendarStyle: CalendarStyle(
+                                todayDecoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 144, 205, 255),
+                                    shape: BoxShape.circle),
+                                selectedDecoration: BoxDecoration(
+                                    color: mainColor, shape: BoxShape.circle),
+                                markerDecoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              ],
+                                isTodayHighlighted: true,
+                                outsideDaysVisible: false,
+                              ),
+                              availableCalendarFormats: const {
+                                CalendarFormat.month: 'Month',
+                                CalendarFormat.week: 'Week',
+                              },
+                              onPageChanged: onFormatChanged,
+                              calendarFormat: format,
+                              onFormatChanged: (CalendarFormat _format) {
+                                setState(() {
+                                  _format == CalendarFormat.week
+                                      ? size = 0.59
+                                      : size = 0.319;
+                                  _format == CalendarFormat.week
+                                      ? format1 = 'week'
+                                      : format1 = 'month';
+                                  format = _format;
+                                  getsale();
+                                });
+                              },
+                              startingDayOfWeek: StartingDayOfWeek.monday,
+                              daysOfWeekVisible: true,
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Text(
+                              LocaleKeys.Order_detail.tr(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 16),
+                            ),
+                            // SizedBox(
+                            //   height: MediaQuery.of(context).size.height * size,
+                            //   child: ListView.builder(
+                            //       itemCount: searchedorders.length,
+                            //       itemBuilder: (BuildContext context, int index) {
+                            //         return TodaySale(
+                            //           name: searchedorders[index].user!,
+                            //           type: searchedorders[index].cartype,
+                            //           price: searchedorders[index].price,
+                            //           imageicon: 'assets/images/car_order.svg',
+                            //         );
+                            //       }),
+                            // )
+                            SizedBox(height: 16),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * size,
+                              child: SfCartesianChart(
+                                primaryXAxis: CategoryAxis(),
+                                series: <LineSeries<SalesData, String>>[
+                                  LineSeries<SalesData, String>(
+                                    dataSource: _spots,
+                                    xValueMapper: (SalesData sales, _) =>
+                                        sales.days,
+                                    yValueMapper: (SalesData sales, _) =>
+                                        sales.sales,
+                                    dataLabelSettings:
+                                        DataLabelSettings(isVisible: true),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    right: 10, left: 10, bottom: 8, top: 8),
-                child: Container(
-                  height: 60,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: mainColor,
-                      borderRadius: BorderRadius.all(Radius.circular(6))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Total Sales",
-                          style: TextStyle(
-                              color: White,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500)),
-                      Row(
-                        children: [
-                          Text(price.toString(),
-                              style: TextStyle(
-                                  color: White,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600)),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Text(" AED",
+                Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 10, top: 8),
+                  child: Container(
+                    height: 60,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: mainColor,
+                        borderRadius: BorderRadius.all(Radius.circular(6))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(LocaleKeys.Total_sales.tr(),
+                            style: TextStyle(
+                                color: White,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500)),
+                        Row(
+                          children: [
+                            Text(price.toString(),
                                 style: TextStyle(
                                     color: White,
-                                    fontSize: 12,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600)),
-                          ),
-                        ],
-                      )
-                    ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(" AED",
+                                  style: TextStyle(
+                                      color: White,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      )),
+        )),
+      ),
     );
   }
 }

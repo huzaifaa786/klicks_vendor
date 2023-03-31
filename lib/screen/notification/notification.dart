@@ -9,6 +9,7 @@ import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:ui' as ui;
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -39,36 +40,39 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: White,
-      body: SafeArea(
-          child: Column(
-        children: [
-          TitleTopbar(
-            text: LocaleKeys.Notification.tr(),
-            ontap: () {
-              Navigator.pop(context);
-            },
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
-            height: MediaQuery.of(context).size.height * 0.89,
-            child: ListView.builder(
-                itemCount: notification.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return NotificationTile(
-                    type:  notification[index].cartype,
-                    title: notification[index].title!,
-                    ontap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationDetail(
-                                  order: notification[index])));
-                    },
-                  );
-                }),
-          ),
-        ],
-      )),
+      body: Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: SafeArea(
+            child: Column(
+          children: [
+            TitleTopbar(
+              text: LocaleKeys.Notification.tr(),
+              ontap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
+              height: MediaQuery.of(context).size.height * 0.89,
+              child: ListView.builder(
+                  itemCount: notification.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return NotificationTile(
+                      type:  notification[index].cartype,
+                      title: notification[index].title!,
+                      ontap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationDetail(
+                                    order: notification[index])));
+                      },
+                    );
+                  }),
+            ),
+          ],
+        )),
+      ),
     );
   }
 }

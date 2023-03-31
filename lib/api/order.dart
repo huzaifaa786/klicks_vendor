@@ -15,12 +15,12 @@ class OrderApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {'id': int.parse(prefs.getString('company_id')!)};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     List<OrderModal> orders = <OrderModal>[];
     for (var order in response['orders']) {
@@ -35,12 +35,12 @@ class OrderApi {
     var data;
 
     data = {'id': id};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+    (response);
     LoadingHelper.dismiss();
     List<ExtraServiceDetail> extraservices = <ExtraServiceDetail>[];
     for (var extraservice in response['orders']) {
@@ -53,10 +53,10 @@ class OrderApi {
     LoadingHelper.show();
     var url = BASE_URL + 'orderaccept';
     var data;
-    print(userid);
-    print(companyid);
+    (userid);
+    (companyid);
     data = {'id': id, 'user_id': userid, "company_id": companyid};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
@@ -76,7 +76,7 @@ class OrderApi {
     var data;
 
     data = {'id': id, 'user_id': userid, "company_id": companyid};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
@@ -96,7 +96,7 @@ class OrderApi {
     var data;
 
     data = {'id': id, 'user_id': userid, "company_id": companyid};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
@@ -117,12 +117,12 @@ class OrderApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {'id': int.parse(prefs.getString('company_id')!)};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     List<SaleModal> orders = <SaleModal>[];
     for (var order in response['orders']) {
@@ -136,7 +136,7 @@ class OrderApi {
     var url = BASE_URL + 'totalsale';
     var data;
     data = {'format': format.toString(), 'date': date.toString(), 'id': id};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,

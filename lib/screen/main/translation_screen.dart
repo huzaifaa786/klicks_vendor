@@ -32,8 +32,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
           ? translateMethod.English
           : translateMethod.Arabic;
       setState(() {});
-      print(parentContext.locale.toString());
-      print(_site);
+      (parentContext.locale.toString());
+      (_site);
     });
     super.initState();
   }

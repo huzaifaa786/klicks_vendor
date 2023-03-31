@@ -5,8 +5,11 @@ import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/screen/edit_profile.dart/edit_modal.dart';
 import 'package:klicks_vendor/static/inputfield.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'dart:ui' as ui;
+import 'package:easy_localization/easy_localization.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key, this.company});
@@ -58,113 +61,118 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            TitleTopbar(
-              ontap: () {
-                Navigator.pop(context);
-              },
-              text: 'Profile',
-            ),
-            Flexible(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.89,
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 12.0, bottom: 6),
-                          child: Text(
-                            "Email",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 16),
+      body: Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: SafeArea(
+          child: Column(
+            children: [
+              TitleTopbar(
+                ontap: () {
+                  Navigator.pop(context);
+                },
+                text: LocaleKeys.Profile.tr(),
+              ),
+              Flexible(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.89,
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 12.0, bottom: 6),
+                            child: Text(
+                              LocaleKeys.Eamil.tr(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 16),
+                            ),
                           ),
-                        ),
-                        InputField(
-                          readOnly: true,
-                          hint: 'Enter Email',
-                          controller: emailController,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 12.0, bottom: 6),
-                          child: Text(
-                            "Phone Number",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 16),
+                          InputField(
+                            readOnly: true,
+                            hint: 'Enter Email',
+                            controller: emailController,
                           ),
-                        ),
-                        InputField(
-                          readOnly: true,
-                          hint: 'Enter phone number',
-                          controller: phoneController,
-                          type: TextInputType.number,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 12.0, bottom: 6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Password",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 16),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  ChangePassword(context, emailController.text);
-                                },
-                                child: Text(
-                                  "Chnage Password",
+                          Padding(
+                            padding: EdgeInsets.only(top: 12.0, bottom: 6),
+                            child: Text(
+                              LocaleKeys.Phone_Number.tr(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 16),
+                            ),
+                          ),
+                          InputField(
+                            readOnly: true,
+                            hint: 'Enter phone number',
+                            controller: phoneController,
+                            type: TextInputType.number,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 12.0, bottom: 6),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  LocaleKeys.Password.tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: mainColor),
+                                      fontSize: 16),
                                 ),
-                              ),
-                            ],
+                                InkWell(
+                                  onTap: () {
+                                    ChangePassword(
+                                        context, emailController.text);
+                                  },
+                                  child: Text(
+                                    LocaleKeys.Change_Password.tr(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: mainColor),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        // InputFieldPasswordTwo(
-                        //   hint: 'Password',
-                        //   toggle: _toggle,
-                        //   obscure: _obscureText,
-                        //   controller: passwordController,
-                        // ),
-                      ],
-                    ),
-                    // show == false
-                    //     ?
-                    // Padding(
-                    //         padding: const EdgeInsets.only(bottom: 12),
-                    //         child: LargeButton(
-                    //             title: "Update Profile",
-                    //             onPressed: () {
-                    //               chnage();
-                    //             }),
-                    //       )
-                    //     : Padding(
-                    //         padding: const EdgeInsets.only(bottom: 12),
-                    //         child: IconsButton(
-                    //           title: 'Changes saved successfully!',
-                    //           color: Colors.green,
-                    //           rounded: true,
-                    //           onPressed: () {
-                    //             // setState(() {
-                    //             //   show = !show;
-                    //             // });
-                    //           },
-                    //         ),
-                    //       )
-                  ],
+                          // InputFieldPasswordTwo(
+                          //   hint: 'Password',
+                          //   toggle: _toggle,
+                          //   obscure: _obscureText,
+                          //   controller: passwordController,
+                          // ),
+                        ],
+                      ),
+                      // show == false
+                      //     ?
+                      // Padding(
+                      //         padding: const EdgeInsets.only(bottom: 12),
+                      //         child: LargeButton(
+                      //             title: "Update Profile",
+                      //             onPressed: () {
+                      //               chnage();
+                      //             }),
+                      //       )
+                      //     : Padding(
+                      //         padding: const EdgeInsets.only(bottom: 12),
+                      //         child: IconsButton(
+                      //           title: 'Changes saved successfully!',
+                      //           color: Colors.green,
+                      //           rounded: true,
+                      //           onPressed: () {
+                      //             // setState(() {
+                      //             //   show = !show;
+                      //             // });
+                      //           },
+                      //         ),
+                      //       )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

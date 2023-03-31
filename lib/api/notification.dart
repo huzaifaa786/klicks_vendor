@@ -12,7 +12,7 @@ class NotificationApi {
     var url = BASE_URL + 'vendernotfion';
     var data;
     final prefs = await SharedPreferences.getInstance();
-    print(prefs.getString('company_id'));
+    (prefs.getString('company_id'));
     data = {'company_id': prefs.getString('company_id')!};
 
     var response = await Api.execute(url: url, data: data);
@@ -20,7 +20,7 @@ class NotificationApi {
     if (!response['error']) {
       List<NotificationModal> notifications = <NotificationModal>[];
       for (var notification in response['notification']) {
-        print(response['notification']);
+        (response['notification']);
         notifications.add(NotificationModal(notification));
       }
       return notifications;
@@ -38,7 +38,7 @@ class NotificationApi {
     LoadingHelper.dismiss();
     if (!response['error']) {
       OrderDetail? noti = OrderDetail(response['orders']);
-      print(response['orders']['mall']['name']);
+      (response['orders']['mall']['name']);
       return noti;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);

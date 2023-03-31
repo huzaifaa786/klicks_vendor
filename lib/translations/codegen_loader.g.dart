@@ -72,7 +72,24 @@ class CodegenLoader extends AssetLoader{
   "Mark_as_completed": "وضع علامة إكمال الطلب",
   "are_you_sure_to_mark_as_complete": "هل أنت متأكد من وضع علامة إكمال الطلب",
   "yes": "نعم",
-  "No": "لا"
+  "No": "لا",
+  "Password_changed": "تم تغيير كلمة السر",
+  "successfully": "بنجاح!",
+  "price": "السعر",
+  "edit_service": "تحرير الخدمات",
+  "alert": "يُحذًِر",
+  "are_you_sure_to_want_delete": "هل أنت متأكد أنك تريد الحذف؟",
+  "Sign_in_to_continue": "تسجيل الدخول",
+  "Email": "البريد الإلكتروني",
+  "Forgot_Password": "نسيت كلمة السر",
+  "Sign_in": "تسجيل دخول",
+  "Find_your_account": "!أوجد حسابك",
+  "Enter_email_address_linked_to_your_account": "أدخل البريد الإلكتروني المقترن بحسابك",
+  "Next": "التالي",
+  "verify_otp": "تأكيد كلمة السر",
+  "Enter_the_6_Digit_code_receive_on_your_mobile_device": "أدخل الرمز المكون من ٦ أرقام ",
+  "Reset_Password_Of_Your_Account": "إعادة تعيين كلمة المرور لحسابك",
+  "filter_by": "فرز "
 };
 static const Map<String,dynamic> en = {
   "Hello": "Hello",
@@ -114,6 +131,7 @@ static const Map<String,dynamic> en = {
   "Eamil": "Email",
   "Phone_Number": "Phone Number",
   "Password": "Password",
+  "Change_Password": "Change Password",
   "Current_Password": "Current Password",
   "New_Password": "New Password",
   "Confirm_New_Password": "Confirm New Password",
@@ -131,7 +149,24 @@ static const Map<String,dynamic> en = {
   "Mark_as_completed": "Mark as completed",
   "are_you_sure_to_mark_as_complete": "Are you sure to mark as complete",
   "yes": "Yes",
-  "No": "No"
+  "No": "No",
+  "Password_changed": "Password changed",
+  "successfully": "successfully!",
+  "price": "Price",
+  "edit_services": "Edit Service",
+  "alert": "Alert",
+  "are_you_sure_to_want_delete": "Are you sure to want delete",
+  "Sign_in_to_continue": "Sign in to continue",
+  "Email": "Email",
+  "Forgot_Password": "Forgot Password",
+  "Sign_in": "Sign in",
+  "Find_your_account": "Find your account!",
+  "Enter_email_address_linked_to_your_account": "Enter email address linked to your account",
+  "Next": "Next",
+  "verify_otp": "Verify Otp",
+  "Enter_the_6_Digit_code_receive_on_your_mobile_device": "Enter the 6 Digit code receive on your mobile device",
+  "Reset_Password_Of_Your_Account": "Reset Password Of Your Account",
+  "filter_by": "Filter By"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

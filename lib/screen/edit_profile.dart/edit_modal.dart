@@ -3,6 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/pass_inputfield_two.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'dart:ui' as ui;
+
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
 
 class EditModel extends StatefulWidget {
   const EditModel({Key? key, required this.email}) : super(key: key);
@@ -77,7 +81,18 @@ class _EditModelState extends State<EditModel> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Password changed\n successfully!',
+                              LocaleKeys.Password_changed.tr(),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(fontSize: 22),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              LocaleKeys.successfully.tr(),
                               textAlign: TextAlign.center,
                               maxLines: 2,
                               style: TextStyle(fontSize: 22),
@@ -99,58 +114,61 @@ class _EditModelState extends State<EditModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(height: 6),
-        Text(
-          'Current Password',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-        ),
-        SizedBox(height: 4),
-        InputFieldPasswordTwo(
-          hint: 'Enter current password',
-          toggle: _toggle,
-          // imageIcon: 'assets/images/lock.svg',
-          obscure: _passwordVisible,
-          controller: currentPassword,
-        ),
-        SizedBox(height: 6),
-        Text(
-          'New Password',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-        ),
-        SizedBox(height: 4),
-        InputFieldPasswordTwo(
-          hint: 'Enter new password',
-          toggle: _toggle1,
-          // imageIcon: 'assets/images/lock.svg',
-          obscure: _newpasswordVisible,
-          controller: newPassword,
-        ),
-        SizedBox(height: 6),
-        Text(
-          'Confirm New Password',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-        ),
-        SizedBox(height: 4),
-        InputFieldPasswordTwo(
-          hint: 'Enter confirm new password',
-          toggle: _toggle2,
-          // imageIcon: 'assets/images/lock.svg',
-          obscure: _cpasswordVisible,
-          controller: confirmNewPassword,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16),
-          child: LargeButton(
-            title: 'Change',
-            onPressed: () async {
-              await change();
-            },
+    return Directionality(
+      textDirection: ui.TextDirection.ltr,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 6),
+          Text(
+            LocaleKeys.Current_Password.tr(),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
           ),
-        )
-      ],
+          SizedBox(height: 4),
+          InputFieldPasswordTwo(
+            hint: LocaleKeys.Enter_current_password.tr(),
+            toggle: _toggle,
+            // imageIcon: 'assets/images/lock.svg',
+            obscure: _passwordVisible,
+            controller: currentPassword,
+          ),
+          SizedBox(height: 6),
+          Text(
+            LocaleKeys.New_Password.tr(),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+          ),
+          SizedBox(height: 4),
+          InputFieldPasswordTwo(
+            hint: LocaleKeys.Enter_new_password.tr(),
+            toggle: _toggle1,
+            // imageIcon: 'assets/images/lock.svg',
+            obscure: _newpasswordVisible,
+            controller: newPassword,
+          ),
+          SizedBox(height: 6),
+          Text(
+            LocaleKeys.Confirm_New_Password.tr(),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+          ),
+          SizedBox(height: 4),
+          InputFieldPasswordTwo(
+            hint: LocaleKeys.Enter_confirm_new_password.tr(),
+            toggle: _toggle2,
+            // imageIcon: 'assets/images/lock.svg',
+            obscure: _cpasswordVisible,
+            controller: confirmNewPassword,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: LargeButton(
+              title: LocaleKeys.Change.tr(),
+              onPressed: () async {
+                await change();
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
