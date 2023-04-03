@@ -58,7 +58,9 @@ class _NotificationDetailState extends State<NotificationDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Directionality(
-        textDirection:  ui.TextDirection.ltr,
+        textDirection: context.locale.toString() == 'en'
+            ? ui.TextDirection.ltr
+            : ui.TextDirection.rtl,
         child: SafeArea(
             child: Padding(
           padding: EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -66,48 +68,53 @@ class _NotificationDetailState extends State<NotificationDetail> {
             children: [
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
+                  Directionality(
+                    textDirection: ui.TextDirection.ltr,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(60),
+                              ),
                             ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(60),
+                            child: Icon(
+                              Icons.keyboard_arrow_left_outlined,
                             ),
-                          ),
-                          child: Icon(
-                            Icons.keyboard_arrow_left_outlined,
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 6.0),
-                            child: Text(
-                              LocaleKeys.Order_detail.tr(),
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'Poppins'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 6.0),
+                              child: Text(
+                                LocaleKeys.Order_detail.tr(),
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Poppins'),
+                              ),
                             ),
-                          ),
-                          FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: SvgPicture.asset('assets/images/order.svg',
-                                  height: 20, width: 20)),
-                        ],
-                      ),
-                      Text("a", style: TextStyle(color: White))
-                    ],
+                            FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: SvgPicture.asset(
+                                    'assets/images/order.svg',
+                                    height: 20,
+                                    width: 20)),
+                          ],
+                        ),
+                        Text("a", style: TextStyle(color: White))
+                      ],
+                    ),
                   ),
                   SizedBox(height: 30),
                   Text(
@@ -119,8 +126,8 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   SizedBox(height: 20),
                   Container(
                     margin: EdgeInsets.only(right: 2, left: 1),
-                    padding:
-                        EdgeInsets.only(right: 12, left: 12, top: 16, bottom: 16),
+                    padding: EdgeInsets.only(
+                        right: 12, left: 12, top: 16, bottom: 16),
                     decoration: BoxDecoration(
                       color: White,
                       borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -170,13 +177,16 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 8),
+                                      padding: context.locale.toString() == 'en'
+                                          ? EdgeInsets.only(right: 8)
+                                          : EdgeInsets.only(left: 8),
                                       child: Container(
                                         padding: const EdgeInsets.all(4),
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 224, 240, 255),
-                                          borderRadius: BorderRadius.circular(15),
+                                          color: Color.fromARGB(
+                                              255, 224, 240, 255),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                         ),
                                         child: FittedBox(
                                           fit: BoxFit.scaleDown,
@@ -235,111 +245,126 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   ),
                   SizedBox(height: 40),
                   widget.order!.status == 3
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Badge(
-                              title: LocaleKeys.completed.tr(),
-                              color: Colors.green,
-                              ontap: () {},
-                            )
-                          ],
+                      ? Directionality(
+                          textDirection: ui.TextDirection.ltr,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Badge(
+                                title: LocaleKeys.completed.tr(),
+                                color: Colors.green,
+                                ontap: () {},
+                              )
+                            ],
+                          ),
                         )
                       : widget.order!.status == 2
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Badge(
-                                  title: LocaleKeys.Rejected.tr(),
-                                  color: Colors.red,
-                                  ontap: () {},
-                                )
-                              ],
+                          ? Directionality(
+                              textDirection: ui.TextDirection.ltr,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Badge(
+                                    title: LocaleKeys.Rejected.tr(),
+                                    color: Colors.red,
+                                    ontap: () {},
+                                  )
+                                ],
+                              ),
                             )
                           : SizedBox(),
                 ],
               ),
               widget.order!.status == 0
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LargeButton(
-                            title: LocaleKeys.Accept.tr(),
-                            onPressed: () async {
-                              final prefs = await SharedPreferences.getInstance();
-                              if (await OrderApi.orderaccept(
-                                  widget.order!.orderId,
-                                  widget.order!.user_id!,
-                                  prefs.getString('company_id')!)) {
-                                setState(() {
-                                  widget.order!.status = 1;
-                                });
-                              }
-                            },
-                            screenRatio: 0.4,
-                            rounded: true,
-                            color: badgeGreen),
-                        LargeButton(
-                            title: LocaleKeys.Reject.tr(),
-                            onPressed: () async {
-                              final prefs = await SharedPreferences.getInstance();
-                              if (await OrderApi.orderreject(
-                                  widget.order!.orderId,
-                                  widget.order!.user_id!,
-                                  prefs.getString('company_id')!)) {
-                                setState(() {
-                                  widget.order!.status = 2;
-                                });
-                              }
-                            },
-                            screenRatio: 0.4,
-                            rounded: true,
-                            color: Colors.red),
-                      ],
-                    )
-                  : widget.order!.status == 1
-                      ? Column(
-                          children: [
-                            LargeButton(
-                              title: LocaleKeys.Order_IN_Progress.tr(),
-                              onPressed: () {},
-                              color: InprocessColor,
-                              screenRatio: 0.45,
-                              rounded: true,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            LargeButton(
-                              title: LocaleKeys.Mark_as_completed.tr(),
+                  ? Directionality(
+                      textDirection: ui.TextDirection.ltr,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          LargeButton(
+                              title: LocaleKeys.Accept.tr(),
                               onPressed: () async {
                                 final prefs =
                                     await SharedPreferences.getInstance();
-                                query = await Alert(
-                                    context: context,
-                                    content: OrderCompleteStatus(
-                                      id: widget.order!.orderId!,
-                                      userId: widget.order!.user_id!,
-                                      company_id: prefs.getString('company_id')!,
-                                    ),
-                                    buttons: [
-                                      DialogButton(
-                                          height: 0,
-                                          color: White,
-                                          onPressed: () async {},
-                                          child: Text(''))
-                                    ]).show();
-                                if (query == true) {
+                                if (await OrderApi.orderaccept(
+                                    widget.order!.orderId,
+                                    widget.order!.user_id!,
+                                    prefs.getString('company_id')!)) {
                                   setState(() {
-                                    widget.order!.status = 3;
+                                    widget.order!.status = 1;
                                   });
                                 }
                               },
-                              color: badgeGreen,
-                              screenRatio: 0.6,
+                              screenRatio: 0.4,
                               rounded: true,
-                            ),
-                          ],
+                              color: badgeGreen),
+                          LargeButton(
+                              title: LocaleKeys.Reject.tr(),
+                              onPressed: () async {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                if (await OrderApi.orderreject(
+                                    widget.order!.orderId,
+                                    widget.order!.user_id!,
+                                    prefs.getString('company_id')!)) {
+                                  setState(() {
+                                    widget.order!.status = 2;
+                                  });
+                                }
+                              },
+                              screenRatio: 0.4,
+                              rounded: true,
+                              color: Colors.red),
+                        ],
+                      ),
+                    )
+                  : widget.order!.status == 1
+                      ? Directionality(
+                          textDirection: ui.TextDirection.ltr,
+                          child: Column(
+                            children: [
+                              LargeButton(
+                                title: LocaleKeys.Order_IN_Progress.tr(),
+                                onPressed: () {},
+                                color: InprocessColor,
+                                screenRatio: 0.45,
+                                rounded: true,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              LargeButton(
+                                title: LocaleKeys.Mark_as_completed.tr(),
+                                onPressed: () async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  query = await Alert(
+                                      context: context,
+                                      content: OrderCompleteStatus(
+                                        id: widget.order!.orderId!,
+                                        userId: widget.order!.user_id!,
+                                        company_id:
+                                            prefs.getString('company_id')!,
+                                      ),
+                                      buttons: [
+                                        DialogButton(
+                                            height: 0,
+                                            color: White,
+                                            onPressed: () async {},
+                                            child: Text(''))
+                                      ]).show();
+                                  if (query == true) {
+                                    setState(() {
+                                      widget.order!.status = 3;
+                                    });
+                                  }
+                                },
+                                color: badgeGreen,
+                                screenRatio: 0.6,
+                                rounded: true,
+                              ),
+                            ],
+                          ),
                         )
                       : SizedBox()
             ],

@@ -96,7 +96,7 @@ class Order extends StatelessWidget {
                                     ],
                                   ),
                                   child: Image(
-                                    image: AssetImage('assets/images/car1.png'),
+                                    image: AssetImage('assets/images/sedan1.png'),
                                     height: 12,
                                   ),
                                 ),
