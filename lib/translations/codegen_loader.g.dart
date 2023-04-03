@@ -89,6 +89,7 @@ class CodegenLoader extends AssetLoader{
   "verify_otp": "تأكيد كلمة السر",
   "Enter_the_6_Digit_code_receive_on_your_mobile_device": "أدخل الرمز المكون من ٦ أرقام ",
   "Reset_Password_Of_Your_Account": "إعادة تعيين كلمة المرور لحسابك",
+  "Extra_Services": "خدمة إضافية",
   "filter_by": "فرز "
 };
 static const Map<String,dynamic> en = {
@@ -166,6 +167,7 @@ static const Map<String,dynamic> en = {
   "verify_otp": "Verify Otp",
   "Enter_the_6_Digit_code_receive_on_your_mobile_device": "Enter the 6 Digit code receive on your mobile device",
   "Reset_Password_Of_Your_Account": "Reset Password Of Your Account",
+  "Extra_Services": "Extra Services",
   "filter_by": "Filter By"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};

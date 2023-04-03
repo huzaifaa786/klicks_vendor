@@ -311,7 +311,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                               height: 20,
                             ),
                             LargeButton(
-                              title: LocaleKeys.Mall.tr(),
+                              title: LocaleKeys.Mark_as_completed.tr(),
                               onPressed: () async {
                                 final prefs =
                                     await SharedPreferences.getInstance();

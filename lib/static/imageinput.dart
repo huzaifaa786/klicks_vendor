@@ -27,7 +27,7 @@ class ImageInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 47,
-      width: 180,
+      width: MediaQuery.of(context).size.width*0.43,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade300),
           color: Colors.white, borderRadius: BorderRadius.circular(6)),

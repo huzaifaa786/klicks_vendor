@@ -25,7 +25,7 @@ class CardCar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 12, left: 4, right: 4, bottom: 16),
       // height: 140,
-      width: MediaQuery.of(context).size.width * 0.44,
+      width: MediaQuery.of(context).size.width * 0.43,
       child: Column(
         children: [
           Image(

@@ -18,6 +18,7 @@ import 'package:klicks_vendor/static/inputfield.dart';
 import 'package:klicks_vendor/static/price_field.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/translations/locale_keys.g.dart';
+import 'package:klicks_vendor/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:ui' as ui;
@@ -159,10 +160,10 @@ class _ServiceState extends State<Service> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    LocaleKeys.Extra_Service.tr(),
+                                    LocaleKeys.Extra_Services.tr(),
                                     style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -176,13 +177,18 @@ class _ServiceState extends State<Service> {
                                       children: [
                                         Image.asset(
                                           'assets/images/add.png',
-                                          height: 14,
-                                          width: 14,
+                                          height: 15,
+                                          width: 15,
                                           color: Colors.black,
                                         ),
-                                        Text(
-                                          LocaleKeys.ADD.tr(),
-                                          // style: TextStyle(color: Colors.blue),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 2),
+                                          child: Text(
+                                            LocaleKeys.ADD.tr(),
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -209,9 +215,10 @@ class _ServiceState extends State<Service> {
                                             PriceInputField(
                                               controller: priceController,
                                               hint: '0.00',
-                                              width: 0.42,
+                                              width: 0.43,
                                               type: TextInputType.number,
                                             ),
+                                            SizedBox(width: 4),
                                             InkWell(
                                               onTap: () {
                                                 selectimage();
@@ -241,14 +248,17 @@ class _ServiceState extends State<Service> {
                                                 });
                                               },
                                               screenRatio: 0.42,
+                                              borderClr: Colors.grey[300]!,
                                             ),
-                                            LargeButton(
+                                            BorderButton(
                                               title: LocaleKeys.Add.tr(),
                                               onPressed: () {
                                                 save();
                                               },
                                               screenRatio: 0.42,
-                                              rounded: true,
+                                              color: mainColor,
+                                              textcolor: White,
+                                              borderClr: mainColor,
                                             )
                                           ],
                                         ),

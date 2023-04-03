@@ -75,6 +75,7 @@ abstract class  LocaleKeys {
   static const verify_otp = 'verify_otp';
   static const Enter_the_6_Digit_code_receive_on_your_mobile_device = 'Enter_the_6_Digit_code_receive_on_your_mobile_device';
   static const Reset_Password_Of_Your_Account = 'Reset_Password_Of_Your_Account';
+  static const Extra_Services = 'Extra_Services';
   static const filter_by = 'filter_by';
 
 }
