@@ -1,3 +1,5 @@
+import 'package:klicks_vendor/modals/order.dart';
+
 class NotificationModal {
   int? id;
   String? title;
@@ -15,8 +17,8 @@ class NotificationModal {
   String? user;
   int? status;
   String? cartype;
-  String? price;
-  List? service = [''];
+  OrderModal? order;
+
 
   NotificationModal(noti) {
     id = noti['id'];
@@ -26,13 +28,9 @@ class NotificationModal {
     company_id = noti['company_id'];
     user_id = noti['user_id'];
     dateTime = DateTime.parse(noti['created_at']);
-    orderId = noti['order']['id'];
+    order = OrderModal(noti['order']);
     // mall = noti['order']['mall']['name'];
-    parking = noti['order']['parking'];
-    plate_number = noti['order']['number_plate'];
-    floor = noti['order']['floor'];
-    status = noti['order']['status'];
-    price = noti['order']['totalpayment'] ?? '';
-    cartype = noti['order']['cartype'];
+
+
   }
 }

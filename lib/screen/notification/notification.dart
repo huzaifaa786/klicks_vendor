@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/notification.dart';
 import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/screen/notification/notification_detail.dart';
+import 'package:klicks_vendor/screen/order_status/order_status.dart';
 import 'package:klicks_vendor/static/notification_card.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
 import 'package:klicks_vendor/translations/locale_keys.g.dart';
@@ -64,8 +65,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NotificationDetail(
-                                    order: notification[index])));
+                                builder: (context) => OrderStatus(
+                                    order: notification[index].order)));
                       },
                     );
                   }),

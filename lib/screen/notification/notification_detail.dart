@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/notification.dart';
@@ -17,10 +19,11 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:ui' as ui;
+import 'package:http/http.dart' as http;
 
 class NotificationDetail extends StatefulWidget {
-  const NotificationDetail({super.key, this.order});
-  final NotificationModal? order;
+  const NotificationDetail({super.key, this.notification});
+  final NotificationModal? notification;
   @override
   State<NotificationDetail> createState() => _NotificationDetailState();
 }
@@ -28,9 +31,10 @@ class NotificationDetail extends StatefulWidget {
 class _NotificationDetailState extends State<NotificationDetail> {
   List<ExtraServiceDetail> services = [];
   bool? query;
+  String refundUrl = 'https://api.stripe.com/v1';
   getservice() async {
     var morderServices =
-        await OrderApi.ExtraServicesINOrder(widget.order!.id.toString());
+        await OrderApi.ExtraServicesINOrder(widget.notification!.order!.id.toString());
     setState(() {
       services = [];
       services = morderServices;
@@ -40,10 +44,39 @@ class _NotificationDetailState extends State<NotificationDetail> {
   OrderDetail? orderDetail;
   getMallandCompany() async {
     var morderdetail =
-        await NotificationApi.MallandCmp((widget.order!.orderId.toString()));
+        await NotificationApi.MallandCmp((widget.notification!.orderId.toString()));
     setState(() {
       orderDetail = morderdetail;
     });
+  }
+
+  refundViaStripe() async {
+    print('dfkdajhfas');
+    try {
+      var uname =
+          'sk_test_51MlTmPAN8zi2vyFsoj42hG3Ogz0rbxcPcbMBYhQ0dYurBHb0cpNmoDgcKioY4dkZeG55asSuZIpkKn1Ftyys4kqx00hbq1myWM';
+      var pword = '';
+      var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
+
+      var headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': authn,
+      };
+
+      var data = {
+        'payment_intent': widget.notification!.order!.paymentIntent,
+      };
+      //double finalPayment = order.service.price * 0.80;
+      final response =
+          await http.post(Uri.parse(refundUrl), headers: headers, body: data);
+
+      final body = jsonDecode(response.body);
+      print(body);
+      return body;
+    } catch (e, stack) {
+      print(stack.toString());
+      rethrow;
+    }
   }
 
   void initState() {
@@ -120,7 +153,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   Text(
                     LocaleKeys.OrderID.tr() +
                         '' +
-                        widget.order!.orderId.toString(),
+                        widget.notification!.order!.id.toString(),
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                   ),
                   SizedBox(height: 20),
@@ -144,17 +177,17 @@ class _NotificationDetailState extends State<NotificationDetail> {
                       children: [
                         CheckOutTile(
                           title: LocaleKeys.Vehicle_Type.tr(),
-                          discription: widget.order!.cartype,
+                          discription: widget.notification!.order!.cartype,
                           image: 'assets/images/vehicleType.svg',
                         ),
                         CheckOutTile(
                           title: LocaleKeys.Number_Plate.tr(),
-                          discription: widget.order!.plate_number,
+                          discription: widget.notification!.order!.plate_number,
                           image: 'assets/images/numberPlate.svg',
                         ),
                         CheckOutTile(
                           title: LocaleKeys.Parking_Number.tr(),
-                          discription: widget.order!.parking,
+                          discription: widget.notification!.order!.parking,
                           image: 'assets/images/parkingNumber.svg',
                         ),
                         orderDetail == null
@@ -165,7 +198,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                 image: 'assets/images/mallCheckout.svg'),
                         CheckOutTile(
                             title: LocaleKeys.Floor_Number.tr(),
-                            discription: widget.order!.floor,
+                            discription: widget.notification!.order!.floor,
                             image: 'assets/images/floorNumberCheck.svg'),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 12.0),
@@ -233,7 +266,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                           ),
                         ),
                         Text(
-                          widget.order!.price! + " AED",
+                          widget.notification!.order!.price! + " AED",
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 23),
                         ),
@@ -244,13 +277,13 @@ class _NotificationDetailState extends State<NotificationDetail> {
                     height: 4,
                   ),
                   SizedBox(height: 40),
-                  widget.order!.status == 3
+                  widget.notification!.order!.status == 3
                       ? Directionality(
                           textDirection: ui.TextDirection.ltr,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Badge(
+                              MBadge(
                                 title: LocaleKeys.completed.tr(),
                                 color: Colors.green,
                                 ontap: () {},
@@ -258,13 +291,13 @@ class _NotificationDetailState extends State<NotificationDetail> {
                             ],
                           ),
                         )
-                      : widget.order!.status == 2
+                      : widget.notification!.order!.status == 2
                           ? Directionality(
                               textDirection: ui.TextDirection.ltr,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Badge(
+                                  MBadge(
                                     title: LocaleKeys.Rejected.tr(),
                                     color: Colors.red,
                                     ontap: () {},
@@ -275,7 +308,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                           : SizedBox(),
                 ],
               ),
-              widget.order!.status == 0
+              widget.notification!.order!.status == 0
                   ? Directionality(
                       textDirection: ui.TextDirection.ltr,
                       child: Row(
@@ -287,38 +320,39 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                 final prefs =
                                     await SharedPreferences.getInstance();
                                 if (await OrderApi.orderaccept(
-                                    widget.order!.orderId,
-                                    widget.order!.user_id!,
+                                    widget.notification!.order!.id,
+                                    widget.notification!.order!.userid!,
                                     prefs.getString('company_id')!)) {
                                   setState(() {
-                                    widget.order!.status = 1;
+                                    widget.notification!.order!.status = 1;
                                   });
                                 }
                               },
                               screenRatio: 0.4,
                               rounded: true,
                               color: badgeGreen),
-                          LargeButton(
-                              title: LocaleKeys.Reject.tr(),
-                              onPressed: () async {
-                                final prefs =
-                                    await SharedPreferences.getInstance();
-                                if (await OrderApi.orderreject(
-                                    widget.order!.orderId,
-                                    widget.order!.user_id!,
-                                    prefs.getString('company_id')!)) {
-                                  setState(() {
-                                    widget.order!.status = 2;
-                                  });
-                                }
-                              },
-                              screenRatio: 0.4,
-                              rounded: true,
-                              color: Colors.red),
+                          // LargeButton(
+                          //     title: LocaleKeys.Reject.tr(),
+                          //     onPressed: () async {
+                          //       final prefs =
+                          //           await SharedPreferences.getInstance();
+                          //         await refundViaStripe();
+                          //       if (await OrderApi.orderreject(
+                          //           widget.order!.orderId,
+                          //           widget.order!.user_id!,
+                          //           prefs.getString('company_id')!)) {
+                          //         setState(() {
+                          //           widget.order!.status = 2;
+                          //         });
+                          //       }
+                          //     },
+                          //     screenRatio: 0.4,
+                          //     rounded: true,
+                          //     color: Colors.red),
                         ],
                       ),
                     )
-                  : widget.order!.status == 1
+                  : widget.notification!.order!.status == 1
                       ? Directionality(
                           textDirection: ui.TextDirection.ltr,
                           child: Column(
@@ -341,8 +375,8 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                   query = await Alert(
                                       context: context,
                                       content: OrderCompleteStatus(
-                                        id: widget.order!.orderId!,
-                                        userId: widget.order!.user_id!,
+                                        id: widget.notification!.order!.id!,
+                                        userId: widget.notification!.order!.userid!,
                                         company_id:
                                             prefs.getString('company_id')!,
                                       ),
@@ -355,7 +389,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                       ]).show();
                                   if (query == true) {
                                     setState(() {
-                                      widget.order!.status = 3;
+                                      widget..notification!.order!.status = 3;
                                     });
                                   }
                                 },
