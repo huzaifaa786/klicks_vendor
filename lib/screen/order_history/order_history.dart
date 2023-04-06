@@ -97,6 +97,7 @@ class _OrderHistryState extends State<OrderHistry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Directionality(
         textDirection: ui.TextDirection.ltr,
         child: SafeArea(
@@ -116,7 +117,7 @@ class _OrderHistryState extends State<OrderHistry> {
                     padding: const EdgeInsets.only(top: 20),
                     child: SearchBar(
                       onChange: searchOrders,
-                      hint: "Search",
+                      hint: LocaleKeys.search.tr(),
                       ontap: () async {
                         query = await showModalBottomSheet(
                           context: context,
@@ -181,17 +182,20 @@ class _OrderHistryState extends State<OrderHistry> {
                   // ),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          LocaleKeys.Total_order.tr() + ': ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: hintColor),
-                        ),
-                        Text(SearchOrders.length.toString(),
-                            style: TextStyle(color: hintColor))
-                      ],
+                    child: Directionality(
+                      textDirection: context.locale.toString() == 'en'? ui.TextDirection.ltr: ui.TextDirection.rtl,
+                      child: Row(
+                        mainAxisAlignment: context.locale.toString() == 'en'?  MainAxisAlignment.end :MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            LocaleKeys.Total_order.tr() + ': ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: hintColor),
+                          ),
+                          Text(SearchOrders.length.toString(),
+                              style: TextStyle(color: hintColor))
+                        ],
+                      ),
                     ),
                   ),
                   Container(

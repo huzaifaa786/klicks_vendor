@@ -12,7 +12,7 @@
     "Language": "Language",
     "All": "All",
     "completed": "Completed",
-    "In_progress": "In_progress",
+    "In_progress": "In progress",
     "Rejected": "Rejected",
     "Total_order": "Total Orders",
     "OrderID": "Order ID",
@@ -74,5 +74,11 @@
     "Enter_the_6_Digit_code_receive_on_your_mobile_device": "Enter the 6 Digit code receive on your mobile device",
     "Reset_Password_Of_Your_Account": "Reset Password Of Your Account",
     "Extra_Services": "Extra Services",
-    "filter_by": "Filter By"
+    "filter_by": "Filter By",
+    "search": "Search",
+    "Plate_Number": "Plate Number",
+    "New_Order_Placed": "تم وضع طلب جديد" ,
+    "Order_has_rejected": "تم رفض طلبك و تم استرداد المبلغ",
+    "Order_has_accepted": "تم قبول طلبك",
+    "Order_has_completed": "تم إكمال طلبك"
 }

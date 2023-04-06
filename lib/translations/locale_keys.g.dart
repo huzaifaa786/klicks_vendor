@@ -77,5 +77,11 @@ abstract class  LocaleKeys {
   static const Reset_Password_Of_Your_Account = 'Reset_Password_Of_Your_Account';
   static const Extra_Services = 'Extra_Services';
   static const filter_by = 'filter_by';
+  static const search = 'search';
+  static const Plate_Number = 'Plate_Number';
+  static const New_Order_Placed = 'New_Order_Placed';
+  static const Order_has_rejected = 'Order_has_rejected';
+  static const Order_has_accepted = 'Order_has_accepted';
+  static const Order_has_completed = 'Order_has_completed';
 
 }

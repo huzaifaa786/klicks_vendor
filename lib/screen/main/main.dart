@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:klicks_vendor/api/auth.dart';
+import 'package:klicks_vendor/api/notification.dart';
 import 'package:klicks_vendor/modals/company.dart';
 import 'package:klicks_vendor/screen/edit_profile.dart/edit_profile.dart';
 import 'package:klicks_vendor/screen/services/service.dart';
@@ -63,10 +64,21 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  bool? checkNoti = false;
+
+  checkNotifications() async {
+    var mcheckNotification = await NotificationApi.CheckNotications();
+    setState(() {
+      checkNoti = mcheckNotification;
+      ;
+    });
+  }
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getcompany();
+      await checkNotifications();
       now = DateTime.now();
       monthName = monthNames[now!.month];
       weekdayName = weekdays[now!.weekday];
@@ -81,7 +93,9 @@ class _MainScreenState extends State<MainScreen> {
         child: SafeArea(
             child: Column(
           children: [
-            Topbar(),
+            Topbar(
+              checkNewNoti: checkNoti,
+            ),
             Flexible(
               child: Container(
                 padding: const EdgeInsets.only(left: 20, right: 20),

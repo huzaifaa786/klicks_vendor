@@ -7,7 +7,7 @@ import 'package:klicks_vendor/values/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationApi {
-   static getnotifications() async {
+  static getnotifications() async {
     LoadingHelper.show();
     var url = BASE_URL + 'vendernotfion';
     var data;
@@ -29,7 +29,8 @@ class NotificationApi {
       return false;
     }
   }
-    static MallandCmp(id) async {
+
+  static MallandCmp(id) async {
     LoadingHelper.show();
     var url = BASE_URL + 'notificationdetail';
     var data = {'order_id': id};
@@ -44,5 +45,31 @@ class NotificationApi {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
+  }
+
+  static CheckNotications() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'check/vendorNotification';
+    final prefs = await SharedPreferences.getInstance();
+    (prefs.getString('api_token'));
+    var data = {'api_token': prefs.getString('api_token')};
+    var response = await Api.execute(url: url, data: data);
+
+    LoadingHelper.dismiss();
+    if (response['exist'] == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static readnotifications(noti_id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'read/notifcation';
+    var data;
+    data = {'notification_id': noti_id};
+
+    await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
   }
 }

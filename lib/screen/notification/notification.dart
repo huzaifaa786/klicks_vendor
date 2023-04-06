@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/api/notification.dart';
 import 'package:klicks_vendor/modals/notification.dart';
+import 'package:klicks_vendor/screen/main/main.dart';
 import 'package:klicks_vendor/screen/notification/notification_detail.dart';
 import 'package:klicks_vendor/static/notification_card.dart';
 import 'package:klicks_vendor/static/title_topbar.dart';
@@ -48,18 +49,32 @@ class _NotificationScreenState extends State<NotificationScreen> {
             TitleTopbar(
               text: LocaleKeys.Notification.tr(),
               ontap: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainScreen(),
+                    ),
+                    (Route<dynamic> route) => false);
               },
             ),
             Container(
-              padding: const EdgeInsets.only(left: 14, right: 14,top: 12),
+              padding: const EdgeInsets.only(left: 14, right: 14, top: 12),
               height: MediaQuery.of(context).size.height * 0.89,
               child: ListView.builder(
                   itemCount: notification.length,
                   itemBuilder: (BuildContext context, int index) {
                     return NotificationTile(
-                      type:  notification[index].cartype,
-                      title: notification[index].title!,
+                      type: notification[index].cartype,
+                      title: notification[index].title! == 'New order placed'
+                          ? LocaleKeys.New_Order_Placed.tr()
+                          : notification[index].title! ==
+                                  'Your order has been accepted'
+                              ? LocaleKeys.Order_has_accepted.tr()
+                              : notification[index].title! ==
+                                      'Your order has been rejected and order amount was refunded'
+                                  ? LocaleKeys.Order_has_rejected.tr()
+                                  : LocaleKeys.Order_has_completed.tr(),
                       ontap: () {
                         Navigator.push(
                             context,

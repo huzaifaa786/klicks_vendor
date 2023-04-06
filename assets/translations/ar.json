@@ -3,7 +3,7 @@
     "Orders": "الطلبات",
     "Services": "الخدمات",
     "Total_sale": "إجمالي البيع",
-    "Profile": "الملف التعريفي",
+    "Profile": " التعريفي",
     "Track_your_order_here": "تتبع طلبك هنا",
     "List_of_our_services": "قائمة خدماتنا",
     "Track_your_daily_sale": "تتبع مبيعاتك اليومية",
@@ -74,5 +74,11 @@
     "Enter_the_6_Digit_code_receive_on_your_mobile_device": "أدخل الرمز المكون من ٦ أرقام ",
     "Reset_Password_Of_Your_Account": "إعادة تعيين كلمة المرور لحسابك",
     "Extra_Services": "خدمة إضافية",
-    "filter_by": "فرز "
+    "filter_by": "فرز ", 
+    "search": "بحث",
+    "Plate_Number": "رقم اللوحة",
+    "New_Order_Placed": "New order placed" ,
+    "Order_has_rejected": "Your order has been rejected and order amount was refunded",
+    "Order_has_accepted": "Your order has been accepted",
+    "Order_has_completed": "Your order has been completed"
 }

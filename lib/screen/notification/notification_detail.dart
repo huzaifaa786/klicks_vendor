@@ -46,11 +46,16 @@ class _NotificationDetailState extends State<NotificationDetail> {
     });
   }
 
+  readNoti() async {
+    await NotificationApi.readnotifications(widget.order!.id);
+  }
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getMallandCompany();
       getservice();
+      readNoti();
     });
   }
 
