@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
+import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/screen/order_status/complete_model.dart';
 import 'package:klicks_vendor/static/badge.dart';
@@ -15,10 +18,12 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:ui' as ui;
+import 'package:http/http.dart' as http;
+
 
 class OrderStatus extends StatefulWidget {
-  const OrderStatus({super.key, this.order});
-  final OrderModal? order;
+   OrderStatus({super.key, this.order});
+  var order;
   @override
   State<OrderStatus> createState() => _OrderStatusState();
 }
@@ -26,6 +31,8 @@ class OrderStatus extends StatefulWidget {
 class _OrderStatusState extends State<OrderStatus> {
   List<ExtraServiceDetail> services = [];
   bool? query;
+  String ?refundUrl = 'https://api.stripe.com/v1/refunds';
+
   getservice() async {
     var morderServices =
         await OrderApi.ExtraServicesINOrder(widget.order!.id.toString());
@@ -35,10 +42,42 @@ class _OrderStatusState extends State<OrderStatus> {
     });
   }
 
+    refundViaStripe() async {
+    print('dfkdajhfas');
+    try {
+      var uname =
+          'sk_test_51MlTmPAN8zi2vyFsoj42hG3Ogz0rbxcPcbMBYhQ0dYurBHb0cpNmoDgcKioY4dkZeG55asSuZIpkKn1Ftyys4kqx00hbq1myWM';
+      var pword = '';
+      var authn = 'Basic ' + base64Encode(utf8.encode('$uname:$pword'));
+
+      var headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': authn,
+      };
+
+      var data = {
+        'payment_intent': widget.order!.paymentIntent,
+      };
+      print(refundUrl!,);
+      print(headers);
+      print(data,);
+      final response =
+          await http.post(Uri.parse(refundUrl!), headers: headers, body: data);
+
+      final body = jsonDecode(response.body);
+      print(body);
+      return body;
+    } catch (e, stack) {
+      print(stack.toString());
+      rethrow;
+    }
+  }
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
+      print(widget.order.paymentIntent);
     });
   }
 
@@ -226,7 +265,7 @@ class _OrderStatusState extends State<OrderStatus> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Badge(
+                            MBadge(
                               title: LocaleKeys.completed.tr(),
                               color: Colors.green,
                               ontap: () {},
@@ -237,7 +276,7 @@ class _OrderStatusState extends State<OrderStatus> {
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Badge(
+                                MBadge(
                                   title: LocaleKeys.Rejected.tr(),
                                   color: Colors.red,
                                   ontap: () {},
@@ -275,9 +314,11 @@ class _OrderStatusState extends State<OrderStatus> {
                               onPressed: () async {
                                 final prefs =
                                     await SharedPreferences.getInstance();
+                                    if(widget.order.paymentMethod == 'stripe')
+                                    await   refundViaStripe() ;
                                 if (await OrderApi.orderreject(
                                     widget.order!.id,
-                                    widget.order!.userid!,
+                                    widget.order!.userid,
                                     prefs.getString('company_id')!)) {
                                   setState(() {
                                     widget.order!.status = 2;

@@ -20,7 +20,7 @@ class NotificationApi {
     if (!response['error']) {
       List<NotificationModal> notifications = <NotificationModal>[];
       for (var notification in response['notification']) {
-        (response['notification']);
+        print(notification['order']);
         notifications.add(NotificationModal(notification));
       }
       return notifications;
