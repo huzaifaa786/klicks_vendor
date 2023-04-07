@@ -62,7 +62,7 @@
     "price": "السعر",
     "edit_service": "تحرير الخدمات",
     "alert": "يُحذًِر",
-    "are_you_sure_to_want_delete": "هل أنت متأكد أنك تريد الحذف؟", 
+    "are_you_sure_to_want_delete": "هل أنت متأكد أنك تريد الحذف؟",
     "Sign_in_to_continue": "تسجيل الدخول",
     "Email": "البريد الإلكتروني",
     "Forgot_Password": "نسيت كلمة السر",
@@ -74,11 +74,11 @@
     "Enter_the_6_Digit_code_receive_on_your_mobile_device": "أدخل الرمز المكون من ٦ أرقام ",
     "Reset_Password_Of_Your_Account": "إعادة تعيين كلمة المرور لحسابك",
     "Extra_Services": "خدمة إضافية",
-    "filter_by": "فرز ", 
+    "filter_by": "فرز ",
     "search": "بحث",
     "Plate_Number": "رقم اللوحة",
-    "New_Order_Placed": "New order placed" ,
-    "Order_has_rejected": "Your order has been rejected and order amount was refunded",
-    "Order_has_accepted": "Your order has been accepted",
-    "Order_has_completed": "Your order has been completed"
+    "New_Order_Placed": "تم وضع طلب جديد",
+    "Order_has_rejected": "تم رفض طلبك و تم استرداد المبلغ",
+    "Order_has_accepted": "تم قبول طلبك",
+    "Order_has_completed": "تم إكمال طلبك"
 }

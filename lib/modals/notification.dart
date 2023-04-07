@@ -8,15 +8,6 @@ class NotificationModal {
   int? order_id;
   int? user_id;
   DateTime? dateTime;
-  int? orderId;
-  String? mall;
-  String? company;
-  String? parking;
-  String? plate_number;
-  String? floor;
-  String? user;
-  int? status;
-  String? cartype;
   OrderModal? order;
 
 
@@ -29,8 +20,5 @@ class NotificationModal {
     user_id = noti['user_id'];
     dateTime = DateTime.parse(noti['created_at']);
     order = OrderModal(noti['order']);
-    // mall = noti['order']['mall']['name'];
-
-
   }
 }

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -182,7 +183,8 @@ class _ServiceState extends State<Service> {
                                           color: Colors.black,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 2),
+                                          padding:
+                                              const EdgeInsets.only(left: 2),
                                           child: Text(
                                             LocaleKeys.ADD.tr(),
                                             style: TextStyle(
@@ -269,7 +271,7 @@ class _ServiceState extends State<Service> {
                             SizedBox(height: 8),
                             SizedBox(
                               height: showCreate == true
-                                  ? MediaQuery.of(context).size.height * 0.16
+                                  ? MediaQuery.of(context).size.height * 0.30
                                   : MediaQuery.of(context).size.height * 0.45,
                               child: SingleChildScrollView(
                                 child: Column(
@@ -390,9 +392,21 @@ editServices(context, service_name, price, imageUrl, id, company) {
                   Padding(
                       padding: const EdgeInsets.only(right: 12),
                       child: image!.path == ''
-                          ? Image(
-                              image: NetworkImage(imageUrl),
-                              width: 45,
+                          ? Container(
+                              height: 45,
+                              width: 50,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: image != null
+                                    ? Image(
+                                        image: CachedNetworkImageProvider(
+                                            imageUrl),
+                                        fit: BoxFit.fill)
+                                    : Image(
+                                        image: AssetImage(
+                                            'assets/images/logo1.png'),
+                                        fit: BoxFit.contain),
+                              ),
                             )
                           : Image(
                               image: AssetImage(image!.path),

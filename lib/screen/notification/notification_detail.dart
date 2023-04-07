@@ -44,7 +44,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
   OrderDetail? orderDetail;
   getMallandCompany() async {
     var morderdetail = await NotificationApi.MallandCmp(
-        (widget.notification!.orderId.toString()));
+        (widget.notification!.order_id.toString()));
     setState(() {
       orderDetail = morderdetail;
     });

@@ -93,10 +93,10 @@ class CodegenLoader extends AssetLoader{
   "filter_by": "فرز ",
   "search": "بحث",
   "Plate_Number": "رقم اللوحة",
-  "New_Order_Placed": "New order placed",
-  "Order_has_rejected": "Your order has been rejected and order amount was refunded",
-  "Order_has_accepted": "Your order has been accepted",
-  "Order_has_completed": "Your order has been completed"
+  "New_Order_Placed": "تم وضع طلب جديد",
+  "Order_has_rejected": "تم رفض طلبك و تم استرداد المبلغ",
+  "Order_has_accepted": "تم قبول طلبك",
+  "Order_has_completed": "تم إكمال طلبك"
 };
 static const Map<String,dynamic> en = {
   "Hello": "Hello",
@@ -177,10 +177,10 @@ static const Map<String,dynamic> en = {
   "filter_by": "Filter By",
   "search": "Search",
   "Plate_Number": "Plate Number",
-  "New_Order_Placed": "تم وضع طلب جديد",
-  "Order_has_rejected": "تم رفض طلبك و تم استرداد المبلغ",
-  "Order_has_accepted": "تم قبول طلبك",
-  "Order_has_completed": "تم إكمال طلبك"
+  "New_Order_Placed": "New order placed",
+  "Order_has_rejected": "Your order has been rejected and order amount was refunded",
+  "Order_has_accepted": "Your order has been accepted",
+  "Order_has_completed": "Your order has been completed"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

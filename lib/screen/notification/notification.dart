@@ -66,7 +66,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   itemCount: notification.length,
                   itemBuilder: (BuildContext context, int index) {
                     return NotificationTile(
-                      type: notification[index].cartype,
+                      type: notification[index].order!.cartype,
                       title: notification[index].title! == 'New order placed'
                           ? LocaleKeys.New_Order_Placed.tr()
                           : notification[index].title! ==

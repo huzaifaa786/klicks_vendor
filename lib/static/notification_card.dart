@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
 class NotificationTile extends StatefulWidget {
-  const NotificationTile({super.key, this.type, this.title, this.day,this.ontap});
+  const NotificationTile(
+      {super.key, this.type, this.title, this.day, this.ontap});
 
   final type;
   final title;
@@ -16,7 +17,7 @@ class NotificationTile extends StatefulWidget {
 class _NotificationTileState extends State<NotificationTile> {
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       print(widget.type);
     });
   }
@@ -25,101 +26,91 @@ class _NotificationTileState extends State<NotificationTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.ontap,
-      child: Flexible(
-        child: Card(
-          shadowColor: Colors.grey,
-          elevation: 3,
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 45,
-                      width: 45,
-                      decoration: BoxDecoration(
-                        color: mainColor,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                      ),
-                      child: Icon(
-                        Icons.notifications_outlined,
-                        color: White,
-                      ),
+      child: Card(
+        shadowColor: Colors.grey,
+        elevation: 3,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                      color: mainColor,
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 12),
-                      width: MediaQuery.of(context).size.width * 0.51,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.title,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins'),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                    child: Icon(
+                      Icons.notifications_outlined,
+                      color: White,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 12),
+                    width: MediaQuery.of(context).size.width * 0.51,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.title,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Poppins'),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              widget.type == 'suv'
+                  ? Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: White,
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: Offset(0, 3),
                           ),
-                          SizedBox(height: 2),
-                          // Text(
-                          //   day,
-                          //   style: TextStyle(
-                          //       fontSize: 12, fontWeight: FontWeight.w500),
-                          // )
                         ],
                       ),
-                    )
-                  ],
-                ),
-                widget.type == 'suv'
-                    ? Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: White,
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Image(
-                          image: AssetImage('assets/images/car2.png'),
-                          height: 12,
-                        ),
-                      )
-                    : Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: White,
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Image(
-                          image: AssetImage('assets/images/car1.png'),
-                          height: 12,
-                        ),
+                      child: Image(
+                        image: AssetImage('assets/images/car2.png'),
+                        height: 12,
                       ),
-              ],
-            ),
+                    )
+                  : Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: White,
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Image(
+                        image: AssetImage('assets/images/sedan1.png'),
+                        height: 12,
+                      ),
+                    ),
+            ],
           ),
         ),
       ),
