@@ -1,17 +1,53 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:klicks_vendor/api/notification.dart';
+import 'package:klicks_vendor/screen/notification/notification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Topbar extends StatefulWidget {
-  const Topbar({super.key, this.checkNewNoti = false});
-  final checkNewNoti;
+  const Topbar({super.key});
 
   @override
   State<Topbar> createState() => _TopbarState();
 }
 
 class _TopbarState extends State<Topbar> {
+  bool? checkNoti = false;
+
+  checkNotifications() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? authCheck = prefs.getString('api_token');
+    print(authCheck);
+    if (authCheck != null) {
+      var mcheckNotification = await NotificationApi.CheckNotications();
+      setState(() {
+        checkNoti = mcheckNotification;
+        print(checkNoti);
+      });
+    } else {}
+  }
+
+  refreshData() {
+    checkNotifications();
+  }
+
+  FutureOr onGoBack(dynamic value) {
+    refreshData();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      checkNotifications();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,11 +66,13 @@ class _TopbarState extends State<Topbar> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'notification');
+                  Route route = MaterialPageRoute(
+                      builder: (context) => NotificationScreen());
+                  Navigator.push(context, route).then(onGoBack);
                 },
                 child: SvgPicture.asset('assets/images/bell.svg'),
               ),
-              widget.checkNewNoti != false
+              checkNoti != false
                   ? new Positioned(
                       right: 1,
                       top: 1,
