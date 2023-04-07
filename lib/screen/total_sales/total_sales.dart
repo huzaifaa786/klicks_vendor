@@ -208,7 +208,7 @@ class _SalesScreenState extends State<SalesScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 10, top: 8),
+                  padding: const EdgeInsets.only(right: 10, left: 10, top: 8,bottom: 10),
                   child: Container(
                     height: 60,
                     padding: EdgeInsets.all(10),
