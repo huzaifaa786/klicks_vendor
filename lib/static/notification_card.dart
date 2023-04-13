@@ -58,7 +58,6 @@ class _NotificationTileState extends State<NotificationTile> {
                       children: [
                         Text(
                           widget.title,
-                          textAlign: TextAlign.justify,
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
