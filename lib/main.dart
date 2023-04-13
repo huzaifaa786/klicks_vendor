@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           'splash': (context) => const SplashScreen(),
           'login': (context) => const LoginScreen(),
-          'order_status': (context) =>  OrderStatus(),
+          // 'order_status': (context) =>  OrderStatus(),
           'notification': (context) => const NotificationScreen(),
           'edit_profile': (context) => const EditProfile(),
           'main': (context) => MainScreen(),

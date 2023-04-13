@@ -81,6 +81,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => OrderStatus(
+                                  noti: notification[index].id,
                                     order: notification[index].order)));
                       },
                     );

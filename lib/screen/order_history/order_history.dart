@@ -222,6 +222,7 @@ class _OrderHistryState extends State<OrderHistry> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => OrderStatus(
+                                        noti: 0,
                                           order: SearchOrders[index])));
                             },
                           );

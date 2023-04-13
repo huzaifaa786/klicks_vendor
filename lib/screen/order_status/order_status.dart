@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:klicks_vendor/api/notification.dart';
 import 'package:klicks_vendor/api/order.dart';
 import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
@@ -22,8 +23,9 @@ import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
 
 class OrderStatus extends StatefulWidget {
-  OrderStatus({super.key, this.order});
+  OrderStatus({super.key, this.order, required this.noti});
   var order;
+  final int? noti;
   @override
   State<OrderStatus> createState() => _OrderStatusState();
 }
@@ -77,10 +79,20 @@ class _OrderStatusState extends State<OrderStatus> {
     }
   }
 
+  readNoti() async {
+    if (widget.noti != 0) {
+      await NotificationApi.readnotifications(widget.noti);
+    }else{
+      print('object');
+    }
+  }
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       getservice();
+      readNoti();
+      print(widget.noti);
       print(widget.order.paymentIntent);
     });
   }
