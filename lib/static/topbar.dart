@@ -51,7 +51,7 @@ class _TopbarState extends State<Topbar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5.0, right: 20),
+      padding: const EdgeInsets.only(left: 20,top: 12, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -59,8 +59,8 @@ class _TopbarState extends State<Topbar> {
             image: AssetImage(
               'assets/images/logo1.png',
             ),
-            height: 63,
-            width: 63,
+            height: 45,
+            width: 45,
           ),
           new Stack(
             children: <Widget>[

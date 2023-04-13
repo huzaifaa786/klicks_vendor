@@ -77,6 +77,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: White,
       body: Directionality(
         textDirection: ui.TextDirection.ltr,
         child: SafeArea(

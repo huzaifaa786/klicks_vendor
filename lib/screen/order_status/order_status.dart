@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:klicks_vendor/api/order.dart';
+import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/notification.dart';
 import 'package:klicks_vendor/modals/order.dart';
@@ -20,9 +21,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
 
-
 class OrderStatus extends StatefulWidget {
-   OrderStatus({super.key, this.order});
+  OrderStatus({super.key, this.order});
   var order;
   @override
   State<OrderStatus> createState() => _OrderStatusState();
@@ -31,7 +31,7 @@ class OrderStatus extends StatefulWidget {
 class _OrderStatusState extends State<OrderStatus> {
   List<ExtraServiceDetail> services = [];
   bool? query;
-  String ?refundUrl = 'https://api.stripe.com/v1/refunds';
+  String? refundUrl = 'https://api.stripe.com/v1/refunds';
 
   getservice() async {
     var morderServices =
@@ -42,7 +42,7 @@ class _OrderStatusState extends State<OrderStatus> {
     });
   }
 
-    refundViaStripe() async {
+  refundViaStripe() async {
     print('dfkdajhfas');
     try {
       var uname =
@@ -58,9 +58,13 @@ class _OrderStatusState extends State<OrderStatus> {
       var data = {
         'payment_intent': widget.order!.paymentIntent,
       };
-      print(refundUrl!,);
+      print(
+        refundUrl!,
+      );
       print(headers);
-      print(data,);
+      print(
+        data,
+      );
       final response =
           await http.post(Uri.parse(refundUrl!), headers: headers, body: data);
 
@@ -85,7 +89,9 @@ class _OrderStatusState extends State<OrderStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Directionality(
-        textDirection: context.locale.toString() == 'en'?  ui.TextDirection.ltr : ui.TextDirection.rtl,
+        textDirection: context.locale.toString() == 'en'
+            ? ui.TextDirection.ltr
+            : ui.TextDirection.rtl,
         child: SafeArea(
             child: Padding(
           padding: EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -131,8 +137,10 @@ class _OrderStatusState extends State<OrderStatus> {
                             ),
                             FittedBox(
                                 fit: BoxFit.scaleDown,
-                                child: SvgPicture.asset('assets/images/order.svg',
-                                    height: 20, width: 20)),
+                                child: SvgPicture.asset(
+                                    'assets/images/order.svg',
+                                    height: 20,
+                                    width: 20)),
                           ],
                         ),
                         Text("a", style: TextStyle(color: White))
@@ -196,7 +204,9 @@ class _OrderStatusState extends State<OrderStatus> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: context.locale.toString() == 'en'? EdgeInsets.only(right: 8):EdgeInsets.only(left: 8),
+                                      padding: context.locale.toString() == 'en'
+                                          ? EdgeInsets.only(right: 8)
+                                          : EdgeInsets.only(left: 8),
                                       child: Container(
                                         padding: const EdgeInsets.all(4),
                                         decoration: BoxDecoration(
@@ -288,8 +298,8 @@ class _OrderStatusState extends State<OrderStatus> {
               ),
               widget.order!.status == 0
                   ? Directionality(
-                    textDirection: ui.TextDirection.ltr,
-                    child: Row(
+                      textDirection: ui.TextDirection.ltr,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           LargeButton(
@@ -312,14 +322,16 @@ class _OrderStatusState extends State<OrderStatus> {
                           LargeButton(
                               title: LocaleKeys.Reject.tr(),
                               onPressed: () async {
+                                LoadingHelper.show();
                                 final prefs =
                                     await SharedPreferences.getInstance();
-                                    if(widget.order.paymentMethod == 'stripe')
-                                    await   refundViaStripe() ;
+                                if (widget.order.paymentMethod == 'stripe')
+                                  await refundViaStripe();
                                 if (await OrderApi.orderreject(
                                     widget.order!.id,
                                     widget.order!.userid,
                                     prefs.getString('company_id')!)) {
+                                  LoadingHelper.dismiss();
                                   setState(() {
                                     widget.order!.status = 2;
                                   });
@@ -330,11 +342,11 @@ class _OrderStatusState extends State<OrderStatus> {
                               color: Colors.red),
                         ],
                       ),
-                  )
+                    )
                   : widget.order!.status == 1
                       ? Directionality(
-                        textDirection: ui.TextDirection.ltr,
-                        child: Column(
+                          textDirection: ui.TextDirection.ltr,
+                          child: Column(
                             children: [
                               LargeButton(
                                 title: LocaleKeys.Order_IN_Progress.tr(),
@@ -378,7 +390,7 @@ class _OrderStatusState extends State<OrderStatus> {
                               ),
                             ],
                           ),
-                      )
+                        )
                       : SizedBox()
             ],
           ),
