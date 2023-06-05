@@ -22,10 +22,10 @@ class LogOutTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(6)),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 3,
-                offset: Offset(0, 3),
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 5,
+                blurRadius: 10,
+                offset: Offset(3, 3),
               ),
             ]),
         child: Padding(

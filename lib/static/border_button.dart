@@ -8,8 +8,9 @@ class BorderButton extends StatelessWidget {
       {Key? key,
       @required this.title,
       @required this.onPressed,
-      this.textcolor,
+      this.textcolor = hintColor,
       this.icon,
+      this.borderClr,
       this.buttonWidth = 0.8,
       this.screenRatio = 0.9,
       this.rounded = false,
@@ -22,22 +23,22 @@ class BorderButton extends StatelessWidget {
   final color;
   final textcolor;
   final icon;
+  final borderClr;
   final rounded;
   final buttonWidth;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * screenRatio,
-      height: 50,
+      // height: 50,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: color,
-          shadowColor: mainColor,
+          // shadowColor: mainColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(45)),
-             side: BorderSide(width: 0.3,color: mainColor),
-             
+             side: BorderSide(width: 1, color: borderClr),
           ),
         ),
         child: Row(
@@ -46,9 +47,9 @@ class BorderButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: mainColor,
+                color: textcolor,
                 fontFamily: 'Poppins',
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
             ),

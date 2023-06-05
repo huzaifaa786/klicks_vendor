@@ -4,7 +4,6 @@ import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/modals/extra_service_detail.dart';
 import 'package:klicks_vendor/modals/order.dart';
 import 'package:klicks_vendor/modals/sale.dart';
-import 'package:klicks_vendor/modals/status_update.dart';
 import 'package:klicks_vendor/values/string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,12 +15,12 @@ class OrderApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {'id': int.parse(prefs.getString('company_id')!)};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     List<OrderModal> orders = <OrderModal>[];
     for (var order in response['orders']) {
@@ -36,12 +35,12 @@ class OrderApi {
     var data;
 
     data = {'id': id};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+    (response);
     LoadingHelper.dismiss();
     List<ExtraServiceDetail> extraservices = <ExtraServiceDetail>[];
     for (var extraservice in response['orders']) {
@@ -50,60 +49,61 @@ class OrderApi {
     return extraservices;
   }
 
-  static orderaccept(id) async {
+  static orderaccept(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'orderaccept';
     var data;
-
-    data = {'id': id};
-    print(data);
+    (userid);
+    (companyid);
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
   }
 
-  static orderreject(id) async {
+  static orderreject(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'orderreject';
     var data;
 
-    data = {'id': id};
-    print(data);
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
   }
 
-  static ordercomplete(id) async {
+  static ordercomplete(id, userid, companyid) async {
     LoadingHelper.show();
     var url = BASE_URL + 'ordercomplete';
     var data;
 
-    data = {'id': id};
-    print(data);
+    data = {'id': id, 'user_id': userid, "company_id": companyid};
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
     LoadingHelper.dismiss();
     if (!response['error']) {
-      return OrderStatusModel(response['orders']);
+      return true;
     } else {
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
@@ -117,12 +117,12 @@ class OrderApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {'id': int.parse(prefs.getString('company_id')!)};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     List<SaleModal> orders = <SaleModal>[];
     for (var order in response['orders']) {
@@ -136,7 +136,7 @@ class OrderApi {
     var url = BASE_URL + 'totalsale';
     var data;
     data = {'format': format.toString(), 'date': date.toString(), 'id': id};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,

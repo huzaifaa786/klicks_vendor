@@ -7,7 +7,7 @@ import 'package:klicks_vendor/values/colors.dart';
 class EditButton extends StatelessWidget {
   const EditButton(
       {Key? key,
-      @required this.title,
+       this.title,
       @required this.onPressed,
       this.textcolor,
       this.icon,
@@ -33,15 +33,13 @@ class EditButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * screenRatio,
       height: 30,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          primary: color,
-          shadowColor: mainColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(45)),
-          ),
-        ),
+      child: InkWell(
+        onTap: onPressed,
+        // style: ElevatedButton.styleFrom(
+        //   primary: color,
+        //   shadowColor: mainColor,
+         
+        // ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,15 +47,7 @@ class EditButton extends StatelessWidget {
               padding: const EdgeInsets.only(right: 2.0),
               child: SvgPicture.asset(imgicon,height: 15,width: 15,),
             ),
-            Text(
-              title,
-              style: TextStyle(
-                color: textcolor,
-                fontFamily: 'Poppins',
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+           
           ],
         ),
       ),

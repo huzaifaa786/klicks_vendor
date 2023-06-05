@@ -20,19 +20,19 @@ class ExtraServiceApi {
       'price': price.text.toString(),
       'image': image,
     };
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     if (!response['error']) {
-      // print(response['services']);
+      // (response['services']);
       ExtraService extraservice = ExtraService(response['services']);
       return true;
     } else {
-      print('error');
+      ('error');
       Fluttertoast.showToast(msg: response['error_data']);
       return false;
     }
@@ -45,12 +45,12 @@ class ExtraServiceApi {
     final prefs = await SharedPreferences.getInstance();
 
     data = {'id': int.parse(prefs.getString('company_id')!)};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     List<ExtraService> extraservices = <ExtraService>[];
     for (var extraservice in response['services']) {
@@ -65,12 +65,12 @@ class ExtraServiceApi {
     var data;
 
     data = {'id': id};
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    // print(response);
+    // (response);
     LoadingHelper.dismiss();
     return response;
   }
@@ -86,12 +86,12 @@ class ExtraServiceApi {
       'image': image,
       'id': id,
     };
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+    (response);
     LoadingHelper.dismiss();
     return response;
   }
@@ -106,12 +106,12 @@ class ExtraServiceApi {
       'price': price.text.toString(),
       'id': id,
     };
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+    (response);
     LoadingHelper.dismiss();
     return response;
   }
@@ -126,12 +126,12 @@ class ExtraServiceApi {
    
       'id' : company_id,
     };
-    print(data);
+    (data);
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+    (response);
     LoadingHelper.dismiss();
     return response;
   }

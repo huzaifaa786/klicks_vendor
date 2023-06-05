@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:klicks_vendor/helpers/loading.dart';
 import 'package:klicks_vendor/screen/login/login.dart';
 import 'package:klicks_vendor/screen/main/main.dart';
+import 'package:klicks_vendor/values/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    LoadingHelper.init();
     initscreen();
   }
 
@@ -57,11 +60,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: White,
       body: SafeArea(
         child: const Center(
           child: Image(
             image: AssetImage(
-              'assets/images/logo1.png',
+              'assets/images/mainLogo.png',
             ),
             height: 350,
             width: 350,

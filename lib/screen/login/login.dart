@@ -6,6 +6,10 @@ import 'package:klicks_vendor/screen/forgot_password/forgot_password.dart';
 import 'package:klicks_vendor/static/button.dart';
 import 'package:klicks_vendor/static/icon_inputfield.dart';
 import 'package:klicks_vendor/static/password_inputfield.dart';
+import 'package:klicks_vendor/translations/locale_keys.g.dart';
+import 'package:klicks_vendor/values/colors.dart';
+import 'dart:ui' as ui;
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool emailValid = false;
 
   _togglecheckbox() {
-    print(checkboxval);
+    (checkboxval);
     setState(() {
       checkboxval = !checkboxval;
     });
@@ -55,99 +59,103 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage(
-                            'assets/images/logo1.png',
+      backgroundColor: White,
+      body: Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage(
+                              'assets/images/logo1.png',
+                            ),
+                            height: 220,
+                            width: 220,
                           ),
-                          height: 220,
-                          width: 220,
+                        ],
+                      ),
+                      // Positioned(
+                      //   bottom: 10,
+                      //   left: 55,
+                      //   child: Text(
+                      //     "Sign in to continue",
+                      //     style: TextStyle(
+                      //       fontSize: 26,
+                      //       fontWeight: FontWeight.w600,
+                      //     ),
+                      //   ),
+                      // )
+                    ],
+                  ),
+                  Text(
+                    LocaleKeys.Sign_in_to_continue.tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: IconInputField(
+                      controller: emailController,
+                      imageIcon: 'assets/images/email.svg',
+                      hint: LocaleKeys.Eamil.tr(),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: InputFieldPassword(
+                      controller: passwordController,
+                      imageIcon: 'assets/images/lock.svg',
+                      hint: LocaleKeys.Password.tr(),
+                      toggle: _toggle,
+                      obscure: _obscureText,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ForgotScreen()));
+                          },
+                          child: Text(
+                            LocaleKeys.Forgot_Password.tr(),
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
-                    // Positioned(
-                    //   bottom: 10,
-                    //   left: 55,
-                    //   child: Text(
-                    //     "Sign in to continue",
-                    //     style: TextStyle(
-                    //       fontSize: 26,
-                    //       fontWeight: FontWeight.w600,
-                    //     ),
-                    //   ),
-                    // )
-                  ],
-                ),
-                Text(
-                  "Sign in to continue",
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w600,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: IconInputField(
-                    controller: emailController,
-                    imageIcon: 'assets/images/email.svg',
-                    hint: 'Email',
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25.0, bottom: 30),
+                    child: LargeButton(
+                      title: LocaleKeys.Sign_in.tr(),
+                      onPressed: () {
+                        login();
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: InputFieldPassword(
-                    controller: passwordController,
-                    imageIcon: 'assets/images/lock.svg',
-                    hint: 'Password',
-                    toggle: _toggle,
-                    obscure: _obscureText,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForgotScreen()));
-                        },
-                        child: Text(
-                          'Forgot Passowrd?',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0, bottom: 30),
-                  child: LargeButton(
-                    title: "Sign in",
-                    onPressed: () {
-                      login();
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

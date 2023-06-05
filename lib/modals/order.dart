@@ -1,4 +1,3 @@
-
 class OrderModal {
   int? id;
   String? mall;
@@ -12,6 +11,9 @@ class OrderModal {
   String? price;
   DateTime? dateTime;
   List? service = [''];
+  int? userid;
+  String? paymentIntent;
+  String? paymentMethod;
 
   OrderModal(order) {
     id = order['id'];
@@ -24,7 +26,10 @@ class OrderModal {
     dateTime = DateTime.parse(order['created_at']);
     price = order['totalpayment'] ?? '';
     user = order['user']['name'] ?? '';
+    userid = order['user']['id'] ?? '';
     cartype = order['cartype'];
     service = order['service'] as List?;
+    paymentMethod = order['paymentmethod'];
+    paymentIntent = order['payment_intent'];
   }
 }
