@@ -141,7 +141,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                 fontSize: 14,
                                 color: colorgrey),
                           ),
-                          Badge(
+                          Badge1(
                             title: 'Complete',
                             color: Colors.green,
                             ontap: () {},
@@ -159,7 +159,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                     fontSize: 14,
                                     color: colorgrey),
                               ),
-                              Badge(
+                              Badge1(
                                 title: 'Rejected',
                                 color: Colors.red,
                                 ontap: () {},

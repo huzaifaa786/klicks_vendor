@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:klicks_vendor/values/colors.dart';
 
-class Badge extends StatelessWidget {
-  const Badge({
+class Badge1 extends StatelessWidget {
+  const Badge1({
     Key? key,
     @required this.title,
     this.color = badgeGreen,
