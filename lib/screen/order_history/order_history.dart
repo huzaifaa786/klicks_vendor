@@ -115,7 +115,7 @@ class _OrderHistryState extends State<OrderHistry> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: SearchBar(
+                    child: MSearchBar(
                       onChange: searchOrders,
                       hint: LocaleKeys.search.tr(),
                       ontap: () async {
