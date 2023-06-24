@@ -429,6 +429,7 @@ editServices(context, service_name, price, imageUrl, id, company) {
       ),
       buttons: [
         DialogButton(
+          color: mainColor,
           onPressed: () async {
             await updata();
             Navigator.pop(context);
@@ -542,6 +543,7 @@ editprice(context, suv_price, sedan_price, company, company_id) {
       ),
       buttons: [
         DialogButton(
+          color: mainColor,
           onPressed: () async {
             await save();
           },
